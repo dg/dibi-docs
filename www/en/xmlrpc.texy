@@ -1,0 +1,21 @@
+XML-RPC service
+***************
+
+Limitations: This interface is experimental and under development. I am testing it. Feedback is welcome.
+
+
+How to call
+------------
+
+Sent a [XML-RPC | http://www.xmlrpc.com/spec] request to: http://xmlrpc.texy.info/
+
+There are these available methods:
+
+- [texy1.toHtml | xmlrpc-texy1.toHtml]
+- [texy1.version | xmlrpc-texy1.version]
+- `texy2.toHtml` *připravuje se*
+- `texy2.version` *připravuje se*
+
+
+{{ parent(api) }}
+{{lang: cs/xmlrpc}}

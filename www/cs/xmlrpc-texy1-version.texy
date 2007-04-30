@@ -1,0 +1,8 @@
+XML-RPC metoda texy1.version
+***************************
+
+Vrací verzi knihovny Texy (jako řetězec). Metoda nemá žádném parametry.
+
+
+{{ parent(api) }}
+{{lang: en/xmlrpc-texy1.version}}

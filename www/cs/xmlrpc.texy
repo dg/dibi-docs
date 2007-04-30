@@ -1,0 +1,23 @@
+Služba XML-RPC
+**************
+
+
+Upozornění: tato služba je experimentální a dosud ve vývoji. Feedback je vítán.
+
+
+Jak službu volat
+-----------
+
+Požadavek ve formátu [XML-RPC | http://www.xmlrpc.com/spec] pošlete na adresu: `http://xmlrpc.texy.info/`
+
+K dispozici jsou tyto metody:
+
+- [texy1.toHtml | xmlrpc-texy1.toHtml]
+- [texy1.version | xmlrpc-texy1.version]
+- `texy2.toHtml` *připravuje se*
+- `texy2.version` *připravuje se*
+
+
+
+{{ parent(api) }}
+{{lang: en/xmlrpc}}

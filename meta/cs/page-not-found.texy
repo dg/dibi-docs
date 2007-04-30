@@ -1,0 +1,5 @@
+<div id="content">
+<h1>{{heading}}</h1>
+
+<p>Stránka nazvaná "{{wikipage}}" na webu dosud neexistuje. <a href="nette:edit">Vytvořit stránku</a>.</p>
+</div> <!-- /content -->

@@ -1,0 +1,205 @@
+Novinky
+*******
+
+
+Převodník Texy! syntaxe do LaTeXu
+------------
+
+31. 7. 2007 .[date]
+
+Jednoduchý [nástroj pro převod | http://jaybee.frih.net/software/prevodnik-texy!---latex] čisté Texy! syntaxe do LaTeXu vytvořil Jay Bee: *"Tento převodník jsem vytvořil a používal jen proto, že jsem líný a přeci jen je mě bližší Texy syntaxe než LaTeX syntaxe. Pro psaní jednoduše formátovaných dokumentů je ideální. Napsal jsem svou bakalářku v Texy a pak jsem ji díky tomuhle převodníku nechal vygenerovat do PDF"*
+
+
+
+Převodník html2texy!
+------------
+
+13. 4. 2007 .[date]
+
+Pro (zpětný) převod HTML kódu do Texy! můžete použít šikovný nástroj [html2texy! | http://www.webkitchen.cz/lab/html2texy/], jehož autorem je Jakub Roztočil. Transformaci obstarává XSL((eXtensible Stylesheet Language)) skript.
+
+
+
+CZECH OPEN SOURCE 2007
+------------
+
+16. 5. 2007 .[date]
+
+Texy! bylo nominováno do ankety CZECH OPEN SOURCE 2007 pořádané serverem Root.cz, ve které odborná porota i široká veřejnost volily to nejlepší z české open-source scény. Ve čtenářském hlasování se [umístilo | http://www.root.cz/clanky/ceska-wikipedie-se-stala-vitezem-ankety-czech-open-source-2007/] na krásném druhém místě. Díky!
+
+
+
+Texy2 je tu!
+------------
+
+29. 3. 2007 .[date]
+
+Nová verze Texy2 je revolučním skokem kupředu. Rychlejší, pružnější a naprosto dokonale přizpůsobivé. Programátoři webových aplikací budou nadšeni!
+
+Základní informace zatím v [changelogu | changelog]
+
+
+
+Finální verze 1
+------------
+
+18. 4. 2006 .[date]
+
+Po docela dlouhém a dá se říci masovém testování jsem opravil (snad) všechny známé chyby, lehce rozšířil funkcionalitu a výsledkem je finální verze Texy 1.
+
+Tímto vlastně končím jednu vývojovou větev. Požadavky na nové funkce, rozšíření stávajících, přepsání pro PHP 5 - to vše si vyžádalo celou řadu změn ve vnitřní struktuře a API. Dokončované Texy 2 je mnohem více zaměřené na potřeby programátorů CMS. Ti mohou nyní plně kontrolovat vkládání obrázků, jako externí data použít i kód zapsaný v Texy syntaxi, vygenerovat XML výstup atd. Nechci však nikoho tlačit do upgrade a přepisování implementací. Proto jsem souběžně udělal údržbu i starší verze.
+
+
+
+CZECH OPEN SOURCE 2006
+------------
+
+6. 3. 2006 .[date]
+
+Texy bylo nominováno do ankety [CZECH OPEN SOURCE 2006 | http://cos.root.cz/] pořádané serverem [Root.cz | www.root.cz]. Cílem ankety je popularizace myšlenky open source a podpora rozvoje její české scény.
+
+
+
+Vkládání externích dat
+--------------------
+
+24. 5. 2005 .[date]
+
+Přidána funkce pro vkládání externích dat. Používá se zápis např. `{{ getPrice(produkt) }}` (viz. [fórum | http://forum.texy.info/viewtopic.php?id=128]). Sponzorem vývoje této funkce je společnost [Internet Mall | www.MALL.cz], a.s.
+
+Dále jsem začal označovat vydané verze datem ve formátu YYYY/MM/DD. Nechci kvůli každé drobnosti navyšovat číslo verze.
+
+
+
+
+Texy jako formát výměny dat?
+----------------------------
+
+16. 3. 2005 .[date]
+
+Sám jsem jej tak začal používat a docela mě potěšilo, že [nejsem jediný | chomat]. Jak syntax doplním o [komentáře | komentare], stane se toto využití ještě mnohem efektivnější.
+
+Mimochodem, hodil by se editor se zvýrazňováním Texy syntaxe. Něco takového jsem se pokusil vytvořit pro Far Manager, ale ještě to není ono. Pokud byste mohli v této oblasti nějak pomoc, bylo by to super!
+
+[chomat]: http://www.chomat.net/articles/inspo-2005
+[komentare]: http://forum.texy.info/viewtopic.php?id=64
+
+
+
+Základ dokumentace a nová pre-verze
+-----------------------------------
+
+16. 3. 2005 .[date]
+
+Vydána verze [RC4 | download] (obsahuje docela [dost změn | changelog]) a také stručná [programátorská dokumentace | api:]. Tak ať slouží!
+
+**Pozor přátelé**: nechtěl bych, abyste se vypekli na jedné změně. Upravil jsem číslované seznamy, které mají odrážku s tečkou. Tedy ty s [čísly | /cs/try/xf3av] a [římskou abecedou | /cs/try/dap6f]. Jde totiž o kolizní syntax s datem nebo iniciálami na začátku řádku. Třeba takový V. I. Lenin se tváří jako dva vnořené seznamy s římskou číslicí ;)
+
+Namísto tečky je tedy třeba používat [závorku | /cs/try/scnch] nebo (nejméně) [dvě mezery | /cs/try/zdxwb].
+
+
+
+
+Testimonials
+------------
+
+14. 3. 2005 .[date]
+
+Jsem velmi vděčný za příznivé ohlasy, které dostávám. Vytvořil jsem pro ně [samostatnou stránku | napsali-o-texy]. A pokud se Vám Texy také líbí, můžete [přidat | testimonials] i Váš ohlas.
+
+
+
+
+Kdy bude finální verze?
+-----------------------
+
+13. 3. 2005 .[date]
+
+Chtěl bych nashromáždit co nejvíce podnětů a sám získat zkušenost z reálného provozu. Určité rysy syntaxe se teprve vykrystalizují, není kam spěchat. Po uvolnění finální verze už totiž nechci do syntaxe šahat.
+
+Co ještě zbývá dořešit před finální verzí
+
+- napsat lepší dokumentaci k syntaxi a manuál pro programátory ([první vlaštovka | api:])
+- několik spíš drobných úprav, které si vyžádali členové [fóra | forum]
+- změny, které mají za cíl připravit si cestičku k další vizi vývoje Texy
+- předělat parsovací modul
+- opravit objevené chyby a vyhovět zajímavým požadavkům na rozšíření
+
+
+
+
+Release Candidate 3
+-------------------
+
+9. 3. 2005 .[date]
+
+- Přináší drobné vylepšení, jako je podpora `<caption>` u tabulek. ([changelog | changelog])
+- Novinkou je jednosouborová verze `texy-compact.php`
+
+
+
+
+Klientská sekce
+---------------
+
+9. 3. 2005 .[date]
+
+Pro komerční zákazníky jsem zřídil klientskou sekci. Najdou zde nadstandardní doplňky, které nejsou šířené pod GPL (například zdrojový kód zpětného konvertoru [deToxy | detoxy]). O přístupové údaje si prosím napište.
+
+
+
+Release Candidate 1 & 2
+-----------------------
+
+23. 2. 2005 .[date]
+
+Vydána verze **Release Candidate 1**, vhodná pro ostré nasazení. O pár dní později následovaná verzí RC2.
+
+
+
+Texy v blogovacích systémech
+-----------------------------
+
+22. 2. 2005  .[date]
+
+- Václav Štrupl spustil projekt [* TextPattern pro české prostředí* | textpattern], který už má v sobě implementované Texy (namísto Textile)
+- Lukáš Petrovický oznamuje, že vyšla nová verze jeho blogovacího nástroje [TruBlog! 0.0.9 | trublog] se zabudovaným Texy
+- Děkuji JohnymuB za novou ikonku [Texy powered | podporte-texy]
+
+[textpattern]: http://www.vaclavak.net/weblog/23/textpattern-pro-ceske-prostredi
+[trublog]: http://trublog.sourceforge.net/en/
+
+
+
+Nové verze pluginů pro CMS
+--------------------------
+
+14. 2. 2005  .[date]
+
+- Nově obsahují návod k instalaci, k dispozici i ve [fóru | forum]
+- Moduly do BLOG:CMS a Nucleus nyní jinak zapisují Texy kód do databáze, takže s předchozímy pluginy jsou naprosto nekompatibilní :-(
+- Plugin pro WordPress nyní podporuje verzi 1.5
+- Plugin pro b2evolution kvůli chybě v kešování nefungoval, nyní by měl valit jak pes
+- Plugin pro TextPattern jsem doladil ve spolupráci s [Vaškem Štruplem | www.vaclavak.net], měl by být 100% funkční
+
+
+
+Začínáme
+--------
+
+- V úterý 1. 2. 2005 byla uvolněna testovací betaverze verze
+- O týden později následovalo oficiální spuštění webu článkem na [La Trine | http://www.dgx.cz/trine/item/texy-tak-a-je-to-venku]
+
+
+
+Poděkování Českému hostingu
+---------------------------
+
+31. 1. 2005 .[date]
+
+Touto cestou bych rád poděkoval [Českému hostingu | http://www.cesky-hosting.cz], který sponzoruje hosting domény texy.info. S jejich službami jsem přišel do kontaktu poprvé a už teď mohu říct, že se mi velmi líbí. Mají perfektně vyřešenou [administraci | 1], otevřeně informují [výpadcích | 2] a všemu vévodí velmi příznivá [jednotná cena | 3]!
+
+[1]: http://www.cesky-hosting.cz/sluzby.html
+[2]: http://www.cesky-hosting.cz/odstavky-a-vypadky.html
+[3]: http://www.cesky-hosting.cz/cenik.html
+[forum]: http://forum.texy.info

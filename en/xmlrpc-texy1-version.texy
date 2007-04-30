@@ -1,0 +1,8 @@
+XML-RPC method texy1.version
+***************************
+
+Returns used Texy version (as string). There are no parameters.
+
+
+{{ parent(api) }}
+{{lang: cs/xmlrpc-texy1.version}}

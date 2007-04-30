@@ -1,0 +1,91 @@
+Očekávatelné chování
+********************
+
+
+Pod tímto pojmem si lze jen stěží představit jeho skutečný význam. Proto se jej pokusím v následujících odstavcích co nejlépe vysvětlit. A jelikož jde o **klíčovou vlastnost** Texy, vysvětlení bude poněkud obšírné. Začneme poněkud obecně:
+
+"Běžně formátovače .(tedy něco jako běžný prací prášek)[about]" pracují na tom principu, že pomoci série sofistikovaných regulárních výrazů prohledávací vstupní text a nalezené formátovací příkazy zaměňují za HTML značky. Je to rychlý a vcelku jednoduchý způsob. Takto pracovaly i první verze Texy.
+
+Zkusme si v praxi ukázat, jak to funguje. Mějme velmi jednoduchou syntax:
+
+- **Tučný text: .(nebo chcete-li zvýrazněný)[about]** zapisuje se `*text*` a systém jej zamění na `<strong>text</strong>`
+- **Obrázek:** zapisuje se jako `[* url *]` a regulární výraz jej změní na `<img src="url">`
+
+Vytvoříme systém, který podle uvedených pravidel formátuje text. Nejprve vyhledá v celém textu symboly značící tučné písmo a nahradí je za příslušné HTML značky. V druhém kroku vyhledá řetězce představující obrázek a také je zamění na HTML element.
+
+Velmi rychle ale zjistíme, že systém nefunguje tak, jak má. Nechme jej naformátovat tento vstup:
+
+/--
+  Toto je obrázek [* images/benny.jpg *] mého *psa*.
+\--
+
+Očekáváme tento výsledek:
+
+/--
+ Toto je obrázek <img src="images/benny.jpg">
+ mého <strong>psa</strong>.
+\--
+
+Systém však vrátí:
+
+/--
+ Toto je obrázek [<strong> images/benny.jpg </strong>]
+ mého <strong>psa</strong>.
+\--
+
+Kde je problém? Tím, že se nejprve nahradí hvězdičky za značky `<strong>`, poškodí se řetězec představující obrázek a v druhém kroku nebude nalezen. Jak z toho ven?
+
+Asi vás napadnou dva způsoby:
+
+-	prohodit pořadí, v jakém je nahrazování realizováno
+-	nebo upravit regulární výraz hledající hvězdičky tak, aby je ignoroval, pokud se před levou a za pravou hvězdičkou nalézá hranatá závorka.
+
+Bohužel,  ani jedno řešení není dokonalé. Prohození výrazů je jen vytloukání klínu klínem. Systém totiž zkolabuje na tomto vstupním textu:
+
+/--
+ Toto je obrázek na neobvyklé url:
+ [* /images/*moje*/foto.jpg *]
+\--
+
+V prvním kroku jej upraví na podobu:
+
+/--
+ Toto je obrázek na neobvyklé url:
+ [* /images/<strong>moje</strong>/foto.jpg *]
+\--
+
+A v druhém kroku:
+
+/--
+ Toto je obrázek na neobvyklé url:
+ <img src="/images/<strong>moje</strong>/foto.jpg">
+\--
+
+Jenže tento výsledek uživatel nezamýšlel. V adrese obrázku nechtěl mít značky `<strong>`, ale obyčejné hvězdičky. Můžete namítnout, že hvězdičky v adrese jsou neobvyklé. Dejme tomu, ale objevit se tam mohou. Tedy uvedené řešení **NENÍ stoprocentní**.
+
+A co druhé řešení? Není o moc lepší. Vyžaduje od programátora nadlidské úsilí: musí odhalit všechny možné interference použitých regulárních výrazů. Regulární výrazy se stanou  mnohem komplikovanější. Navíc zmizí univerzálnost systému, každá změna syntaxe totiž bude vyžadovat složité úpravy všech výrazů. Takový přístup je jen podhoubím pro vznik těžko odhalitelných chyb. Opět řešení **NENÍ stoprocentní**.
+
+Jak to dělá Texy
+-----------------
+
+A teď, když oba dva běžné formátovací prostředky selhaly, objevuje se na scéně Texy. A situaci zachrání :-)
+
+Ale opusťme reklamní žargon. Ona skutečně realita je taková, že známé a populární formátovače (Textile, Markdown, ...) na podobných konstrukcích spolehlivě kolabují. Proto ostatně Texy vzniklo, z požadavku na **pořádný** formátovač s **očekávatelným chováním**.
+
+Předností Texy je používání jen stoprocentních technik. Prioritou není rychlost, ale bezchybnost a dokonalost převodu. Tím se od konkurence odlišuje.
+
+
+Stále nevěříte?
+---------------
+
+Vezměme si například populární převaděč [Textile | Textile]. Jeho syntaxe říká, že text uzavřený mezi hvězdičkami bude zvýrazněn značkou `<strong>`, text mezi podtržítky značkou `<em>`. Navíc je možné ihned po prvním podtržítku použít modifikátor, tedy například _(class)text_. Pokud však v modifikátoru použijeme hvězdičky, Textile zmateme a vrátí neočekávatelný výsledek. Zkuste si nechat zformátovat výraz:
+
+/--
+_(tak *tohle* Textile)nezvládne_
+\--
+
+**Ale tím nechci Textile shazovat - naopak, jde o skvělý nástroj!**
+
+[textile]: http://textism.com/tools/textile/
+
+{{ parent(co-je-texy) }}

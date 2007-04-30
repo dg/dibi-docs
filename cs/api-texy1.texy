@@ -1,0 +1,384 @@
+Programátorský manuál pro Texy 1.x
+*****************************
+
+
+Texy je napsané v objektovém PHP. Funguje ve verzích 4 i novější 5 (minimální požadovaná verze je 4.3.3).
+
+Na podrobnější popis si prosím ještě počkejte. Dobrým zdrojem informací jsou ale příklady, které najdete přímo v [distribuci | download]. Demonstrují tyto možnosti:
+
+- jak implementovat cache
+- kontrola užití HTML tagů a atributů
+- formátování komentářů
+- zvýraznění syntaxe ve zdrojových kódech
+- restrikce užití modifikátorů
+- použití smajlíků
+
+V případě dotazů se obracejte přímo do [fóra | http://forum.texy.info].
+
+
+Základ
+======
+
+V podstatě stačí do kódu zahrnout knihovnu texy.php (nebo texy-compact.php) a vytvořit objekt `$texy = &new Texy();`. Pozor, pokud používáte PHP verze 4, nevynechejte znak `&`.
+
+Celý převod obstará volání metody `$html = $texy->process($s)`, kde proměnná `$s` obsahuje vstupní text a vrací se zformátovaný HTML výstup.
+
+/-- code php
+
+// vložíme knihovnu
+require_once('texy.php');
+
+// vytvoříme objekt
+$texy = &new Texy();
+
+// můžeme jej nakonfigurovat
+$texy->utf = TRUE;
+$texy->imageModule->root  = 'images/';
+
+// a zpracujeme vstupní text $s
+$html = $texy->process($s);
+
+\--
+
+V ukázce vidíte, že objekt `$texy` je možné dále konfigurovat. Všechny volitelné parametry jsou vysvětlené níže.
+
+Pokud potřebujete formátovat jen jednořádkový text (tedy bez blokových elementů), použijte `$html = $texy->process($s, TRUE)`.
+
+
+Nastavení jádra Texy
+=====================
+
+$texy->allowedClasses:
+  - povolené CSS třídy a ID
+  - *TRUE* - jsou povoleny veškeré třídy a ID (výchozí hodnota)
+  - *FALSE* - všechny třídy a ID zakázané
+  - *array* - povoleny jsou třídy a ID specifikované v poli (ID začínají prefixem ``#``)
+  - příklad: `array('class1', 'class2', '#id1', '#id2')`
+  - metoda `$texy->safeMode()` nastaví proměnnou na FALSE
+  - metoda `$texy->trustMode()` nastaví proměnnou na TRUE
+
+$texy->allowedStyles:
+  - povolené CSS inline styly
+  - *`TRUE`* - jsou povoleny veškeré vložené CSS styly (výchozí hodnota)
+  - *`FALSE`* - vkládané CSS je zakázáno
+  - *`array`* - povoleny jsou CSS vlastnosti specifikované v poli
+  - příklad: `array('font-size', 'color', 'width')`
+  - metoda `$texy->safeMode()` nastaví proměnnou na FALSE
+  - metoda `$texy->trustMode()` nastaví proměnnou na TRUE
+
+$texy->allowedTags:
+  - povolené HTML značky
+  - *`TRUE`* - jsou povoleny veškeré značky a attributy (tedy i nevalidní)
+  - *`FALSE`* - všechny značky zakázané
+  - *`array`* - povoleny jsou značky specifikované **jako klíče** v poli, na atributy není kladeno žádné omezení
+  - příklad: `array( 'strong' => TRUE, 'a' => TRUE );`
+  - *`array`* - povoleny jsou jen uvedené atributy
+  - příklad: `array( 'a' => array('href', 'title') );`
+  - *výchozí hodnotou* je pole všech validních značek (viz trustMode)
+  - metoda `$texy->safeMode()` nastaví proměnnou na pole tzv. *bezpečných značek*
+  - metoda `$texy->trustMode()` nastaví proměnnou na pole validních značek (mimo html, head, body, base, meta, link a title)
+
+$texy->obfuscateEmail:
+  - zda se mají maskovat emailové adresy před roboty
+  - *boolean*
+
+$texy->styleSheet:
+  - zde se zapisuje vygenerovaný CSS stylesheet. Texy sám styly negeneruje, tato proměnná je připravena pro uživatelské funkce a moduly
+  - *string*
+
+$texy->tabWidth:
+  - Texy převádí u vstupního textu tabulátory na mezery, tady lze nastavit jejich šířku (def. 8)
+  - *int*
+
+$texy->utf:
+  - zapnutí / vypnutí režimu UTF-8 (nastavujte vždy a nespoléhejte se na default)
+  - *boolean*
+
+$texy->userReference:
+  - callback pro reference, ať už obrázky nebo odkazy
+
+$texy->mergeLines:
+  - režim spojování řádků
+  - *boolean*
+
+
+
+
+
+Nastavení modulů
+================
+
+Ke každému modulu lze přistupovat přes `$texy->*any*Module->`.
+
+$texy->*any*Module->allowed:
+  - obecně slouží k vypnoutí nebo omezit funkčnosti modulu.
+  - obvykle lze hromadně měnit toto nastavení pomocí `$texy->safeMode()` a `$texy->trustMode()`
+
+
+
+TexyBlockModule
+---------------
+
+Zpracovává všechny bloky `/-- xxx`
+
+$texy->blockModule->codeHandler:
+  - callback pro bloky `/--code`, `/--samp` nebo obyčejný `/--`
+  - výchozí a bezpečný režim se přepíná metodami `safeMode()` a `trustMode()`. Týká se bloku `/--html`, který se v bezpečném režimu chová jako blok `/--text`.
+
+$texy->blockModule->allowed:
+  - které bloky jsou povoleny? (code, samp, text, html, div)
+  - příklad: `$texy->blockModule->allowed->samp = FALSE;`
+
+$texy->blockModule->allowedHTML:
+  - zda je povoleno vkládání html v bloku /--html
+  - *boolean*
+
+
+
+
+TexyFormatterModule
+---------------
+
+Formátuje výsledné HTML a zároveň hlídá a koriguje wellformed zápis.
+
+$texy->formatterModule->indent:
+  - formátovat výstup do přehledné podoby?
+  - *boolean*
+
+$texy->formatterModule->baseIndent:
+  - minimální odsazení
+  - *int*
+
+$texy->formatterModule->lineWrap:
+  - šířka řádku
+  - *int*
+
+
+
+
+TexyHeadingModule
+---------------
+
+Zpracovává titulky
+
+
+$texy->headingModule->top:
+  - strop pro titulky, tj. úroveň nejvyššího titulku, def. 1
+  - *int*
+
+$texy->headingModule->title:
+  - zde je po parsování uložen text prvního titulku (bez html kódování, vhodné pro použití v <title>
+  - *string*
+
+$texy->headingModule->balancing:
+  - metoda zpracování titulků, buď TEXY_HEADING_DYNAMIC (výchozí) nebo TEXY_HEADING_FIXED
+
+$texy->headingModule->levels:
+  - převodní tabulka, určuje váhu jednotlivých titulků. Doporučuji needitovat.
+  - příklad: `$texy->headingModule->levels['*'] = 3;`
+
+$texy->headingModule->allowed:
+  - konfigurace, které typ titulků je povolen (surrounded, underlined)
+  - příklad: `$texy->headingModule->allowed->surrounded = FALSE;`
+
+
+
+
+TexyHtmlModule
+---------------
+
+Zpracovává přímé HTML
+
+
+
+
+
+TexyImageModule
+---------------
+
+Má na starosti obrázky
+
+$texy->imageModule->root:
+  - kořenový adresář obrázků, výchozí je `'images/'`
+  - *string*
+
+$texy->imageModule->linkedRoot:
+  - kořenový adresář obrázků, které jsou použity jako cíl odkazu, tedy `[odkaz | * img.jpg *]`
+  - *string*
+
+$texy->imageModule->rootPrefix:
+  - rootPrefix + root + jmeno_obrazku by mělo dát fyzickou cestu k obrázku na serveru, používá se k zjištění rozměrů pro atributy width a height
+  - *string*
+
+$texy->imageModule->leftClass:
+  - třída, která se použije u obrázků zarovnaných vlevo
+  - *string*
+
+$texy->imageModule->rightClass:
+  - nebo vpravo (není-li specifikována, Texy zarovnává pomoci float:left či right
+  - *string*
+
+$texy->imageModule->defaultAlt:
+  - implicitní atribut alt, pokud není u obrázku určen
+  - *string*
+
+
+
+
+TexyImageDescModule
+---------------
+
+Tzv. obrázky s popiskou
+
+$texy->imageDescModule->boxClass:
+  - obrázek s popiskou, třída ohraničujícího kontejneru div
+  - *string*
+
+$texy->imageDescModule->leftClass:
+  - totéž, pokud je plovoucí vlevo
+  - *string*
+
+$texy->imageDescModule->rightClass:
+  - totéž, pokud je plovoucí vpravo
+  - *string*
+
+
+
+
+TexyLinkModule
+---------------
+
+Zpracovává všechny odkazy a reference
+
+$texy->linkModule->root:
+  - kořenový adresář relativních odkazů
+  - *string*
+
+$texy->linkModule->emailOnClick:
+  - akce onclick, která bude doplněna k emailům (vhodné pro nějaké sofistikovanější schovávání emailů před roboty)
+  - *string*
+
+$texy->linkModule->imageOnClick:
+  - akce onclick, je připojena k odkazům vedoucím na obrázek (vyvolání vyskakovacího okna atd.)
+  - *string*
+
+$texy->linkModule->forceNoFollow:
+  - automatické doplňování rel='nofollow'. Ručně lze doplňovat takto: "text odkazu .[nofollow]"
+  - *boolean*
+
+$texy->linkModule->allowed:
+  - konfigurace pluginu (link, email, url)
+  - příklad: `$texy->linkModule->allowed->email = FALSE;`
+
+
+
+
+TexyListModule
+---------------
+
+Číslované a nečíslované seznamy
+
+$texy->listModule->allowed:
+  - konfigurace povolené syntaxe `*, -, +, 1., 1), I., I), a), A)`
+  - příklad: `$texy->listModule->allowed['1.'] = TRUE;`
+
+
+
+
+TexyLongWordsModule
+---------------
+
+Řeší rozdělení dlouhých slov
+
+$texy->longWordsModule->shy:
+  - standardně `&shy;`, pro firefox se může hodit `&shy;<wbr>`
+  - *string*
+
+
+
+
+TexyPhraseModule
+----------------
+
+Zpracovává téměř všechny fráze, tedy úseky textu s určitým formátem (tučné, kurzíva, subskript atd)
+
+$texy->phraseModule->codeHandler:
+  - callback pro zpracování `` ` .... ` ``
+
+$texy->phraseModule->allowed:
+  - konfigurace podporované syntaxe. Tady lze vypínat nebo měnit tagy
+
+
+
+
+TexyQuickCorrectModule
+---------------
+
+Ve výsledném HTML provádí typografické úpravy
+
+$texy->quickCorrectModule->doubleQuotes:
+  - entity pro dvojité uvozovky (pro použití v jiném jazyku)
+  - výchozí pro češtinu je `array('&bdquo;', '&ldquo;');`
+
+$texy->quickCorrectModule->singleQuotes:
+  - entity pro jednoduché uvozovky (pro použití v jiném jazyku)
+  - výchozí pro češtinu je `array('&sbquo;', '&lsquo;');`
+
+$texy->quickCorrectModule->dash:
+  - entita pomlčky (pro použití v jiném jazyku)
+  - výchozí pro češtinu je `'&ndash;'`
+
+
+
+
+TexyQuoteModule
+---------------
+
+Blokové a řádkové citace
+
+$texy->quoteModule->allowed:
+  - konfigurace (line, block)
+  - příklad: `$texy->quoteModule->allowed->line = FALSE;`
+
+
+
+
+TexySmiliesModule
+---------------
+
+Má na starosti nahrazování smajlíků za obrázky
+
+$texy->smiliesModule->allowed:
+  - vypnutí / zapnutí (standardně vypnuto)
+  - *boolean*
+
+$texy->smiliesModule->icons:
+  - tabulka všech smajlíků a odpovídajících obrázků
+  - *asociativní pole*
+
+$texy->smiliesModule->root:
+  - kořenový adresář těchto obrázků
+  - *string*
+
+$texy->smiliesModule->class:
+  - a CSS třída
+  - *string*
+
+
+
+
+TexyTableModule
+---------------
+
+Tabulky
+
+$texy->tableModule->evenClass:
+  - třída přiřazená všem sudým řádkům
+  - *string*
+
+$texy->tableModule->oddClass:
+  - třída přiřazená všem lichým řádkům
+  - *string*
+
+
+{{ parent(api) }}

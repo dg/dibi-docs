@@ -1,0 +1,20 @@
+Blbuvzdornost
+*************
+
+
+Tímto lidovým pojmem se označuje systém, který se dokáže korektně vypořádat s jakýmkoliv vstupem. To je případ i Texy a také díky tomu je možné jej nasadit v širokém spektru aplikací. Například jako formátovač komentářů na fóru.
+
+Na takové systémy, jsou obecně kladeny vyšší nároky. Pisatel komentáře totiž může odeslat prakticky jakýkoliv shluk písmen a je jen na aplikaci, aby se s nimi vypořádala a vrátila validní a [očekávatelný | ocekavatelne-chovani] HTML kód. Komentář může být napsán se záměrem podvrhnout záškodnický kód - např. JavaScript, velký obrázek, text rozbíjející layout stránky nebo nevalidní konstrukci, na které ztroskotá XML parser.
+
+Je až s podivem, jak v této oblasti selhávají téměř všechny populární formátovače. Při testu wellformed výstupu neobstojí ani [Textile | textile] nebo šikovný [Markdown | markdown]. Zkuste si jimi nechat zformátovat tyto řetězce:
+
+**Textile:** `*well _formed* text_`
+
+**Markdown:** `_well **formed_ text**`
+
+[textile]: http://textism.com/tools/textile/
+[markdown]: http://daringfireball.net/projects/markdown/dingus
+
+
+
+{{ parent(co-je-texy) }}

@@ -1,0 +1,25 @@
+Texy2 pro PHP4
+**************
+
+<a href="http://gophp5.org" title="Support GoPHP5.org"><img src="http://gophp5.org/sites/gophp5.org/buttons/goPHP5-200x65.png" height="65" width="200" class="right noborder" alt="Support GoPHP5.org" /></a>
+
+Podpora PHP verze 4 byla definitivně ukončena dne 5. února 2008. Podslední verzi pro PHP 4 si můžete [stáhnout zde | http://download.texy.info/php4/texy-2.0-beta2-php4.zip] (revize 201).
+
+Tato verze byla vytvořena za pomoci [PHP 5 → 4 převodníku | http://latrine.dgx.cz/php-5-to-4-converter].
+
+Poznámky:
+
+- pokud je text v jiném kódování než UTF-8, bude vyžadovat knihovnu `iconv`.
+- konstanty tříd Texy::ALL apod. se zapisují jako obyčejné konstanty TEXY_ALL
+- není nutné při práci s objekty používat ampersandy (!), takže volejte `$texy = new Texy` namísto `&new Texy`.
+
+
+Pluginy pro CMS((Content Management System, redakční systém)) pro PHP 4
+----------------------------------------
+
+- [b2evolution plugin | http://download.texy.info/php4/texy2-plugin-b2evo.zip]
+- [WordPress plugin | http://download.texy.info/php4/texy2-plugin-wordpress.zip]
+- [BLOG:CMS plugin | http://download.texy.info/php4/texy2-plugin-blogcms.zip]
+- [Nucleus plugin | http://download.texy.info/php4/texy2-plugin-nucleus.zip]
+- [lucidCMS plugin | http://download.texy.info/php4/texy2-plugin-lucid.zip]
+- [TextPattern plugin | http://download.texy.info/php4/texy2-plugin-textpattern.zip]

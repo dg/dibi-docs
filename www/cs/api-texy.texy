@@ -1,0 +1,92 @@
+Třída Texy
+**********
+
+Poznámka: PHP 4 nezná konstanty tříd. Proto místo `Texy::ALL`, `Texy::NONE` používejte náhradní konstanty `TEXY_ALL`, `TEXY_NONE`.
+
+|----------------
+| proměnná | typ | výchozí | popis |
+|----------------
+| `$encoding`     | string   | `'UTF-8'` | kódování vstupního a výstupního textu
+| `$allowed`      | mixed    |  | povolené "Texy syntaxe"
+| `$allowedTags`  | mixed    | *validní značky* | povolené HTML značky
+| `$allowedClasses` | mixed  | Texy::ALL | povolené CSS třídy a identifikátory
+| `$allowedStyles` | mixed   | Texy::ALL | povolené CSS styly
+| `$alignClasses` | array    | *vynulované* | CSS třídy pro zarovnání textu a obrázků
+| `$mergeLines`   | boolean  | TRUE    | spojovat řádky?
+| `$tabWidth`     | int      | 8       | šířka tabulátorů kvůli převední na mezery
+| `$obfuscateEmail` | boolean| TRUE    | maskovat emailové adresy před roboty?
+| `$urlSchemeFilters` | array| NULL    |
+| `$styleSheet`   | string   | NULL    | připraveno pro uživatelské použití
+
+
+Proměnné `$allowedTags`, `$allowedClasses` a `$allowedStyles` mohou nabývat hodnot:
+
+- `Texy::ALL` - jsou povoleny všechny HTML značky resp. styly resp. třídy
+- `Texy::NONE` - naopak jsou všechny zakázány
+- *array* - výčet povolených hodnot
+  - `$allowedTags` - povolené značky tvoří klíče, viz příklady níže
+  - `$allowedClasses` - seznam tříd a ID, přičemž ID začínají prefixem #
+  - `$allowedStyles` - seznam CSS vlastností
+
+Pole `$alignClasses` definuje CSS třídy pro zarovnání textu a obrázků. Blíže popsáno [ve fóru | http://forum.texy.info/viewtopic.php?id=532].
+
+Texy spojuje řádky následující za sebou do odstavců. Toto chování je možné vypnout nastavením vlastnosti `$texy->mergeLines = FALSE`.
+
+Volba výstupu HTML / XHTML
+-------------
+
+Formát výstupu zvolíte metodou `$texy->setOutputMode(format)`. Jako `formát` zadejte jednu z těchto konstant:
+
+| `Texy::HTML4_TRANSITIONAL` | HTML 4.0 Transitional, in which deprecated elements are allowed
+| `Texy::HTML4_STRICT` | HTML 4.0 Strict, in which deprecated elements are forbidden
+| `Texy::HTML5` | not supported yet
+| `Texy::XHTML1_TRANSITIONAL` | XHTML 1.0 Transitional
+| `Texy::XHTML1_STRICT` | XHTML 1.0 Strict
+| `Texy::XHTML5` | not supported yet
+
+Výchozí režim je `Texy::XHTML1_TRANSITIONAL`.
+
+Příklady
+--------
+
+Povolíme pouze HTML elementy `<strong>, <div>, <a>` a některé jejich atributy:
+
+/--code php
+$texy->allowedTags = array(
+    'strong' => Texy::NONE,  // <strong> nesmí mít žádné attributy
+    'div' => Texy::ALL,  // <div> může mít jakékoliv atributy
+    'a' => array('href', 'lang', 'target'), // <a> může mít jen tyto atributy
+);
+\--
+
+Všechny HTML značky zakážeme:
+
+/--code php
+$texy->allowedTags = Texy::NONE;
+\--
+
+Povolíme pouze CSS třídy `class1, class2` a CSS identifikátory `id1, id2`
+
+/--code php
+$texy->allowedClasses = array('class1', 'class2', '#id1', '#id2');
+\--
+
+Povolíme pouze CSS vlastnosti `font-size, color, width`
+
+/--code php
+$texy->allowedStyles = array('font-size', 'color', 'width');
+\--
+
+Důležité je vždy nastavit správné kódování vstupního a výstupního text
+
+/--code php
+$texy->encoding = 'windows-1250';
+\--
+
+Místo přímých stylů `style="text-align:left"` apod. používej třídy `class="left"` apod.
+
+/--code php
+$texy->alignClasses['left'] = 'left';
+$texy->alignClasses['right'] = 'right';
+... // dále možno definovat: center, justify, top, bottom, middle
+\--

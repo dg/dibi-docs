@@ -1,0 +1,22 @@
+Třída TexyScriptModule
+*********************
+
+Má na starosti volání uživatelských funkcí a vkládání externích dat. Modul vypneme zakázáním syntaxe `script`:
+
+/--code php
+$texy->allowed['script'] = FALSE;
+\--
+
+Konfigurace
+-----------
+
+|----------------
+| proměnná | typ | výchozí | popis |
+|----------------
+| $handler    | callback | NULL | callback ve stylu Texy1
+| $separator  | string | `';'`  | oddělovat argumentů
+
+Příklady
+--------
+
+Najdete ve [fóru | http://forum.texy.info/viewtopic.php?pid=1954].

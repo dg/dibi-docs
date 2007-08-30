@@ -1,0 +1,21 @@
+Třída TexyPhraseModule
+*********************
+
+Má na starosti tzv. fráze, tedy úseky textu (tučný text, odkaz, ...). Můžeme vypínat a zapínat jednotlivé syntaxe:
+
+/--code php
+$texy->allowed['phrase/strong'] = FALSE;
+...
+\--
+
+Konfigurace
+-----------
+
+|----------------
+| proměnná | typ | výchozí | popis |
+|----------------
+| $tags          | array   |  | HTML značky pro jednotlivé fráze
+| $linksAllowed  | boolean | TRUE | je možné k frázi přidat odkaz?
+
+
+Pod pojmem fráze se rozumí jakákoliv řádková syntax jako `**tučné**`, `//kurzíva//`, `subskript_2`, `[odkaz | www.dgx.cz`].

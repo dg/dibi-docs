@@ -1,0 +1,17 @@
+Třída TexyBlockModule
+*********************
+
+Má na starosti zpracování bloků `/-- xxx`. Modul vypneme zakázáním syntaxe `blocks`:
+
+/--code php
+$texy->allowed['blocks'] = FALSE;
+
+// nebo pro jednotlivé typy bloků
+$texy->allowed['block/code'] = FALSE;
+\--
+
+
+Příklady
+--------
+
+*Dokumentace se připravuje*

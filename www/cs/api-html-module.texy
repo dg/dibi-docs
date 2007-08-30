@@ -1,0 +1,20 @@
+Třída TexyHtmlModule
+*********************
+
+Má na starosti HTML značky a komentáře na vstupu. Modul vypneme zakázáním syntaxe:
+
+/--code php
+// vypneme HTML značky
+$texy->allowed['html/tag'] = FALSE;
+
+// vypneme HTML komentáře
+$texy->allowed['html/comment'] = FALSE;
+\--
+
+Konfigurace
+-----------
+
+|----------------
+| proměnná | typ | výchozí | popis |
+|----------------
+| $passComment  | boolean | TRUE | zobrazit HTML komentáře na výstupu?

@@ -1,0 +1,61 @@
+Doplňky, nástroje, pluginy
+******************
+
+
+Texy pluginy pro CMS((Content Management System, redakční systém)) a frameworky
+----------------------------------------
+
+(vyžaduje PHP 5.1 nebo vyšší, pluginy pro starší verze najdete [zde | texy2-php4])
+
+- [b2evolution plugin | download:texy2-plugin-b2evo.zip] (pro 1.8 - 2.0) ([informace | http://forum.texy.info/viewforum.php?id=8])
+- [WordPress plugin | download:texy2-plugin-wordpress.zip]  (pro 1.2 - 2.5) ([informace | http://forum.texy.info/viewforum.php?id=10])
+- [BLOG:CMS plugin | download:texy2-plugin-blogcms.zip] ([informace | http://forum.texy.info/viewforum.php?id=4], [upozornění | http://forum.texy.info/viewtopic.php?id=65])
+- [Nucleus plugin | download:texy2-plugin-nucleus.zip] (pro 3.2) ([informace | http://forum.texy.info/viewforum.php?id=7], [upozornění | http://forum.texy.info/viewtopic.php?id=66])
+- [lucidCMS plugin | download:texy2-plugin-lucid.zip] ([informace | http://forum.texy.info/viewforum.php?id=17] )
+- [Drupal plugin | http://drupal.org/project/texy] (vytvořil Havran)
+- [Symfony plugin sfTexyPlugin | http://trac.symfony-project.com/trac/wiki/sfTexyPlugin] (vytvořil Miloslav Kmet)
+- [Joomla plugin | http://www.foceni.org/download/joomla/texy-plugin-2.html] (vytvořil Jiří Žán)
+
+
+
+
+Publikační systémy s předinstalovaným Texy
+-----------------------
+
+- [Český WordPress | http://www.dgx.cz/trine/item/cesky-wordpress-ke-stazeni]
+- [Český TextPattern | http://textpattern.ivorius.com/] (via Ivo Toman)
+
+
+Texy na jiných platformách
+---------------
+
+- Java: [JTexy | http://jtexy.dev.java.net/] (projekt je ve vývoji a hledají se spolupracovníci)
+- Ruby: [Texier | http://texier.rubyforge.org/] aneb Texy naruby ;-)
+- .NET: [Texy.net | http://www.codeplex.com/texynet/]
+- .NET: [Texy! with Phalanger | http://tomasp.net/blog/aspnettexy.aspx]
+- via [XML/RPC server | xmlrpc]
+
+
+Editory
+-------
+
+- [Amy Editor | http://www.april-child.com/amy/website] se zvýrazňováním syntaxe ([vykoušejte naživo | http://www.april-child.com/amy/api/embed/test_texy.html])
+- [Texyla | http://texyla.jaknato.com/] AJAX editor pro Texy
+
+
+Převaděče
+---------
+
+- [html2texy! | http://www.webkitchen.cz/lab/html2texy/] zpětný převodník do HTML
+- [Texy! -> LaTeX | http://jaybee.frih.net/software/prevodnik-texy!---latex]
+
+
+Příklady, tutoriály
+------------------
+
+- příklad spojení [Texy2 & FSHL | download:texy2-example-FSHL.zip]
+- příklad spojení [Texy2 & GeSHi | download:texy2-example-GeSHi.zip]
+
+
+
+{{lang: en/extend}}

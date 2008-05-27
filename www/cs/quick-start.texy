@@ -1,0 +1,362 @@
+Quick Start
+**********
+
+Cíle layeru dibi:
+
+-	maximálně ulehčit práci programátorům. Jak?
+  -	zjednodušit zápis SQL příkazů, co to jen půjde
+  -	snadný přístup k metodám, i bez globálních proměnných
+  -	funkce pro několik rutinních úkonů
+-	eliminovat výskyt chyby. Jak?
+  -	přehledný zápis SQL příkazů
+-	přenositelnost mezi databázovými systémy
+  -	automatická podpora konvencí (escapování/slashování, uvozování identifikátorů)
+  -	automatické formátování spec. typů, např. datum, řetězec
+  -	sjednocení základních fcí (připojení k db, vykonání příkazu, získání výsledku)
+-	**a především KISS** (Keep It Simple, Stupid)
+  -	zachovat maximální jednoduchost
+  -	raději jeden geniální nápad, než 10.000 hloupých řádků kódu
+
+
+Připojení k databázi
+--------------
+
+Každé spojení je reprezentováno objektem DibiConnection. To komunikuje s databází přes ovladač (třída implementující IDibiDriver). Který ovladač použít zvolíme při vytváření objektu:
+
+/--code php
+$options = array(
+    'driver'   => 'mysql',
+    'host'     => 'localhost',
+    'username' => 'root',
+    'password' => '***',
+    'database' => 'table',
+);
+
+// v případě chyby vyhodí DibiException
+$connection = new DibiConnection($options);
+$connection->query('TRUNCATE `table`');
+\--code
+
+Ale na tento způsob můžete klidně zapomenout :-) Je tu totiž statický registr `dibi`. Ten má za úkol udržovat v globálně dostupném úložišti objekt (či objekty) spojení a nad nimi volat potřebné funkce:
+
+/--code php
+dibi::connect(array(
+    'driver'   => 'mysql',
+    'host'     => 'localhost',
+    'username' => 'root',
+    'password' => '***',
+    'database' => 'test',
+    'charset'  => 'utf8',
+));
+\--
+
+Statická třída `dibi` má **jednu báječnou výhodu** - kdekoliv je po ruce. Nemusíte získávat instanci připojení, prostě napíšete `dibi::` a máte vystaráno.
+
+Není to sice obvyklé, ale může se stát, že budete v aplikaci používat více připojení, třeba k různým databázím. Pak si každé připojení pojmenujete při připojování
+
+/--code php
+dibi::connect($options1, 'prvni pripojeni');
+dibi::connect($options2, 'druhe pripojeni');
+\--
+
+a kdykoliv si je buď vytáhnete z registru...
+
+/--code php
+$connection = dibi::getConnection('druhe pripojeni');
+$connection->query(...);
+\--
+
+...nebo jej tzv. aktivujete a voláte přes třídu dibi:
+
+/--code php
+dibi::activate('prvni pripojeni');
+dibi::query(...);
+\--
+
+*Poznámka: připojování ve stylu DSN, kdy popis připojení je uložen v řetězci připomínajícím URI, se v praxi ukázalo jako nepraktické. Používám raději pole, přípustný je však i řetězec, a to ve standardizovaném formátu HTTP query.*
+
+
+SQL příkazy - tak to je bomba!
+-------------------------
+
+Přiznám se, že způsob zápisu SQL příkazů jsem hledal šíleně dlouho. Nakonec jsem dospěl k technice, která je nesmírně prostá, intuitivní a doslova návyková:
+
+/--code php
+dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
+
+$arr = array(
+    'pole' => 'hodnota',
+    'bit'  => TRUE,
+);
+dibi::query('INSERT INTO [table]', $arr);
+
+dibi::query('UPDATE `table` SET ', $arr, 'WHERE `id`=%i', $x);
+\--
+
+Jak vidíte, SQL příkaz se zapisuje jako série parametrů a před vložením proměnné uvedeme modifikátor (např. `%i`). Pokud ho neuvedeme, zjistí se typ automaticky (samozřejmě nelze zjistit typy jako je datum apod).
+
+Proměnná na naformátuje do výsledného SQL podle pravidel aktivní databáze. Tak třeba TRUE bude v MS SQL jako -1, jinde jako '1'. Stejně tak se zformátují řetězce, časové údaje, atd.
+
+Modifikátory jsou následující:
+
+| %s | string |
+| %sn | string, ale '' se přeloží jako NULL |
+| %bin | binární data |
+| %b | boolean |
+| %i %u | integer |
+| %f | float |
+| %d | datum (očekává string nebo integer) |
+| %t | datum & čas (také string či integer) |
+| %n | identifikátor (tedy název tabulky či sloupce) |
+| %sql | SQL - řetězec ponechá beze změny |
+| %lmt | speciální - určuje limit |
+| %ofs | speciální - určuje offset |
+| %ex | speciální - expanduje pole |
+
+
+Pokud za modifikátorem následuje NULL, vloží se do databáze NULL. Pokud následuje pole, tak se modifikátor aplikuje na všechny jeho prvky. Ty se pak vloží do SQL oddělené čárkama.
+
+**Vždy používejte** modifikátor `%s` před proměnnou s řetězcem. Dibi by pak nemohlo rozlišit, co je SQL příkaz (tzv. embedded SQL) a co řetězec. V tomto příkladu je funkce `dibi::query` volána s dvěma argumenty, první je řetězec představující (embedded) SQL,  druhý je řetězec představující řetězec. Modifikátor `%s` to odliší:
+
+/--code php
+$text = "I'm fine";
+dibi::query('UPDATE `table` SET `text`=%s', $text);
+// MySQL: UPDATE `table` SET `text`='I\'m fine'
+// ODBC:  UPDATE [table] SET [text]='I''m fine'
+\--
+
+
+Proč používám termín embedded SQL? Protože jak vidno, i toto SQL prochází zpracováním, aby vyhovovalo konvencím dané databáze. Identifikátory (jména tabulek a sloupců) uvozuji do hranatých závorek nebo zpětných uvozovek (je to jedno), dále řetězce značím jednoduchými či dvojitými uvozovkami, ale na výstup se dostane vždy to, co databáze žádá. Příklad
+
+/--code php
+dibi::query("UPDATE `table` SET [text]='I''m fine'");
+
+// MySQL: UPDATE `table` SET `text`='I\'m fine'
+// ODBC:  UPDATE [table] SET [text]='I''m fine'
+\--
+
+Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem dibi je opak.
+
+Formátování polí
+-------------------
+
+Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pole, které se pak oddělené čárkami vloží do SQL. Ovšem můžeme využít také dvou speciálních modifikátorů `%a` nebo `%v`.
+
+| %a | assoc | `[key]=val, [key2]="val2", ...` |
+| %l | list | `(val, "val2", ...)` |
+| %v | values | `([key], [key2], ...) VALUES (val, "val2", ...)` |
+| jiný  | - | `val, val2, ...` |
+
+Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V tom případě dibi použije tuto dedukci: jde-li o příkaz INSERT či REPLACE, zvol %v, jinak %a (platí pro asociativní pole).
+
+Takže příklad:
+
+/--code php
+$arr = array(
+    'a' => 'hello',
+    'b'  => TRUE,
+);
+dibi::query('INSERT INTO [table]', $arr);
+// INSERT INTO `table` (`a`, `b`) VALUES ('hello', 1)
+
+dibi::query('UPDATE `table` SET ', $arr);
+// UPDATE `table` SET `a`='hello', `b`=1
+\--code
+
+
+Speciální typy - objekty
+-------------------
+
+Parametrem může být také objekt. Musí implementovat rozhraní `IDibiVariable` s metodou `toSql()`. Té se předá cílový ovladač a případný modifikátor a ona vrátí SQL řetězec. Jako příklad jsou v dibi takto řešeny objekty, které nesou datum a čas.
+
+Standardní implementací IDibiVariable je třída DibiVariable. Konstruktoru předáme hodnotu a modifikátor:
+
+/--code php
+dibi::query('UPDATE `table` SET ', array(
+    'time' => new DibiVariable(time(), 'd'),
+    'number' => new DibiVariable('RAND()', 'sql'),// %sql means SQL ;)
+));
+// UPDATE `table` SET ('2008-01-01', RAND())
+\--code
+
+
+Můžete použít také šikovější továrny na tyto objekty: `dibi::date()` a `dibi::datetime()`. Jako parametr akceptují kromě číselné hodnoty timestamp i řetězce.
+
+
+Postupné skládání dotazu
+---------------------
+
+Dibi disponuje také podporou pro postupné skládání SQL dotazu:
+
+/--code php
+$query[] = 'SELECT * FROM [table]';
+if ($where){
+    array_push($query, 'WHERE [id]=%d', $where);
+}
+
+// a nyní předáme pole
+$result = dibi::query($query);
+\--
+
+Nebo lze použít expanzi pole přes speciální modifikátor `%ex`.
+
+Podmíněné SQL příkazy
+---------------------
+
+Podmíněné SQL příkazy jsou velmi silným nástrojem. Ovládají se pomocí tří klíčových slov `%if`, `%else` a `%end`. První z nich `%if` se musí, obdobně jako modifikátor, nacházet zcela na konci řetězce představujícího SQL:
+
+
+/--code php
+$user = ???
+
+dibi::query('
+SELECT *
+FROM [table]
+%if', isset($user), 'WHERE [user]=%s', $user
+);
+\--
+
+Závěrečné `%end` je možno vynechat (nebo bude lepší na něm trvat?).
+
+Podmínku lze rozšířit o část `%else`:
+
+/--code php
+dibi::query('
+SELECT *
+FROM %if', $cond, '[one_table] %else [second_table]'
+);
+\--
+
+Podmínky můžete zanořovat do libovolné hloubky!
+
+Prefixy & substituce
+---------
+
+Názvy tabulek a sloupců mohou obsahovat proměnné části. Ty si nejprve nadefinujeme:
+
+/--code php
+// create new substitution :blog:  ==>  wp_
+dibi::addSubst('blog', 'wp_');
+\--
+
+a poté použijeme v SQL. Všimněte si, že v SQL jsou uvozeny dvojtečkama:
+
+/--code php
+dibi::test("UPDATE [:blog:items] SET [text]='Hello World'");
+// UPDATE `wp_items` SET `text`='Hello World'
+\--
+
+
+Testování query()
+---------------
+
+Abyste si mohli trošku s dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
+
+Možná by vás zajímalo, co celé to parsování a skládání dotazu stojí. Napsal jsem tyto funkce co nejoptimálněji a situace je taková, že zaberou jen zlomek času, který si ukousne samotné vykonání SQL příkazu. Můžete si ověřit.
+
+
+Získávání výsledků
+------------------
+
+Nejjednodušší cesta vede přes klasickou iteraci
+
+/--code php
+$result = dibi::query('SELECT * FROM table');
+
+foreach ($result as $n => $row) {
+    print_r($row);
+}
+
+unset($result);
+\--
+
+Všimněte si, že zdroje se uvolní automaticky při zrušení objektu.
+
+Je možné také nastavit *offset* a eventuálně i *limit*
+
+/--code php
+$result = dibi::query('SELECT * FROM table');
+
+$offset = 10;
+$limit = 3;
+
+foreach ($result->getIterator($offset, $limit)
+          as $n => $row) {
+    print_r($row);
+}
+\--
+
+Můžeme získat jen první políčko výsledku
+
+/--code php
+$value = $result->fetchSingle();
+\--code
+
+Nebo celou tabulku do indexovaného pole:
+
+/--code php
+$all = $result->fetchAll();
+\--
+
+A pak tu máme k dispozici jednu mocnou funkci:
+
+/--code php
+$assoc = $result->fetchAssoc('id');
+\--
+
+Získá celou tabulku do asociativního a klíčem je políčko 'id'. Největší síla funkce se projeví tehdy, pokud provedete asociaci podle více políček. Takto lze nesmírně elegantně získávat data z dotazů, ve kterých spojujeme více tabulek. Příklad si [nechám na příště | /temer-v-cili-dibi-0-9b].
+
+Užitečná je také funkce pro získávání dat v podobě asociativního pole klíč => hodnota
+
+/--code php
+$pairs = $result->fetchPairs('customerID', 'name');
+\--
+
+Počet řádků zjistíme voláním:
+
+/--code php
+$rows = count($result);
+
+// přesun kurzoru:
+$result->seek($row);
+\--
+
+
+Datové typy
+-----------
+
+Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a dibi je bude automaticky převádět.
+
+/--code php
+$result->setType('id', Dibi::FIELD_INTEGER);
+$record = $res->fetch();
+
+if (is_int($record['id']))
+    echo 'yes, it is integer';
+\--code
+
+
+A ještě maličkost. Dibi vrací záznamy pouze jako asociativní pole 'název sloupce' => hodnota. Nelze přepnout na jinou metodu, protože jiné metody jsou špatné. Máte-li jiný názor, tak blahopřeji, ale nic se tím nezmění.
+
+
+Výjimky, logování chyb a profiler
+-----------------
+
+Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku DibiException nebo potomka DibiDriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
+
+Užitečnou vlastností je logování provozu:
+
+/--code php
+dibi::startLogger('log.txt', TRUE);
+\--
+
+Druhý parametr určuje, zda se budou zaznamenávat pouze chyby (hodnota FALSE) nebo vše (TRUE). Což se hodí při ladění. Tehdy se uplatní i velmi jednoduchý profiler:
+
+/--code php
+echo dibi::$sql; // poslední SQL příklaz
+echo dibi::$elapsedTime; // jeho doba trvání v sec
+echo dibi::$numOfQueries; // celkem SQL příkazů
+echo dibi::$totalTime; // celkový čas v sec
+\--
+
+Dibi disponuje rozhraním pro připojení vlastního profileru nebo logovací knihovny. API uveřejním později.

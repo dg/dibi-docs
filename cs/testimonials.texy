@@ -1,0 +1,28 @@
+Testimonials
+============
+
+Pokud používáte Texy! a rádi byste jej doporučili i ostatním, vyplňte prosím stručně tento formulář. Odměnou Vám budiž odkaz na Vaše stránky. Děkuji za Váš čas.
+
+<form action="/testimonials-send" method="post" enctype="multipart/form-data">
+
+
+Co můžete o Texy! říci?
+--------------------
+
+Kde je používáte a jak Vám vyhovuje, jaký má pro Vás přínos? Komu byste je doporučil?
+
+<textarea name="opinion" rows="10"></textarea>
+
+Kontakt na Vás
+--------------
+
+.{width:100%}
+| Vaše jméno:      | <input class="text" type="text" name="name" style="width:250px" /> |
+| Kontaktní email: | <input class="text" type="text" name="email" style="width:250px" /> |
+| Web:             | <input class="text" type="text" name="web" style="width:250px" /> |
+| Zadejte prosím číslo 22 (ochrana proti spamu): |  <input type="text" class="text" id="email_fxI" name="email_fx" /> | .[#email_fxD]
+
+
+<input type="submit" name="submut" value="odeslat" style="padding: 5px 10px; " />
+
+</form>

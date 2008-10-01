@@ -145,6 +145,9 @@ Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pol
 | %a | assoc | `[key]=val, [key2]="val2", ...` |
 | %l | list | `(val, "val2", ...)` |
 | %v | values | `([key], [key2], ...) VALUES (val, "val2", ...)` |
+| %by | ordering | `[key] ASC, [key2] DESC ...` |
+| %and |  | `[key]=val AND [key2]="val2" AND ...` |
+| %or |  | `[key]=val OR [key2]="val2" OR ...` |
 | jiný  | - | `val, val2, ...` |
 
 Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V tom případě dibi použije tuto dedukci: jde-li o příkaz INSERT či REPLACE, zvol %v, jinak %a (platí pro asociativní pole).

@@ -1,0 +1,36 @@
+Dejte si na stránky ikonku Texy
+********************************
+
+
+Můžete si vybrat z následujících připravených ikonek. Nebo si vytvořit vlastní.
+
+Ikonku uložíte kliknutím pravým tlačítkem myši a volbou *"Uložit obrázek jako..."*. Obrázek si prosím nahrejte na vlastní server.
+
+
+
+Ikonka 80x15px
+--------------
+
+[* texy-powered.png *]
+
+
+Ikonka 88x31px
+--------------
+
+.[grid]
+| [* 88x31-white.gif *] | [* 88x31-blue.gif *] | [* 88x31-black.gif *]
+
+
+Ikonka 80x15px
+--------------
+
+.[grid]
+| [* 80x15-white.gif *] | [* 80x15-blue.gif *] | [* 80x15-black.gif *]
+
+
+Odkaz na web Texy nejépe použijte v tomto tvaru:
+
+/--code html
+<a href="http://texy.info/"
+title="The best plain text to HTML converter"><img src="ikonka.gif" /></a>
+\--

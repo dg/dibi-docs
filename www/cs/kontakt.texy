@@ -1,31 +1,34 @@
 Kontakt
 *******
 
+<div id="hcard-David-Grudl" class="vcard">
 
-David Grudl:
-  - email: david@grudl.com
-  - blog: [La Trine | http://www.latrine.cz/]
-  - ICQ: 121546824 **(nejsem poradna!) .[alert]**
-  - mobil: 776777064 (pozor, obrácený denní režim)
+"David Grudl .[fn url]":http://davidgrudl.com
+ <span class="adr">"Zahradní 20 .[street-address]"
+ "66441 .[postal-code]" "Brno – Troubsko .[locality]" ([Google Map | http://www.google.com/maphp?q=&om=1&ll=49.174157,16.510563&spn=0.021408,0.038409])
+ "The Czech Republic .[country-name]" .[noindent]
 
-.[alert]
-Než mi napíšete o radu:
-- Jakýkoliv dotaz ohledně Texy! směřujte do [Texy fóra | http://forum.texy.info]
-- Na problémy s WordPressem je tu [české Wordpress fórum | http://podpora.dgx.cz/wordpress]
-- Zvažte, jestli váš problém skutečně vyžaduje konzultaci odborníka s hodinovou sazbou 1500 Kč
+**Jakýkoliv dotaz ohledně software směřujte do příslušného fóra! .[alert]**
+ Omlouvám se, ale nejsem bezplatná poradna.
 
-Účetní informace:
-  - Sídlo: Zahradní 20, 66441 Brno - Troubsko
-  - IČ: 69663963
-  - DIČ: CZ7801233561
-  - Plátce DPH: Ano
+E-mail: "david@grudl.com .[email]":david@grudl.com
+ jabber: *on demand*
+ ICQ: 121546824
+ Tel: "+420 776 777 064 .[tel]"
+ blog: [La Trine | www.latrine.cz], [phpFashion | http://phpfashion.com]
+ twitter: [DavidGrudl | http://twitter.com/DavidGrudl]  .[noindent]
 
-bankovní spojení mBank:
-  - 670100-2200142627 / 6210
-  - IBAN: CZ62 6210 6701 0022 0014 2627
-  - SWIFT (BIC): (není)
 
-bankovní spojení Raiffeisenbank (dříve eBanka):
-  - 2339968001 / 5500
-  - IBAN: CZ04 5500 0000 0023 3996 8001
-  - SWIFT (BIC): RZBCCZPP
+Obchodní údaje
+--------------
+
+IČ: 69663963
+ DIČ: CZ7801233561 (plátce DPH)  .[noindent]
+
+Bankovní spojení:
+ 670100–2200142627 / 6210 (mBank)
+ IBAN: CZ62 6210 670­1 0022 0014 2­627  .[noindent]
+
+Zapsáno na obecním živnostenském úřadě Městského úřadu Šlapanice.
+
+</div>

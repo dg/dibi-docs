@@ -1,0 +1,34 @@
+Download
+********
+
+Dibi 1.0, [changelog | http://code.google.com/p/dibi/source/list], uvolněno pod [Dibi licencí | license]. Vyžaduje PHP ve verzi 5.1 nebo novější.
+
+<a href="http://download.dibiphp.com/latest.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
+
+--- .[clear]
+
+
+Subversion Access
+-----------------
+
+You can obtain the latest development version from our subversion (SVN) repository. The easiest way to browse through the repository is using the [web source code browser | http://code.google.com/p/dibi/source/browse]. We recommend you install an SVN client on your machine for better access. [TortoiseSVN | http://tortoisesvn.net/] is a highly recommended client on Windows.
+
+Use this command to anonymously check out the latest project source code:
+
+/--pre
+# Non-members may check out a read-only working copy anonymously over HTTP.
+svn checkout http://dibi.googlecode.com/svn/trunk/ nette-read-only
+\--
+
+You can take a look at the "[* feed-icon.gif *] RSS feed":http://nette.org/feed for the changes log of SVN and this page.
+
+Icon for your website
+------------
+
+<a href="http://dibiphp.com/" title="dibi - tiny ‘n’ smart database abstraction layer"
+    ><img src="http://dibiphp.com/images/dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+
+/--code
+<a href="http://dibiphp.com/" title="dibi - tiny 'n' smart database abstraction layer"
+><img src="dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+\--

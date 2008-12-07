@@ -350,10 +350,10 @@ Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjim
 Užitečnou vlastností je logování provozu:
 
 /--code php
-dibi::startLogger('log.txt', TRUE);
+dibi::getProfiler()->setFile('log.sql');
 \--
 
-Druhý parametr určuje, zda se budou zaznamenávat pouze chyby (hodnota FALSE) nebo vše (TRUE). Což se hodí při ladění. Tehdy se uplatní i velmi jednoduchý profiler:
+Pokud používáte Firefox, [Firebug | www.getfirebug.com] a [FirePHP | http://www.firephp.org], bude se provoz logovat i do Firebug konzole. Což se hodí při ladění. Tehdy se uplatní i velmi jednoduchý profiler:
 
 /--code php
 echo dibi::$sql; // poslední SQL příklaz

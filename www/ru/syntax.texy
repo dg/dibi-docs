@@ -1,0 +1,963 @@
+Syntax
+******
+
+
+Абзацы
+==============
+
+/--code texy
+Lorem ipsum dolor sit amet,
+still the same paragraph.
+
+Второй абзац
+\--
+
+/-- texysource .[html]
+Lorem ipsum dolor sit amet,
+still the same paragraph.
+
+Второй абзац
+\--
+
+
+/--code texy
+Lorem ipsum dolor sit amet,
+ тот же абзац, но разделенный тегом `<br>`
+ используя один пробел в начале строки
+\--
+
+
+/-- texysource .[html]
+Lorem ipsum dolor sit amet,
+ тот же абзац, но разделенный тегом `<br>`
+ используя один пробел в начале строки
+\--
+
+
+Модификаторы центрирования и цвета:
+
+/--code texy
+.{color:blue}
+Lorem ipsum dolor sit amet.
+
+.<>
+Lorem ipsum dolor sit amet.
+\--
+
+/-- texysource .[html]
+.{color:blue}
+Lorem ipsum dolor sit amet.
+
+.<>
+Lorem ipsum dolor sit amet.
+\--
+
+
+
+
+Заголовки
+=======
+
+Первый способ:
+
+/--code texy
+Main title
+**************
+
+Subtitle
+==========
+\--
+
+
+Второй способ:
+
+/--code texy
+=== Main title ===
+
+## Subtitle ##
+
+## or same subtitle
+\--
+
+
+/-- texysource .[html]
+Main title
+**************
+
+Subtitle
+==========
+\--
+
+
+
+
+
+Горизонтальная линия
+=================
+
+В Texy используется четыре способа:
+
+/--code texy
+--------
+
+********
+
+\--
+
+
+
+
+
+
+Код
+====
+
+/--code texy
+  /---code php
+    function reImage($matches) {
+      $content = $matches[1];
+      $align = $matches[5];
+      $href = $matches[6];
+    }
+  \---
+\--
+
+Синтаксис может быть подсвечен сторонними модулями
+
+/---code php
+  function reImage($matches) {
+    $content = $matches[1];
+    $align = $matches[5];
+    $href = $matches[6];
+  }
+\---
+
+/-- texysource .[html]
+  /---code php
+    function reImage($matches) {
+      $content = $matches[1];
+      $align = $matches[5];
+      $href = $matches[6];
+    }
+  \---
+\--
+
+
+
+
+Выключение Texy
+============
+
+
+/--code texy
+  /---html
+    <em>test</em>: **this is not strong**
+  \---
+
+
+  /---text
+    <em>test</em>: **this is not strong**
+  \---
+\--
+
+
+
+
+
+
+Div-блоки
+==========================
+
+
+/--code texy
+  /---div .[header]
+
+    content of div
+
+  \---
+\--
+
+/-- texysource .[html]
+  /---div .[header]
+
+    content of div
+
+  \---
+\--
+
+
+Вложенные div-ы:
+
+/--code texy
+  /---div .[header]
+
+    ## This is a header.
+
+    /---div
+      nested div
+    \---
+
+    Texy is sexy!
+
+  \---
+\--
+
+
+/-- texysource .[html]
+  /---div .[header]
+
+    ## This is a header.
+
+    /---div
+      nested div
+    \---
+
+    Texy is sexy!
+
+  \---
+\--
+
+
+
+
+
+Цитаты
+======
+
+/--code texy
+> This is a blockquote with two paragraphs.
+>
+> 640 K should be enough for everyone
+>
+>:http://www.microsoft.com
+\--
+
+/-- texysource .[html]
+> This is a blockquote with two paragraphs.
+>
+> 640 K should be enough for everyone
+>
+>:http://www.microsoft.com
+\--
+
+Вложенные цитаты:
+
+/--code texy
+> This is header
+> ******
+>
+> > Lorem ipsum dolor sit amet.
+> > Vestibulum enim wisi
+>
+> Back to the first level.
+\--
+
+
+/-- texysource .[html]
+> This is header
+> ******
+>
+> > Lorem ipsum dolor sit amet.
+> > Vestibulum enim wisi
+>
+> Back to the first level.
+\--
+
+
+
+
+Ссылки
+======
+
+/--code texy
+Look at [homepage | http://texy.info].
+
+Do you know [La Trine | http://latrine.dgx.cz]?
+
+[Write me | me@example.com]
+\--
+
+/-- texysource .[html]
+Look at [homepage | http://texy.info].
+
+Do you know [La Trine | http://latrine.dgx.cz]?
+
+[Write me | me@example.com]
+\--
+
+
+
+Предопределенные ссылки
+---------
+
+/--code texy
+ [homepage]: http://texy.info/ Texy .(homepage)
+ [la trine]: http://latrine.dgx.cz
+
+ This is [homepage]
+
+ Look at [this site | la trine]
+\--
+
+[homepage]: http://texy.info/ Texy .(homepage)
+[la trine]: http://latrine.dgx.cz
+
+/-- texysource .[html]
+ This is [homepage]
+
+ Look at [this site | la trine]
+\--
+
+
+
+
+
+
+Изображения
+=======
+
+/--code texy
+[* image.gif *]
+\--
+
+/-- texysource .[html]
+[* image.gif *]
+\--
+
+Выравнивание изображений:
+
+/--code texy
+[* image.gif <] Left-aligned image. Lorem ipsum ...
+
+[* image.gif >] Right-aligned image. Curabitur quam ...
+\--
+
+/-- texysource .[html]
+[* image.gif <] Left-aligned image. Lorem ipsum ...
+
+[* image.gif >] Right-aligned image. Curabitur quam ...
+\--
+
+
+С измерениями
+-------
+
+/--code texy
+[* image.gif 10x20 *]
+\--
+
+/-- texysource .[html]
+[* image.gif 10x20 *]
+\--
+
+
+С событием наведения мышки
+---------------------
+
+/--code texy
+[* image.gif | image-over.gif *]
+\--
+
+/-- texysource .[html]
+[* image.gif | image-over.gif *]
+\--
+
+/--div .[output]
+[* image.gif | image-over.gif *]
+\--
+
+
+С модификаторами
+------------
+
+/--code texy
+[* image.gif .(alt text)[foto] *]
+\--
+
+/-- texysource .[html]
+[* image.gif .(alt text)[foto] *]
+\--
+
+
+
+Изображения, использующие предопределенные ссылки
+---------
+
+/--code texy
+What a beautiful girl [* picture*] !
+
+[* picture*]: image.gif .(my girl)
+\--
+
+/--code html
+What a beautiful girl <img src="images/image.gif"
+alt="my girl" /> !
+\--
+
+
+Изображения с описанием
+------------------
+
+/--code texy
+[* image.gif *] *** This is *description* under image
+\--
+
+/-- texysource .[html]
+[* image.gif *] *** This is *description* under image
+\--
+
+
+
+
+
+
+Phrases
+=====
+
+/--code texy
+*emphasis*
+
+**strong emphasis**
+
+***stronger emphasis***
+
+^^superscript^^ vs. __subscript__
+
+Quotes: >>Lorem Ipsum Dolores<<:www.lipsum.com
+
+Cite: As ~~Frank Borland~~ said, ...
+\--
+
+/--code html
+<em>emphasis</em>
+
+<strong>strong emphasis</strong>
+
+<strong><em>stronger emphasis</em></strong>
+
+<sup>superscript</sup> vs. <sub>subscript</sub>
+
+Quotes: <q cite="http://www.lipsum.com">Lorem Ipsum Dolores</q>
+
+Cite: As <cite>Frank Borland</cite> said, ...
+\--
+
+/--div .[output]
+*emphasis*
+
+**strong emphasis**
+
+***stronger emphasis***
+
+^^superscript^^ vs. __subscript__
+
+Quotes: >>Lorem Ipsum Dolores<<:www.lipsum.com
+
+Cite: As ~~Frank Borland~~ said, ...
+\--
+
+
+
+With modifiers
+---------------
+
+
+/--code texy
+**strong and green .{color:green}** like Hulk
+\--
+
+/--code html
+<strong style="color:green;">strong and green</strong> like Hulk
+\--
+
+/--div .[output]
+**strong and green .{color:green}** like Hulk
+\--
+
+
+
+
+
+Direct HTML tags
+==========
+
+/--code texy
+This <strong class=info>is strong</strong> text.
+<br> This is not.
+\--
+
+/--code html
+This <strong class="info">is strong</strong> text.
+<br /> This is not.
+\--
+
+
+
+
+
+
+Lists
+=======
+
+/--code texy
+-   Red
+-   Green
+-   Blue
+\--
+
+/--code html
+<ul>
+	<li>Red</li>
+
+	<li>Green</li>
+
+	<li>Blue</li>
+</ul>
+\--
+
+/--div .[output]
+-   Red
+-   Green
+-   Blue
+\--
+
+
+
+Ordered
+-----------------
+
+
+/--code texy
+1)  One
+2)  Two
+3)  Three
+
+a)  One
+b)  Two
+c)  Three
+
+A)  DOS
+B)  Windows
+C)  Linux
+
+I)  Yesterday
+II)  Today
+III)  Tomorrow
+\--
+
+/--code html
+<ol>
+	<li>One</li>
+
+	<li>Two</li>
+
+	<li>Three</li>
+</ol>
+
+<ol style="list-style-type:lower-alpha;">
+	<li>One</li>
+
+	<li>Two</li>
+
+	<li>Three</li>
+</ol>
+
+<ol style="list-style-type:upper-alpha;">
+	<li>DOS</li>
+
+	<li>Windows</li>
+
+	<li>Linux</li>
+</ol>
+
+<ol style="list-style-type:upper-roman;">
+	<li>Yesterday</li>
+
+	<li>Today</li>
+
+	<li>Tomorrow</li>
+</ol>
+\--
+
+/--div .[output]
+1)  One
+2)  Two
+3)  Three
+
+a)  One
+b)  Two
+c)  Three
+
+A)  DOS
+B)  Windows
+C)  Linux
+
+I)  Yesterday
+II)  Today
+III)  Tomorrow
+\--
+
+
+
+Nested lists
+---------------
+
+/--code texy
+a)  Bird
+  I)  Bird
+    -   Red
+    -   Green
+    -   Blue
+  II)  McHale
+  III)  Parish
+b)  McHale
+c)  Parish
+      1)  Bird
+      2)  McHale
+      3)  Parish
+\--
+
+/--div .[output]
+a)  Bird
+  I)  Bird
+    +   Red
+    +   Green
+    +   Blue
+  II)  McHale
+  III)  Parish
+b)  McHale
+c)  Parish
+      1)  Bird
+      2)  McHale
+      3)  Parish
+\--
+
+
+
+Definition list
+----------------
+
+/--code texy
+Concert Divokej Bill:
+    - when: 9. 12. 2004
+    - where: Brno
+    - Price: EUR 26
+\--
+
+/--code html
+<dl>
+	<dt>Concert Divokej Bill</dt>
+
+	<dd>when: 9. 12. 2004</dd>
+
+	<dd>where: Brno</dd>
+
+ 	<dd>Price: EUR 26</dd>
+</dl>
+\--
+
+/--div .[output]
+Concert Divokej Bill:
+    - when: 9. 12. 2004
+    - where: Brno
+    - Price: EUR 26
+\--
+
+
+With modifiers
+---------------
+
+
+/--code texy
+.{color:red}
+PHP:    .{color:blue}
+  - PHP: Hypertext Preprocessor .{color:green}
+  - A scripting language
+  - Personal Home Pages
+\--
+
+/--div .[output]
+.{color:red}
+PHP:    .{color:blue}
+  - PHP: Hypertext Preprocessor .{color:green}
+  - A scripting language
+  - Personal Home Pages
+\--
+
+
+
+
+Modifiers
+============
+
+These types of modifiers are available:
+
+- (title) descriptive, used as attribute title or alt (for images)
+- `[class1 class2 #id]` determine class and/or ID
+- {class:blue} direct CSS style
+- {target:_blank} direct HTML attribute
+- horizontal alignment:
+  - left <
+  - right >
+  - center <>
+  - justify =
+
+- vertical alignment: (for tables)
+  - top ^
+  - middle -
+  - bottom _
+
+
+/--code texy
+Centered using modifier  .<>
+
+Another example .{color:blue; lang: cs}
+\--
+
+/--code html
+<p style="text-align:center">Centered using modifier</p>
+
+<p style="color:blue" lang="cs">Another example</p>
+\--
+
+
+
+
+
+
+Quick-corrects .[#quickcorrect]
+==============
+
+/--code texy
+- very long words division (with respect for language rules). Example: antidisestablishmentarianism
+- clickable emails and URL www.dgx.cz, dave@dgx.cz (emails are obfuscated against spambots)
+- "national" 'typographic' quotes
+- divider vs. dash: 10-15 vs. north-west
+- em-dash: one -- two
+- dimension sign 10 x 20
+- nonbreakable spaces in phone numbers +420 776 552 046
+- acronym NATO((North Atlantic Treaty Organisation))
+- abbr "et al."((and others))
+- quickCorrects like this(TM) this(R) or this(C)
+- arrows <- and -> and <->
+- ellipsis...
+- preserve HTML entities
+- and many others :-)
+\--
+
+
+/--div .[output]
+- very long words division (with respect for language rules). Example: antidisestablishmentarianism
+- clickable emails and URL www.dgx.cz, dave@dgx.cz (emails are obfuscated against spambots)
+- "national" 'typographic' quotes
+- divider vs. dash: 10-15 vs. north-west
+- em-dash: one -- two
+- dimension sign 10 x 20
+- nonbreakable spaces in phone numbers +420 776 552 046
+- acronym NATO((North Atlantic Treaty Organisation))
+- abbr "et al."((and others))
+- quickCorrects like this(TM) this(R) or this(C)
+- arrows <- and -> and <->
+- ellipsis...
+- preserve HTML entities
+- and many others :-)
+\--
+
+spaces:
+
+/--code texy
+- vkládání nezalomitelných mezer za jednopísmennc ptedložky (v aut> u okna)
+- ned>litelnc mezery u telefonních čísel +420 776 552 046
+\--
+
+/--code html
+vkládání nezalomitelných mezer za jednopísmennc ptedložky (v&nbsp;aut> u&nbsp;okna)
+
+ned>litelnc mezery u&nbsp;telefonních čísel +420&nbsp;776&nbsp;552&nbsp;046
+\--
+
+*Poznámka: Nahrazování se obvykle tídí dalšími pravidly, kterc určují, kdy
+symbol nahradit a kdy ne. Naptíklad šipka `->` nemůže být na konci tádku atd. Proto nebuďte ptekvapeni, když v n>kterých ptípadech Texy náhradu neprovede. Pokud to považujete za chybu, dejte mi v>d>t.*
+
+Zkratky, akronymy .[#acronym]
+------------------
+
+Používá se zápisu s dvojitou kulatou závorkou:
+
+/--code texy
+jednoslovnc: NATO((North Atlantic Treaty Organisation))
+
+víceslovnc: "et al."((a další))
+\--
+
+/--code html
+jednoslovnc: <acronym title="North Atlantic Treaty Organisation">NATO</acronym>
+
+víceslovnc: <acronym title="a další">et al.</abbr>
+\--
+
+*Poznámka: mezi ABBR a ACRONYM se [nerozlišuje | http://forum.texy.info/viewtopic.php?id=11].*
+
+
+Klikatelnc URI
+--------------
+
+Automatický ptevod URI do klikatelnc formy (včetn> emailů)
+
+/--code texy
+další informace na www.dgx.cz a takc ...
+\--
+
+/--div .[output]
+další informace na www.dgx.cz a takc ...
+\--
+
+
+
+
+
+
+Rozd>lení velmi dlouhých slov .[#longwords]
+=============================
+
+Velmi zajímavá a důležitá funkce Texy. Dlouhá slova mohou narušit vzhled stránky, proto je vhodnc prohlížeči naznačit, kde je může zalomit. Texy tyto místa hledá s ptihlcdnutím k národním zvyklostem, tedy slovo rozd>luje podle slabik:
+
+/--code texy
+nejneobhospodatovávateln>jšími
+\--
+
+/--code html
+nejneobhospoda&shy;továvateln>jší&shy;mi</p
+\--
+
+*Poznámka: limit dclky slova je volitelný*
+
+*Poznámka: současnc prohlížeče na jádru Gecko (Mozilla, Firefox) jsou k naznačencmu d>lení slepí. Doufám, že vývojáti tento nedostatek brzy odstraní. Nebo zkuste [tohle | http://forum.texy.info/viewtopic.php?id=36]*
+
+
+
+
+
+
+
+Tabulky .[#table]
+=======
+
+Ptíklad jednoduchc tabulky, sloupce se odd>lují znakem `|`
+
+/--code texy
+| first col | second col | third col
+| Adam      | Eva        | Franta
+\--
+
+A výsledek je:
+
+| first col | second col | third col
+| Adam      | Eva        | Franta
+
+
+Hlavičku tabulky můžeme definovat tímto zápisem:
+
+/--code texy
+|-----------------------------
+| First Name | Last Name | Age
+|----------------------------
+| Jesus      | Christ    | 33
+| Cecilie    | Svobodova | 74
+\--
+
+|-----------------------------
+| First Name | Last Name | Age
+|----------------------------
+| Jesus      | Christ    | 33
+| Cecilie    | Svobodova | 74
+
+Pokud hlavičku netvotí tádek (tádky), můžeme ji definovat na úrovni bun>k. Stačí vložit hv>zdičku ihned po znaku `|`
+
+
+/--code texy
+|* First Name | Jesus    | Cecilie
+|* Last Name  | Christ   | Svobodova
+|* Age        | 33       | 74
+\--
+
+
+|* First Name | Jesus    | Cecilie
+|* Last Name  | Christ   | Svobodova
+|* Age        | 33       | 74
+
+
+Sloučení sloupců
+----------------
+
+všimn>te si zdvojencho ||
+
+/--code texy
+|-----------------------------
+| Name                  || Age
+|----------------------------
+| Jesus      | Christ    | 33
+\--
+
+|-----------------------------
+| Name                  || Age
+|----------------------------
+| Jesus      | Christ    | 33
+
+
+
+Sloučení tádků
+--------------
+
+Všimn>te si znaku `^` symbolizujícího sm>r nahoru:
+
+
+/--code texy
+|-----------------------------
+| First Name | Last Name | Age
+|----------------------------
+| Bill                  || 50
+|^                       | 52
+| Jim        | Beam      | 70
+\--
+
+|-----------------------------
+| First Name | Last Name | Age
+|----------------------------
+| Bill                  || 50
+|^                       | 52
+| Jim        | Beam      | 70
+
+
+Modifikátory
+------------
+
+Platí tato pravidla:
+- modifikátor ovliv_ující celou tabulku se vkládá bezprosttedn> pted tabulku
+- ovliv_ující tádek se vkládá na konec tádku
+- ovliv_ující sloupec se vkládá na začátek bu_ky (vlevo v bu_ce)
+- a nakonec ovliv_ující bu_ku se vkládá na konec bu_ky (pravo v bu_ce)
+
+Podívejte se na ptíklad.
+
+/--code texy
+.(people)
+| .{color: green} first col | second col      .>| third col | .{font-style:italic}
+| Adam                      | Eva .{color: blue}| Franta    |
+\--
+
+Zde je:
+- `.(people)` modifikátor tabulky
+- `.{color: green}` modifikátor sloupce
+- `.{font-style:italic}` modifikátor tádku
+- `.{color: blue}` a takc `.>` modifikátor bu_ky
+
+Takže výsledná tabulka vypadá takto:
+
+
+.(people)
+| .{color: green} first col | second col      .>| third col | .{font-style:italic}
+| Adam                      | Eva .{color: blue}| Franta    |
+
+
+{{lang: cs/syntax}}

@@ -1,39 +1,37 @@
-What is Texy
+Что такое Texy
 -----------
 
-<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download" class="right"><strong>Start Download</strong><br />{{svn}}</a>
+<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download" class="right"><strong>Скачать</strong><br />{{svn}}</a>
 
-Texy allows you to enter content using an **easy to read** Texy syntax which is filtered into *structurally valid* XHTML. No knowledge of HTML is required. Texy is one of the most complex formatting tools. It allows adding of images, links, nested lists, tables and has full support for CSS.
+Texy позволяет вам создавать контент, используя **легко читаемый** синтаксис Texy, который преобразуется в **валидный** XHTML. При этом не нужно знание HTML. Texy - это один из наиболее продвинутых инструментов в этой области. Он позволяет добавлять изображения, ссылки, многоуровневые списки, таблицы; CSS полностью поддерживается.
 
-Texy supports hyphenation of long words (which reflects language rules), clickable emails and URL (emails are obfuscated against spambots), national typographic single and double quotation marks, ellipses, em dashes, dimension sign, nonbreakable spaces (e.g. in phone numbers), acronyms, arrows and many others.
+Texy поддерживает переносы длинных слов (с учётом правил языка), преобразование e-mail и URL в ссылки (при этом e-mail шифруется от спам-ботов), национальные типографские одинарные и двойные кавычки, многоточия, длинные тире, неразрывные пробелы (например в телефонных номерах), акронимы, стрелки и многое другое.
 
-Texy is being developed by David Grudl since 2004. It is written in PHP or can be used via XML/RPC service.
+Texy разрабатывает David Grudl с 2004 года. Texy написан на PHP, кроме того возможно использование через службу XML/RPC.
 
-Texy is licenced by GNU General Public License. Plugins for several content-management systems are available.
+Texy подлежит лицензии GNU GPL. Доступны также плагины для многих систем управления содержимым (CMS).
 
-
-
-Features
+Возможности
 --------
 
-- simple, intuitive and human friendy markup
-- generate clean and valid XHTML code
-- may be used together with syntax highlighter
-- designed with proper typography in mind
-- supports hyphenation
+- простая, интуитивная и человеко-читаемая разметка
+- генерирование чистого и валидного XHTML
+- возможность подключения модулей подсветки синтаксиса
+- разработано с учетом типографских правил
+- поддерживает переносы
 
-
-Why Texy
+Почему Texy
 --------
 
-- bulletproof - ensures the well-formedness of the resulting code
-- predectable behaviour
-- flexible configuration
+- "пуленепробиваемость" - будьте уверены в чистоте и структурной правильности результирующего кода
+- предсказуемое поведение
+- гибкость конфигурирования
 
-[Syntax | syntax]
+[Синтаксис | syntax]
 
 {{lang: cs/homepage}}
 {{lang: en/homepage}}
 {{lang: de/homepage}}
 {{lang: pl/homepage}}
 {{lang: fr/homepage}}
+{{lang: ru/homepage}}

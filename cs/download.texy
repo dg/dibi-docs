@@ -1,0 +1,44 @@
+Download
+********
+
+Texy2 *beta*, [changelog | http://code.google.com/p/texy/source/list], uvolněno pod licencí GPL. Vyžaduje PHP ve verzi 5.1 nebo novější
+
+<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
+
+--- .[clear]
+
+Verze pro PHP 4
+---------------
+
+Stáhnout [Texy2 pro PHP 4 | http://download.texy.info/php4/texy-2.0-beta2-php4.zip] (rev. 201)
+- podpora byla ukončena
+- lze použít i v PHP 5
+- [další informace & pluginy | texy2-php4]
+
+
+Ostatní
+-------
+- [Texy pluginy pro CMS a frameworky|doplnky#toc-texy-pluginy-pro-cms-a-frameworky]
+- [Nástroje, pluginy, doplňky|doplnky]
+- [Ikonky] pro vaše stránky
+- [Logo Texy! | download:logo.eps] (formát EPS)
+- [Logo Texy2 | download:logo-texy2.eps] (formát EPS)
+
+
+Subversion Access
+-----------------
+
+You can obtain the latest development version from our subversion (SVN) repository. The easiest way to browse through the repository is using the [web source code browser | http://code.google.com/p/texy/source/browse]. We recommend you install an SVN client on your machine for better access. [TortoiseSVN | http://tortoisesvn.net/] is a highly recommended client on Windows.
+
+Use this command to anonymously check out the latest project source code:
+
+/--code
+# Non-members may check out a read-only working copy anonymously over HTTP.
+svn checkout http://texy.googlecode.com/svn/trunk/ texy-read-only
+\--
+
+You can take a look at the "[* feed-icon.gif *] RSS feed":/feed for the changes log of SVN and this page.
+
+
+
+{{lang: en/download}}

@@ -1,11 +1,19 @@
 Download
 ********
 
-Dibi 1.0, [changelog | http://code.google.com/p/dibi/source/list], released under the terms of the [Dibi License | license]. Requires PHP 5.1 or higher.
+Dibi, released under the terms of the [Dibi License | license]. Requires PHP 5.1 or higher.
 
-<a href="http://download.dibiphp.com/latest.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
+.[download]
+| Next Release (Unstable) | Release date | Download | Manual
+|--------
+| Dibi 1.1 alpha [changelog | http://code.google.com/p/dibi/source/list] | 2/2009 | [zip | download:latest.zip] | [api reference | download:apidoc.zip]
+| DibiTableX plugin | 2/2009 | [zip | download:DibiTableX.zip] | [info | http://phpfashion.com/experiment-dibitable]
+|--------
+| Latest Stable Release | Release date | Download
+|--------
+| Dibi 1.01  | 1/2009 | [zip | download:dibi-1.01.zip] | [api reference | download:apidoc-1.01.zip]
 
---- .[clear]
+
 
 
 Subversion Access
@@ -17,10 +25,10 @@ Use this command to anonymously check out the latest project source code:
 
 /--pre
 # Non-members may check out a read-only working copy anonymously over HTTP.
-svn checkout http://dibi.googlecode.com/svn/trunk/ nette-read-only
+svn checkout http://dibi.googlecode.com/svn/trunk/ dibi-read-only
 \--
 
-You can take a look at the "[* feed-icon.gif *] RSS feed":/feed for the changes log of SVN and this page.
+You can take a look at the "[* feed-icon.gif *] RSS feed":http://nette.org/feed for the changes log of SVN and this page.
 
 Icon for your website
 ------------

@@ -338,8 +338,10 @@ if (is_int($record['id']))
     echo 'yes, it is integer';
 \--code
 
+Návratový typ
+-------------
 
-A ještě maličkost. Dibi vrací záznamy pouze jako asociativní pole 'název sloupce' => hodnota. Nelze přepnout na jinou metodu, protože jiné metody jsou špatné. Máte-li jiný názor, tak blahopřeji, ale nic se tím nezmění.
+Dibi vrací záznamy jako objekty DibiRow. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
 
 
 Výjimky, logování chyb a profiler

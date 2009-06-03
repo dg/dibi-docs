@@ -104,6 +104,7 @@ Modifikátory jsou následující:
 | %bin | binární data |
 | %b | boolean |
 | %i %u | integer |
+| %in | integer, ale 0 se přeloží jako NULL |
 | %f | float |
 | %d | datum (očekává string nebo integer) |
 | %t | datum & čas (také string či integer) |

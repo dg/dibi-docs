@@ -4,6 +4,7 @@ Temer v cili dibi 0 9b
 Doplnění k získávání výsledků z sql dotazů :
 Pokud chcete mít jako výsledek jen pole dat (třeba i asociativní pole). Je potřeba si na to vytvořit vlastní funkci. Protože metody typu ->fetchAll() vrací jen pole objektů.
 Takže funkce vracející pole dat :
+
 /--code php
 $res = $dibi::query("SELECT YEAR([datum]) AS rok FROM [$tab] GROUP BY YEAR([datum])") ;
 $pole = $this->getPole ( $res) ;
@@ -14,5 +15,6 @@ public function getPole ( $res ) {
 		$ret[] = $p->rok ;
 	return $ret;
 }
---/
+\--
+
 Hotovo. Pěkné co ? :-)

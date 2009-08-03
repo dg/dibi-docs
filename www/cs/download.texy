@@ -25,19 +25,18 @@ Ostatní
 - [Logo Texy2 | download:logo-texy2.eps] (formát EPS)
 
 
-Subversion Access
+Mercurial Access
 -----------------
 
-You can obtain the latest development version from our subversion (SVN) repository. The easiest way to browse through the repository is using the [web source code browser | http://code.google.com/p/texy/source/browse]. We recommend you install an SVN client on your machine for better access. [TortoiseSVN | http://tortoisesvn.net/] is a highly recommended client on Windows.
+You can obtain the latest development version from our Mercurial (HG) repository. The easiest way to browse through the repository is using the [web source code browser | http://code.google.com/p/texy/source/browse]. We recommend you install an Mercurial client on your machine for better access. [TortoiseHg | http://mercurial.selenic.com/wiki/Download] is a highly recommended client on Windows.
 
-Use this command to anonymously check out the latest project source code:
+Use this command to anonymously get a local copy of the repository:
 
 /--code
-# Non-members may check out a read-only working copy anonymously over HTTP.
-svn checkout http://texy.googlecode.com/svn/trunk/ texy-read-only
+hg clone https://texy.googlecode.com/hg/ texy
 \--
 
-You can take a look at the "[* feed-icon.gif *] RSS feed":/feed for the changes log of SVN and this page.
+You can take a look at the "[* feed-icon.gif *] RSS feed":/feed for the changes log of HG and this page.
 
 
 

@@ -1,7 +1,7 @@
 Download
 ********
 
-Texy2 *beta*, [changelog | http://code.google.com/p/texy/source/list], uvolněno pod licencí GPL. Vyžaduje PHP ve verzi 5.1 nebo novější
+Texy2 *beta*, [changelog | http://github.com/dg/texy/commits/master], uvolněno pod licencí GPL. Vyžaduje PHP ve verzi 5.1 nebo novější
 
 <a href="http://download.texy.info/texy-2.0-beta2.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
 
@@ -25,15 +25,13 @@ Ostatní
 - [Logo Texy2 | download:logo-texy2.eps] (formát EPS)
 
 
-Mercurial Access
------------------
+Přístup přes Git
+----------------
 
-You can obtain the latest development version from our Mercurial (HG) repository. The easiest way to browse through the repository is using the [web source code browser | http://code.google.com/p/texy/source/browse]. We recommend you install an Mercurial client on your machine for better access. [TortoiseHg | http://mercurial.selenic.com/wiki/Download] is a highly recommended client on Windows.
-
-Use this command to anonymously get a local copy of the repository:
+Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | http://github.com/dg/texy/tree/master]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
 
 /--code
-hg clone https://texy.googlecode.com/hg/ texy
+git clone git://github.com/dg/texy.git
 \--
 
 You can take a look at the "[* feed-icon.gif *] RSS feed":/feed for the changes log of HG and this page.

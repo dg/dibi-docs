@@ -1,0 +1,53 @@
+Texy! je sexy!
+===========
+
+<a href="http://download.texy.info/texy-2.0.zip" id="download" class="right"><strong>Start Download</strong><br />{{svn}}</a>
+
+Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky. Používají ho tisíce spokojených uživatelů.
+
+--> [Více o Texy | co je texy]
+
+
+Co všechno umí?
+---------------
+
+- vytvářet odkazy, odrážky, tabulky,...
+- vkládat do textu obrázky
+- zná českou typografii
+- a navíc je **zdarma!** (Texy je [svobodný software] pod [licencí GPL | licence])
+
+a pro odborníky:
+
+- generuje vždy validní HTML nebo XHTML kód
+- plně podporuje CSS((Kaskádové styly)) a UTF-8
+
+--------
+
+Novinky
+=======
+
+Převodník Texy! syntaxe do LaTeXu
+------------
+
+31. 7. 2007 .[date]
+
+Jednoduchý [nástroj pro převod | http://jaybee.frih.net/software/prevodnik-texy!---latex] čisté Texy! syntaxe do LaTeXu vytvořil Jay Bee: *"Tento převodník jsem vytvořil a používal jen proto, že jsem líný a přeci jen je mě bližší Texy syntaxe než LaTeX syntaxe. Pro psaní jednoduše formátovaných dokumentů je ideální. Napsal jsem svou bakalářku v Texy a pak jsem ji díky tomuhle převodníku nechal vygenerovat do PDF"*
+
+
+
+CZECH OPEN SOURCE 2007
+------------
+
+16. 5. 2007 .[date]
+
+Texy! bylo nominováno do ankety CZECH OPEN SOURCE 2007 pořádané serverem Root.cz, ve které odborná porota i široká veřejnost volily to nejlepší z české open-source scény. Ve čtenářském hlasování se [umístilo | http://www.root.cz/clanky/ceska-wikipedie-se-stala-vitezem-ankety-czech-open-source-2007/] na krásném druhém místě. Díky!
+
+
+--> [archiv novinek | novinky]
+
+
+
+{{lang: en/homepage}}
+{{lang: de, homepage}}
+{{lang: pl, homepage}}
+{{lang: fr, homepage}}

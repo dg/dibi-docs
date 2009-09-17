@@ -1,16 +1,16 @@
 Download
 ********
 
-Texy2 *beta*, [changelog | http://github.com/dg/texy/commits/master], uvolněno pod licencí GPL. Vyžaduje PHP ve verzi 5.1 nebo novější
+Texy 2.0, [changelog | http://github.com/dg/texy/commits/master], uvolněno pod licencí GPL. Vyžaduje PHP ve verzi 5.1 nebo novější
 
-<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
+<a href="http://download.texy.info/texy-2.0.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
 
 --- .[clear]
 
 Verze pro PHP 4
 ---------------
 
-Stáhnout [Texy2 pro PHP 4 | http://download.texy.info/php4/texy-2.0-beta2-php4.zip] (rev. 201)
+Stáhnout [Texy pro PHP 4 | http://download.texy.info/php4/texy-2.0-beta2-php4.zip] (rev. 201)
 - podpora byla ukončena
 - lze použít i v PHP 5
 - [další informace & pluginy | texy2-php4]

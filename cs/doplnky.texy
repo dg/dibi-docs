@@ -1,7 +1,6 @@
 Doplňky, nástroje, pluginy
 ******************
 
-
 Texy pluginy pro CMS((Content Management System, redakční systém)) a frameworky
 ----------------------------------------
 
@@ -39,8 +38,9 @@ Texy na jiných platformách
 Editory
 -------
 
-- [Amy Editor | http://www.april-child.com/amy/website] se zvýrazňováním syntaxe ([vykoušejte naživo | http://www.april-child.com/amy/api/embed/test_texy.html])
+- [Amy Editor | http://www.amyeditor.com/] se zvýrazňováním syntaxe ([vykoušejte naživo | http://www.amyeditor.com/api/embed/test_texy.html])
 - [Texyla | http://texyla.janmarek.net/] AJAX editor pro Texy
+- [Texy Editor | http://editor.texy.info]
 
 
 Převaděče

@@ -1,0 +1,37 @@
+Podpořte vývoj
+******************
+
+.[perex]
+Dibi můžete používat a distribuovat zcela zdarma. Budeme proto rádi, pokud jeho vývoj podpoříte příspěvkem.
+
+Pokud Vám knihovna dobře slouží a chtěli byste podpořit jeho další vývoj, nebo pokud byste rádi vyjádřili uznání za čas, který autor strávil jejím vývojem, pošlete prosím příspěvek v jakékoliv výši.
+
+**Děkujeme Vám!**
+
+Příspěvek můžete zaslat na účet: 670100-2200142627 / 6210 (mBank)
+
+Nebo přes platební kartu či PayPal:
+
+/--notexy
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"><div>
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="david@grudl.com">
+    <input type="hidden" name="item_name" value="Dibi">
+    <input type="hidden" name="no_shipping" value="0">
+    <input type="hidden" name="no_note" value="1">
+    <input type="hidden" name="currency_code" value="CZK">
+    <input type="hidden" name="tax" value="0">
+    <input type="hidden" name="lc" value="CZ">
+    <input type="hidden" name="bn" value="PP-DonationsBF">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" width="122" height="47" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+    </div></form>
+\--
+
+
+Poděkování
+----------
+
+Děkuji všem fanouškům a sponzorům za finanční podporu:
+
+- "[[w3w, s.r.o.]]":http://w3w.cz/ *1000 Kč*
+- Ladislav Marek *500 Kč*

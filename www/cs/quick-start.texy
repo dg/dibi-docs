@@ -308,7 +308,7 @@ A pak tu máme k dispozici jednu mocnou funkci:
 $assoc = $result->fetchAssoc('id');
 \--
 
-Získá celou tabulku do asociativního a klíčem je políčko 'id'. Největší síla funkce se projeví tehdy, pokud provedete asociaci podle více políček. Takto lze nesmírně elegantně získávat data z dotazů, ve kterých spojujeme více tabulek. Příklad si [nechám na příště | /temer-v-cili-dibi-0-9b].
+Získá celou tabulku do asociativního a klíčem je políčko 'id'. Největší síla funkce se projeví tehdy, pokud provedete asociaci podle více políček. Takto lze nesmírně elegantně získávat data z dotazů, ve kterých spojujeme více tabulek. Příklad si [nechám na příště | http://phpfashion.com/temer-v-cili-dibi-0-9b].
 
 Užitečná je také funkce pro získávání dat v podobě asociativního pole klíč => hodnota
 

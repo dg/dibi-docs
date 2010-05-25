@@ -1,9 +1,9 @@
 Download
 ********
 
-Texy2 *beta*, [changelog | http://code.google.com/p/nette/source/list], released under the terms of the GPL license. Requires PHP 5.1 or higher.
+Texy 2.1, [changelog | http://code.google.com/p/nette/source/list], released under the terms of the GPL license. Requires PHP 5.1 or higher.
 
-<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download"><strong>Start Download</strong><br />{{svn}}</a>
+<a href="http://files.texy.info/latest.zip" id="download"><strong>Start Download</strong><br />Latest version</a>
 
 --- .[clear]
 
@@ -32,7 +32,7 @@ Converters, editors, examples
 -----------------
 
 - [Amy, Web 2.0 Collaborative Editor | http://www.april-child.com/blog/2007/04/24/introducing-amy/] with syntax highlighting
-- [Texyla | http://texyla.jaknato.com/] AJAX editor for Texy
+- [Texyla | http://texyla.janmarek.net/] AJAX editor for Texy
 - [html2texy! | http://www.webkitchen.cz/lab/html2texy/] backward convert to HTML
 - [Texy! -> LaTeX | http://jaybee.frih.net/software/prevodnik-texy!---latex]
 - example [Texy2 & FSHL | download:texy2-example-FSHL.zip]

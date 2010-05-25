@@ -1,7 +1,7 @@
 Texy! je sexy!
 ===========
 
-<a href="http://download.texy.info/texy-2.0.zip" id="download" class="right"><strong>Start Download</strong><br />{{svn}}</a>
+<a href="http://files.texy.info/latest.zip" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
 
 Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky. Používají ho tisíce spokojených uživatelů.
 
@@ -26,8 +26,16 @@ a pro odborníky:
 Novinky
 =======
 
+Vydána verze Texy 2.1
+---------------------
+
+20. 5. 2010 .[date]
+
+Nová verze opravuje pár chybiček syntaxe a především výrazně zrychluje parsování velmi dlouhých řádků. Update je vřele doporučen.
+
+
 Vydána verze Texy 2.0
------------------------
+---------------------
 
 18. 9. 2009 .[date]
 

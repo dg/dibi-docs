@@ -24,14 +24,9 @@ Konfigurace
 | proměnná | typ | výchozí | popis |
 |----------------
 | $root          | string | `''` | kořenový adresář relativních odkazů
-| $imageOnClick  | string | | onclick handler pro obrázky
-| $popupOnClick  | string | | onclick handler pro pseudotřídu `popup`
+| $imageClass    | string | | třída pro odkazy vedoucí na obrázky (od Texy 2.2)
 | $forceNoFollow | boolean    | FALSE | doplňovat `rel="nofollow"`?
 | $shorten       | boolean    | TRUE | zkracovat URL?
-
-Akce $imageOnClick se vyvolá při kliknutí na odkaz, který vede na obrázek (např. vyvolání vyskakovacího okna). Výchozí hodnota je `'return !popupImage(this.href)';`. Je tedy vhodné si definovat JavaScriptovou funkce `popupImage()`.
-
-Akce $popupOnClick se vyvolá při kliknutí na odkaz s pseudotřídou `popup`, např. `"odkaz .[popup]":www.dgx.cz`. Výchozí hodnota je `'return !popup(this.href)';`. Je tedy vhodné si definovat JavaScriptovou funkce `popup()`.
 
 Texy automaticky doplňuje atribut nofollow odkazům, které mají pseudotřídu `nofollow`, např. `"odkaz .[nofollow]":www.dgx.cz`.
 

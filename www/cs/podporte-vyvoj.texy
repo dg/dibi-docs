@@ -1,0 +1,129 @@
+Podpořte vývoj
+******************
+
+.[perex]
+Texy můžete používat a distribuovat zcela zdarma. Budeme proto rádi, pokud jeho vývoj podpoříte příspěvkem.
+
+Pokud Vám knihovna dobře slouží a chtěli byste podpořit jeho další vývoj, nebo pokud byste rádi vyjádřili uznání za čas, který autor strávil jejím vývojem, pošlete prosím příspěvek v jakékoliv výši. Texy můžete podpořit také umístěním [ikonky] na své stránky.
+
+
+**Děkujeme Vám!**
+
+Příspěvek můžete zaslat na účet: 670100-2200142627 / 6210 (mBank)
+
+Nebo přes platební kartu či PayPal:
+
+/--notexy
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"><div>
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="david@grudl.com">
+    <input type="hidden" name="item_name" value="Texy">
+    <input type="hidden" name="no_shipping" value="0">
+    <input type="hidden" name="no_note" value="1">
+    <input type="hidden" name="currency_code" value="CZK">
+    <input type="hidden" name="tax" value="0">
+    <input type="hidden" name="lc" value="CZ">
+    <input type="hidden" name="bn" value="PP-DonationsBF">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" width="122" height="47" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+    </div></form>
+\--
+
+
+Poděkování
+----------
+
+Rád bych poděkoval všem uvedeným za jejich podporu.
+
+- [Jan Odvárko | http://odvarko.cz] *250 Kč*
+- [Radek Matěj | http://nikdo.cz/] *€10*
+- [Martin Kuželka | http://www.kuzelka.net] *500 Kč*
+- [Radek Hulán | http://myego.cz] *600 Kč*
+- [Juraj Krivda | http://krivda.com] *500 Kč*
+- [Matěj Humpál | http://finwe.info] *500 Kč*
+- [Josef Průša | http://www.nabytek-prusa.cz] *700 Kč*
+- [Milan Kryl | http://kryl.info] *500 Kč*
+- [Matěj Novák | http://seky.nahory.net] *500 Kč*
+- [Milan Vít | http://www.milanvit.net] *500 Kč*
+- [Fandor | www.fandor.cz] *500 Kč*
+- [Juraj Ďurech | http://hvge.sk/] *500 Kč*
+- [Tomáš Vítek | http://tomik.jmx.cz] *1000 Kč*
+- [gdi | http://www.gdi.cz/] *500 Kč*
+- [Ľubomír Lenárd | http://www.akvarely.sk/] *100 Kč*
+- Vítězslav Plachý *v naturáliích*
+- [David Exl | http://blog.cmon.cz] *150 Kč*
+
+
+Komerční licence zakoupili:
+--------------
+
+- [DANNAX spol. s r.o. | www.dannax.sk]
+- Ondřej Machulda
+- [pux s.r.o. | www.puxtravel.cz]
+- Ing. Rastislav Weber - FANDOM
+- Martin Kryl
+- [Michal Šafus | www.safus.eu]
+- [Moderní design | www.modernidesign.eu]
+- [Dalibor Hellebrant | http://hellebrant.cz]
+- [Softima s.r.o. | http://softima.cz]
+- [two bits s.r.o. | http://twobits.cz]
+- Jan Folwarczny
+- Institut elektronické komerce s.r.o.
+- [Ing. Marek Pár | www.mxi.cz]
+- Michal Pospiech
+- [Jan Martinek | http://jan-martinek.com]
+- [Jakub Kotál | www.webtovarna.cz]
+- [Outcomm | www.komunikacniagentura.cz]
+- [VIZUS | www.vizus.cz]
+- [KUCHYNKA s.r.o. | www.novareklama.cz]
+- [Jan Marek | www.janmarek.net]
+- [Metallic Relation | www.metallicrelation.com]
+- [Car Trader s.r.o. | http://cartrader.cz]
+- [Jakub Adamus | www.zobak.cz]
+- [Softima s.r.o | www.softima.cz]
+- [Matouš Mihaliček | http://www.mihalicek.net]
+- [Salebra | http://www.salebra.com]
+- [MARF - reklamní agentura | http://marf.cz]
+- "[[w3w, s.r.o.]]":http://w3w.cz/
+- [Fotogalerie PhotoExtract | http://www.photoextract.com/cs/]
+- Ing. Lukáš Brůha
+- [Almex | www.mrtester.cz]
+- [ebee | http://www.ebee.cz/]
+- [Funlife Trading | http://www.funlife.cz/]
+- [TOVARNA.CZ | www.tovarna.cz]
+- [2 M STUDIO | http://www.2mstudio.cz]
+- [Embex | http://www.embex.sk]
+- [MediaFabríca | http://www.mediafabrica.cz/]
+- [3v.cz | http://3v.cz]
+- [HostingPLUS.CZ | http://www.hostingplus.cz]
+- [Ing. Karel Křenek | http://www.weblight.info]
+- [JP Consult | http://www.jpconsult.cz/]
+- [Naweb webdesign | http://www.naweb.cz]
+- [Liquid Design | http://www.liquiddesign.eu]
+- [SynergyWEB | http://www.synergyweb.cz/]
+- [SECTOR 31 | http://www.sector31.cz]
+- [Petr Dvořák | http://dvorak.tisnof.cz/]
+- [Brabec Design Team | http://www.brade.cz]
+- [Atte | www.atte.cz]
+- [HAKOMA Facilities | http://www.hakoma.cz/]
+- [Aleš Dobrovolný | http://adobrovolny.net/]
+- [Štěpán Kocourek | www.kocourekp.com]
+- [Shortcat | www.shortcat.cz]
+- [Jiří Hon | http://www.okna-dvere.cz/]
+- [Jan Stiborek | http://tomas.stiborek.info/]
+- [Ing. Michal Máčel, CSc. | http://www.vema.cz/]
+- Jan Pospíšil
+
+
+Sponzoři
+--------
+
+- [Webhosting To je ono! | www.tojeono.cz] - sponzor hostingu
+- [Internet Mall | www.mall.cz] - sponzor funkce [vkládání externích dat | http://forum.texy.info/viewtopic.php?id=128]
+- [Český hosting | www.ceskyhosting.cz] - sponzor hostingu
+
+
+/-- div .{color:gray; font-size:80%}
+Note: Donations are cool. However, I don't like them being used as a cheap form of advertising commercial sites that have no relationship with Texy! whatsoever. Or Search Engine Optimizing them. To discourage this type of donations, links are attributed with the rel="nofollow".
+\--
+
+{{nofollow:yes}}

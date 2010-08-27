@@ -3,8 +3,8 @@ Vítejte!
 
 Můžete používat syntax Texy!, pokud Vám vyhovuje:
 - třeba **tučné** písmo nebo *kurzíva*
-- a takto se dělá [odkaz | http://texy.info]
-- více najdete na stránce [syntax | syntax]
+- a takto se dělá "odkaz":http://texy.info
+- více najdete na stránce "syntax":[syntax]
 
 
 Ale také můžete zůstat u HTML:

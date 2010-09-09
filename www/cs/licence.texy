@@ -1,11 +1,65 @@
 Licenční politika
 *****************
 
-Texy jsem uvolnil jako [svobodný software] proto, aby ho **kdokoliv mohl používat**. To je také hlavní krédo licenční politiky. Z toho důvodu Texy šířím pod licencí GPL zcela zdarma a v případě placené licence se můžeme domluvit na takových podmínkách, aby se vám vyplatily i v případě nevýdělečných projektů.
+Texy jsem uvolnil jako svobodný software proto, aby ho **kdokoliv mohl používat zdarma**.
 
-Můžete si tedy zvolit mezi dvěma licencemi. Aplikace je přitom pod oběma identická. Nutné je pouze dodržet jejich podmínky, v opačném případě byste porušili zákon.
 
-Máte zájem o komerční licence?
-------------------------------
+Kolik stojí licence?
+--------------------
+Texy můžete používat a distribuovat zcela zdarma pod licencí GPL. Pokud Vám knihovna dobře slouží a chtěli byste podpořit její další vývoj, nebo pokud byste rádi vyjádřili uznání za čas, který autor strávil jejím vývojem, pošlete prosím příspěvek v jakékoliv výši. **Děkuji Vám!**
 
-Přečtěte si prosím [podrobné informace o licencích | licence-faq] a napište mi na david@grudl.com. Vaše dotazy ohledně licencí také rád zodpovím ve [fóru | http://forum.texy.info/viewforum.php?id=5]*.
+Příspěvek můžete zaslat platební kartou nebo z PayPal účtu.
+
+/--notexy
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"><div>
+    <input type="hidden" name="cmd" value="_donations">
+    <input type="hidden" name="business" value="david@grudl.com">
+    <input type="hidden" name="item_name" value="Texy">
+    <input type="hidden" name="no_shipping" value="0">
+    <input type="hidden" name="no_note" value="1">
+    <input type="hidden" name="currency_code" value="CZK">
+    <input type="hidden" name="tax" value="0">
+    <input type="hidden" name="lc" value="CZ">
+    <input type="hidden" name="bn" value="PP-DonationsBF">
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" width="122" height="47" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+    </div></form>
+\--
+
+
+
+
+Co je to GPL licence?
+---------------------
+
+GPL je zkratka názvu GNU General Public License. Pod touto licencí je Texy šířeno jako svobodný software, tedy zdarma a bez jakékoliv záruky. Licence Vám umožňuje Texy zdarma stáhnout, libovolně upravovat a používat ve svých aplikacích. Tyto aplikace můžete také dále distribuovat, ale opět pod licencí GPL. Podrobně viz [český překlad GPL | gpl].
+
+
+Proč není Texy šířeno pod volnější licencí, třeba BSD nebo LGPL?
+----------------------------
+
+Plánuji Texy pod volnější licencí uvolnit.
+
+
+Co je Open source?
+------------------
+
+- open = otevřený, přístupný
+- source = zdrojový kód, tj. text programu napsaný v programovacím jazyce
+
+Open source je tedy počítačový program s přístupným zdrojovým kódem. Znamená to, že program je k dispozici v textové formě, ve které jej napsal programátor. A to obvykle každému. Díky tomu mají ostatní programátoři možnost studovat, jak program pracuje.
+
+S pojmem Open source úzce souvisí pojem **svobodný software.**
+
+
+Co je svobodný software?
+----------------------
+
+- software = počítačový program
+
+Svobodný software (anglicky free software) je počítačový program, který zaručuje uživatelům svobodu jej spouštět, kopírovat, distribuovat, studovat, měnit a zlepšovat. Přizpůsobovat ho svým potřebám. Opravovat chyby, přidávat do něj své vlastní nápady a poté tato vylepšení zveřejňovat ostatním.
+
+Máte tedy volnou ruku, nemusíte nikoho žádat o povolení, nebo za něj platit.
+
+Aby bylo technicky možné program měnit, je třeba mít přístup k jeho zdrojovému kódu. Proto svobodný software musí být vždy Open source. Svobodný software je podmnožinou škatulky Open source.
+
+**Svobodný software minimalizuje rizika závislosti uživatele na používaném softwaru.** Pokud tvůrce přestane software dále vyvíjet, může se toho ujmout kdokoliv jiný.

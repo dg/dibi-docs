@@ -118,6 +118,22 @@ dibi::query("UPDATE `table` SET [text]='I''m fine'");
 
 Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem dibi je opak.
 
+Operátor LIKE
+-------------
+
+Pro operátor LIKE jsou k dispozici tři speciální výrazy:
+
+| %like~ | výraz začíná řetězcem
+| %~like | výraz končí řetězcem
+| %~like~ | výraz obsahuje řetězec
+
+Příklad použítí - hledej jména začínající na určitý řetězec:
+
+/--code php
+dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
+\--
+
+
 Formátování polí
 -------------------
 

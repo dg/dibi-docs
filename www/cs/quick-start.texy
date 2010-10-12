@@ -1,7 +1,8 @@
 Quick Start
 **********
 
-Cíle layeru dibi:
+Cíle layeru dibi
+-----------------
 
 -	maximálně ulehčit práci programátorům. Jak?
   -	zjednodušit zápis SQL příkazů, co to jen půjde
@@ -37,7 +38,7 @@ $connection = new DibiConnection($options);
 $connection->query('TRUNCATE `table`');
 \--code
 
-Ale na tento způsob můžete klidně zapomenout :-) Je tu totiž statický registr `dibi`. Ten má za úkol udržovat v globálně dostupném úložišti objekt (či objekty) spojení a nad nimi volat potřebné funkce:
+Ale na tento způsob můžete klidně zapomenout :-) Je tu totiž statický registr `dibi`. Ten má za úkol udržovat v globálně dostupném úložišti objekt spojení a nad ním volat potřebné funkce:
 
 /--code php
 dibi::connect(array(
@@ -51,27 +52,6 @@ dibi::connect(array(
 \--
 
 Statická třída `dibi` má **jednu báječnou výhodu** - kdekoliv je po ruce. Nemusíte získávat instanci připojení, prostě napíšete `dibi::` a máte vystaráno.
-
-Není to sice obvyklé, ale může se stát, že budete v aplikaci používat více připojení, třeba k různým databázím. Pak si každé připojení pojmenujete při připojování
-
-/--code php
-dibi::connect($options1, 'prvni pripojeni');
-dibi::connect($options2, 'druhe pripojeni');
-\--
-
-a kdykoliv si je buď vytáhnete z registru...
-
-/--code php
-$connection = dibi::getConnection('druhe pripojeni');
-$connection->query(...);
-\--
-
-...nebo jej tzv. aktivujete a voláte přes třídu dibi:
-
-/--code php
-dibi::activate('prvni pripojeni');
-dibi::query(...);
-\--
 
 *Poznámka: připojování ve stylu DSN, kdy popis připojení je uložen v řetězci připomínajícím URI, se v praxi ukázalo jako nepraktické. Používám raději pole, přípustný je však i řetězec, a to ve standardizovaném formátu HTTP query.*
 
@@ -100,11 +80,11 @@ Proměnná na naformátuje do výsledného SQL podle pravidel aktivní databáze
 Modifikátory jsou následující:
 
 | %s | string |
-| %sn | string, ale '' se přeloží jako NULL |
+| %sN | string, ale '' se přeloží jako NULL |
 | %bin | binární data |
 | %b | boolean |
 | %i %u | integer |
-| %in | integer, ale 0 se přeloží jako NULL |
+| %iN | integer, ale 0 se přeloží jako NULL |
 | %f | float |
 | %d | datum (očekává string nebo integer) |
 | %t | datum & čas (také string či integer) |
@@ -143,12 +123,14 @@ Formátování polí
 
 Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pole, které se pak oddělené čárkami vloží do SQL. Ovšem můžeme využít také dvou speciálních modifikátorů `%a` nebo `%v`.
 
-| %a | assoc | `[key]=val, [key2]="val2", ...` |
-| %l | list | `(val, "val2", ...)` |
-| %v | values | `([key], [key2], ...) VALUES (val, "val2", ...)` |
-| %by | ordering | `[key] ASC, [key2] DESC ...` |
 | %and |  | `[key]=val AND [key2]="val2" AND ...` |
 | %or |  | `[key]=val OR [key2]="val2" OR ...` |
+| %a | assoc | `[key]=val, [key2]="val2", ...` |
+| %l %in | list | `(val, "val2", ...)` |
+| %v | values | `([key], [key2], ...) VALUES (val, "val2", ...)` |
+| %m | multivalues | `([key], [key2], ...) VALUES (val, "val2", ...), (val, "val2", ...), ...` |
+| %by | ordering | `[key] ASC, [key2] DESC ...` |
+| %n | identifikátory | `[key], [key2] AS alias, ...` |
 | jiný  | - | `val, val2, ...` |
 
 Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V tom případě dibi použije tuto dedukci: jde-li o příkaz INSERT či REPLACE, zvol %v, jinak %a (platí pro asociativní pole).
@@ -168,23 +150,53 @@ dibi::query('UPDATE `table` SET ', $arr);
 \--code
 
 
-Speciální typy - objekty
+
+Složitější výrazy v polích
 -------------------
 
-Parametrem může být také objekt. Musí implementovat rozhraní `IDibiVariable` s metodou `toSql()`. Té se předá cílový ovladač a případný modifikátor a ona vrátí SQL řetězec. Jako příklad jsou v dibi takto řešeny objekty, které nesou datum a čas.
-
-Standardní implementací IDibiVariable je třída DibiVariable. Konstruktoru předáme hodnotu a modifikátor:
+Přímo v polích (v klíčích) je možné používat modifikátory:
 
 /--code php
 dibi::query('UPDATE `table` SET ', array(
-    'time' => new DibiVariable(time(), 'd'),
-    'number' => new DibiVariable('RAND()', 'sql'),// %sql means SQL ;)
+	'number%sql' => 'RAND()', // %sql means SQL ;)
 ));
-// UPDATE `table` SET ('2008-01-01', RAND())
+// UPDATE `table` SET 'number' = RAND()
 \--code
 
 
-Můžete použít také šikovější továrny na tyto objekty: `dibi::date()` a `dibi::datetime()`. Jako parametr akceptují kromě číselné hodnoty timestamp i řetězce.
+Také hodnoty mohou být složitější výrazy:
+
+/--code php
+dibi::query('UPDATE `table` SET ', array(
+	'title' => array('SHA1(%s)', 'tajneheslo'),
+));
+// UPDATE `table` SET 'title' = SHA1('tajneheslo')
+\--code
+
+Klíče je možné zcela vynechat:
+
+/--code php
+dibi::query('SELECT * FROM `table` WHERE %and', array(
+	array('number > %i', 10),
+	array('number < %i', 100),
+));
+// SELECT * FROM `table` WHERE (number > 10) AND (number < 100)
+\--code
+
+
+
+Speciální typ pro datum a čas
+-------------------
+
+Parametrem může být také objekt `DateTime`.
+
+/--code php
+dibi::query('UPDATE `table` SET ', array(
+    'time' => new DateTime,
+));
+// UPDATE `table` SET ('2008-01-01 01:08:10')
+\--code
+
 
 
 Postupné skládání dotazu
@@ -203,6 +215,7 @@ $result = dibi::query($query);
 \--
 
 Nebo lze použít expanzi pole přes speciální modifikátor `%ex`.
+
 
 Podmíněné SQL příkazy
 ---------------------
@@ -339,7 +352,17 @@ if (is_int($record['id']))
     echo 'yes, it is integer';
 \--code
 
-Návratový typ
+Nebo lze nechat všechny typy automaticky detekovat:
+
+/--code php
+$result->detectTypes();
+...
+\--
+
+Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => TRUE` a typy se budou detekovat vždy.
+
+
+Vrácený záznam
 -------------
 
 Dibi vrací záznamy jako objekty DibiRow. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
@@ -365,4 +388,6 @@ echo dibi::$numOfQueries; // celkem SQL příkazů
 echo dibi::$totalTime; // celkový čas v sec
 \--
 
-Dibi disponuje rozhraním pro připojení vlastního profileru nebo logovací knihovny. API uveřejním později.
+Dibi disponuje rozhraním pro připojení vlastního profileru nebo logovací knihovny.
+
+{{toc}}

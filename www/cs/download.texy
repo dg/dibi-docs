@@ -6,7 +6,7 @@ Dibi, uvolněno pod [Dibi licencí | license]. Vyžaduje PHP ve verzi 5.2 nebo n
 .[download]
 | Next Release (Unstable) | Release date | Download | Manual
 |--------
-| Dibi 1.3-dev [changelog | http://github.com/nette/dibi/commits/master] | -- | [zip | download:latest.zip] | [api reference | download:apidoc.zip]
+| Dibi 1.3-dev [changelog | http://github.com/dg/dibi/commits/master] | -- | [zip | download:latest.zip] | [api reference | download:apidoc.zip]
 | DibiTableX plugin | 2/2009 | [zip | download:DibiTableX.zip] | [info | http://phpfashion.com/experiment-dibitable]
 |--------
 | Latest Stable Release | Release date | Download
@@ -19,14 +19,14 @@ Dibi, uvolněno pod [Dibi licencí | license]. Vyžaduje PHP ve verzi 5.2 nebo n
 Přístup přes Git
 ----------------
 
-Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | http://github.com/nette/dibi/tree/master]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
+Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | http://github.com/dg/dibi/tree/master]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
 
 /--code
-git clone git://github.com/nette/dibi.git
+git clone git://github.com/dg/dibi.git
 \--
 
 
-You can take a look at the "[* feed-icon.gif *] RSS feed":http://nette.org/feed for the changes log of GIt and this page.
+You can take a look at the "[* feed-icon.gif *] RSS feed":http://dibiphp.com/feed for the changes log of GIt and this page.
 
 Icon for your website
 ------------

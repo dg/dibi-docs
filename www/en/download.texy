@@ -4,16 +4,16 @@ Download
 Dibi, released under the terms of the [Dibi License | license]. Requires PHP 5.2 or higher.
 
 .[download]
-| Next Release (Unstable) | Release date | Download | Manual
+| Latest Release | Release date | Download
 |--------
-| Dibi 1.3-dev [changelog | http://github.com/nette/dibi/commits/master] | -- | [zip | download:latest.zip] | [api reference | download:apidoc.zip]
-| DibiTableX plugin | 2/2009 | [zip | download:DibiTableX.zip] | [info | http://phpfashion.com/experiment-dibitable]
+| Dibi 1.5rc | 1/2011 | [zip | download:dibi-1.5rc.zip]
+| Dibi 1.2   | 9/2009 | [zip | download:dibi-1.2.zip]
+| DibiTableX plugin [info | http://phpfashion.com/experiment-dibitable] | 2/2009 | [zip | download:DibiTableX.zip]
 |--------
-| Latest Stable Release | Release date | Download
+| Development Release | Release date | Download
 |--------
-| Dibi 1.2   | 9/2009 | [zip | download:dibi-1.2.zip] (vyžaduje PHP 5.1) | [api reference | download:apidoc-1.2.zip]
-| Dibi 1.1   | 8/2009 | [zip | download:dibi-1.1.zip] | [api reference | download:apidoc-1.1.zip]
-
+| Dibi 1.3-dev [changelog | http://github.com/dg/dibi/commits/master] | -- | [zip | download:dibi-dev.zip]
+|--------
 
 
 GIT Access

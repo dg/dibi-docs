@@ -1,18 +1,8 @@
 - [home | homepage]
-- [about Texy]
-    - [features]
-    - [cool things]
-    - [testimonials]
-    - [Texy vs. WYSIWYG]
-
+- [syntax]
 - **try Texy**:http://texy.info/en/try/
-
 - [download]
-
-- documentation
-    - [syntax]
-    - [programmer's guide | manual]
-    - [API documentation | http://api.texy.info]
-    - [XML-RPC service | xmlrpc]
-
+- [API manual | http://api.texy.info]
+- [XML-RPC service | xmlrpc]
+- [about Texy]
 - [support forum | http://forum.texy.info]

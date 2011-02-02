@@ -1,7 +1,7 @@
 Что такое Texy
 -----------
 
-<a href="http://download.texy.info/texy-2.0-beta2.zip" id="download" class="right"><strong>Скачать</strong><br />{{svn}}</a>
+<a href="http://files.texy.info/latest.zip" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
 
 Texy позволяет вам создавать контент, используя **легко читаемый** синтаксис Texy, который преобразуется в **валидный** XHTML. При этом не нужно знание HTML. Texy - это один из наиболее продвинутых инструментов в этой области. Он позволяет добавлять изображения, ссылки, многоуровневые списки, таблицы; CSS полностью поддерживается.
 

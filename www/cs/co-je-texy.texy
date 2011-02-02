@@ -1,0 +1,38 @@
+Co je Texy?
+***********
+
+
+Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky.
+
+Chcete zvýraznit písmo? Vytvořit nadpis či odrážky? Přidat obrázek nebo tabulku? Nemusíte zápasit se složitým textovým editorem. Stačí psát prostý text a Texy už úpravu zvládne za vás. Výsledkem bude hezky zformátovaná stránka.
+
+--> [Vyzkoušejte si to | http://texy.info/cs/try/]
+
+Texy dnes používají tisíce spokojených uživatelů.
+
+
+Co všechno umí?
+---------------
+
+- vytvářet odkazy, odrážky, tabulky,...
+- vkládat do textu obrázky
+- zná českou typografii
+- a navíc je **zdarma!** (pod [licencí BSD a GPL | licence])
+
+a pro odborníky:
+
+- generuje vždy validní HTML nebo XHTML kód
+- podporuje CSS((Kaskádové styly))
+- rozumí všem obvyklým kódováním včetně Unicode (UTF-8)
+- vkládá pevné mezery za jednopísmenné předložky
+- je dokonale konfigurovatelné a přizpůsobitelné
+
+
+Objevte Texy!
+-----------
+
+- [V čem je Texy lepší než konkurence | V čem je lepší]?
+- Srovnání [Texy versus WYSIWYG editory | texy-vs-wysiwyg]
+- [Příklady využití | priklady-vyuziti]
+- [Základy syntaxe | syntax]
+- [Licence a autorská práva | licence]

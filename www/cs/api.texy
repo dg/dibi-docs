@@ -1,0 +1,36 @@
+Programátorský manuál
+***************
+
+Texy je napsané v objektovém PHP. Minimální požadovaná verze je 4.3.3 (ve verzi pro PHP 4) a 5.1 (ve verzi pro PHP 5).
+
+V případě dotazů se obracejte přímo do [fóra | http://forum.texy.info].
+
+--> [API dokumentace | http://api.texy.info]
+
+--> [Základní dovednosti | api-zaklady]
+
+--> Jednotlivé moduly: .[#moduly]
+- [Texy | api-texy] - jádro Texy
+- [TexyBlockModule | api-block-module] - zpracování bloků `/-- xxx`
+- [TexyBlockQuoteModule | api-blockquote-module] - blokové citace
+- [TexyEmoticonModule | api-emoticon-module] - nahrazování smajlíků za obrázky
+- [TexyFigureModule | api-figure-module] - obrázky s popiskou
+- [TexyHeadingModule | api-heading-module] - nadpisy, titulky
+- [TexyHorizLineModule | api-horizline-module] - horizontální čáry
+- [TexyHtmlModule | api-html-module] - HTML značky a komentáře na vstupu
+- [TexyHtmlOutputModule | api-htmloutput-module] - formátování výstupního HTML
+- [TexyImageModule | api-image-module] - obrázky
+- [TexyLinkModule | api-link-module] - odkazy a reference
+- [TexyListModule | api-list-module] - číslované, nečíslované a definiční seznamy
+- [TexyLongWordsModule | api-longwords-module] - rozdělení dlouhých slov
+- [TexyParagraphModule | api-paragraph-module] - jednotlivé odstavce textu
+- [TexyPhraseModule | api-phrase-module] - fráze, tedy úseky textu (tučný text, odkaz, ...)
+- [TexyScriptModule | api-script-module] - volání uživatelských funkcí
+- [TexyTableModule | api-table-module] - tabulky
+- [TexyTypographyModule | api-typography-module] - typografické úpravy výsledného textu
+
+
+Ostatní informace
+-----------------
+
+- [Manuál pro starší verzi Texy 1.x | api-texy1]

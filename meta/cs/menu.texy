@@ -1,9 +1,6 @@
 - [úvodní stránka | homepage]
 
-- [co je Texy]
-    - [v čem je lepší?]
-    - [napsali o Texy]
-    - [Texy vs. WYSIWYG]
+- [syntaxe | syntax]
 
 - **demo**:http://texy.info/cs/try/
 
@@ -11,14 +8,17 @@
 
 - [pluginy | doplnky]
 
-- dokumentace
-    - [licence]
-    - [syntaxe | syntax]
-    - [video tutorial]
-    - [manuál | api]
-    - [API dokumentace | http://api.texy.info]
-    - [služba XML-RPC | xmlrpc]
+- [video tutorial]
+
+- [dokumentace | api]
 
 - [fórum | http://forum.texy.info]
 - [blog | http://phpfashion.com/category/texy]
-- [podpořte vývoj]
+- [služba XML-RPC | xmlrpc]
+
+- [co je Texy]
+    - [v čem je lepší?]
+    - [napsali o Texy]
+    - [Texy vs. WYSIWYG]
+    - [licence]
+    - [podpořte vývoj]

@@ -1,12 +1,14 @@
-Licenční politika
-*****************
+Licence
+*******
 
-Texy jsem uvolnil jako svobodný software proto, aby ho **kdokoliv mohl používat zdarma**.
+Texy jsem uvolnil jako svobodný software proto, aby ho **kdokoliv mohl používat zdarma**. Můžete vybrat, zda chcete Texy používat v souladu s New BSD licencí nebo GNU General Public License (GPL) ve verzi 2 nebo 3.
+
+Licence BSD je doporučena pro většinu projektů, jelikož je snadné ji pochopit a neklade téměř žádná omezení na to, co můžete s Texy dělat. Pokud se však GPL hodí pro váš projekt lépe, zvolte ji. Přičemž není potřeba nikoho informovat, jak jste se rozhodli.
+
+Texy tak můžete svobodně používat i v komerčních projektech, stačí jen zachovat původní copyrighty.
 
 
-Kolik stojí licence?
---------------------
-Texy můžete používat a distribuovat zcela zdarma pod licencí GPL. Pokud Vám knihovna dobře slouží a chtěli byste podpořit její další vývoj, nebo pokud byste rádi vyjádřili uznání za čas, který autor strávil jejím vývojem, pošlete prosím příspěvek v jakékoliv výši. **Děkuji Vám!**
+Pokud Vám knihovna dobře slouží a chtěli byste podpořit její další vývoj, nebo pokud byste rádi vyjádřili uznání za čas, který autor strávil jejím vývojem, pošlete prosím příspěvek v jakékoliv výši. **Děkuji Vám!**
 
 Příspěvek můžete zaslat platební kartou nebo z PayPal účtu.
 
@@ -24,20 +26,6 @@ Příspěvek můžete zaslat platební kartou nebo z PayPal účtu.
     <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" width="122" height="47" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
     </div></form>
 \--
-
-
-
-
-Co je to GPL licence?
----------------------
-
-GPL je zkratka názvu GNU General Public License. Pod touto licencí je Texy šířeno jako svobodný software, tedy zdarma a bez jakékoliv záruky. Licence Vám umožňuje Texy zdarma stáhnout, libovolně upravovat a používat ve svých aplikacích. Tyto aplikace můžete také dále distribuovat, ale opět pod licencí GPL. Podrobně viz [český překlad GPL | gpl].
-
-
-Proč není Texy šířeno pod volnější licencí, třeba BSD nebo LGPL?
-----------------------------
-
-Plánuji Texy pod volnější licencí uvolnit.
 
 
 Co je Open source?

@@ -270,19 +270,19 @@ Div-блоки
 ======
 
 /--code texy
-Look at [homepage | http://texy.info].
+Look at homepage:[http://texy.info].
 
-Do you know [La Trine | http://latrine.dgx.cz]?
+Do you know "Nette":http://nette.org?
 
-[Write me | me@example.com]
+"Write me":me@example.com
 \--
 
 /-- texysource .[html]
-Look at [homepage | http://texy.info].
+Look at homepage:[http://texy.info].
 
-Do you know [La Trine | http://latrine.dgx.cz]?
+Do you know "Nette":http://nette.org?
 
-[Write me | me@example.com]
+"Write me":me@example.com
 \--
 
 

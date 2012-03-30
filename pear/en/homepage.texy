@@ -1,0 +1,32 @@
+Dibi PEAR channel
+******************
+
+Dibi is installable using the PEAR Installer. This installer provides a distribution system for PHP packages, and is shipped with every release of PHP.
+
+The Dibi PEAR channel (`pear.dibiphp.com`) that is used to distribute Dibi needs to be registered with the local PEAR environment. This has to be done only once:
+
+/--
+pear channel-discover pear.dibiphp.com
+\--
+
+You can list available packages: (you can receive updates via a [feed |http://pear.dibiphp.com/feed.xml])
+
+/--
+pear remote-list -c dibi
+\--
+
+Now the Dibi can be installed from the PEAR channel:
+
+/--
+pear install dibi/dibi
+\--
+
+Installing a specific version/stability:
+
+/--
+pear install dibi/dibi-2.0.1
+pear install dibi/package_name-beta
+\--
+
+
+You can also [download packages manually |www:download].

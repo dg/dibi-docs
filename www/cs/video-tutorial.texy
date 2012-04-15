@@ -1,7 +1,6 @@
 Video tutorial
 **************
 
-/--notexy
 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="509" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version==8">
     <param name="src" value="http://files.texy.info/tutorial/controller.swf"/>
     <param name="bgcolor" value="FFFFFF"/>
@@ -10,6 +9,5 @@ Video tutorial
     <param name="flashVars" value="csConfigFile=http://files.texy.info/tutorial/tutorial.xml&csColor=FFFFFF"/>
     <embed src="http://files.texy.info/tutorial/controller.swf" width="500" height="509" bgcolor="FFFFFF" quality="best" allowScriptAccess="always" flashVars="csConfigFile=http://files.texy.info/tutorial/tutorial.xml" pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
 </object>
-\--
 
 Velice děkuji společnosti "w3w, s.r.o.":http://w3w.cz/kontakt za vytvoření a poskytnutí videa.

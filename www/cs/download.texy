@@ -1,20 +1,13 @@
 Download
 ********
 
-Dibi, uvolněno pod [BSD a GPL | license]. Vyžaduje PHP ve verzi 5.1 nebo novější.
+Dibi, uvolněno pod [BSD a GPL | license]. Vyžaduje PHP ve verzi 5.2 nebo novější.
 
 .[download]
 | Latest Release | Release date | Download
 |--------
-| Dibi 1.5rc | 7/2011 | [zip | download:dibi-1.5rc.zip]
+| Dibi 2.0.2   | 12/2012 | [zip | download:dibi-2.0.2.zip]
 | Dibi 1.2   | 9/2009 | [zip | download:dibi-1.2.zip]
-| DibiTableX plugin [info | http://phpfashion.com/experiment-dibitable] | 2/2009 | [zip | download:DibiTableX.zip]
-|--------
-| Development Release | Release date | Download
-|--------
-| Dibi 1.3-dev [changelog | http://github.com/dg/dibi/commits/master] | -- | [zip | download:dibi-dev.zip]
-|--------
-
 
 
 Přístup přes Git

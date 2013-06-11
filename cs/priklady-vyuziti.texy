@@ -24,5 +24,3 @@ Komentáře a diskuzní fóra .[#comments]
 Texy počítá i s nasazením jako formátovač příspěvků v diskuzních fórech a komentářích. Přispívatelé mohou používat jednotnou a **intuitivní syntaxi** a programátorům **odpadne náročná práce** na vlastním formátovači.
 
 Tato oblast použití je charakteristická tím, že vyžaduje mnohem **přísnější kontrolu** vstupů. Texy proto obsahuje mechanismy, které zakáží nebo omezí použití určitých HTML značek (a jejich atributů), kaskádových stylů a tříd atd.
-
-{{ parent(co-je-texy) }}

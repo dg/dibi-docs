@@ -17,5 +17,4 @@ There are these available methods:
 - `texy2.version` *připravuje se*
 
 
-{{ parent(api) }}
 {{lang: cs/xmlrpc}}

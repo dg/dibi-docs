@@ -108,5 +108,4 @@ The following example converts short text `Hello **world**` to XHTML:
 
 
 
-{{ parent(api) }}
 {{lang: en/xmlrpc-texy1.toHtml}}

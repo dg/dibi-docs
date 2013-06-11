@@ -379,6 +379,3 @@ $texy->tableModule->evenClass:
 $texy->tableModule->oddClass:
   - třída přiřazená všem lichým řádkům
   - *string*
-
-
-{{ parent(api) }}

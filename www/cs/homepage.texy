@@ -23,8 +23,28 @@ a pro odborníky:
 
 --------
 
-Novinky
-=======
+Vydána verze Texy 2.3
+---------------------
+
+20. 7. 2013 .[date]
+
+- added tests and [Nette Tester](http://github.com/nette/tester)
+
+For the details about the changes you can have a look at the "Github diff":[https://github.com/dg/texy/compare/v2.2...v2.3].
+
+
+Vydána verze Texy 2.2
+---------------------
+
+30. 3. 2013 .[date]
+
+- licence changed to the New BSD License or the GNU General Public License (GPL) version 2 or 3.
+- added composer.json
+- rewritten some regular expressions as possessive due backtrack limit
+- some bug fixes
+
+For the details about the changes you can have a look at the "Github diff":[https://github.com/dg/texy/compare/v2.1...v2.2].
+
 
 Vydána verze Texy 2.1
 ---------------------
@@ -48,7 +68,6 @@ Převodník Texy! syntaxe do LaTeXu
 31. 7. 2007 .[date]
 
 Jednoduchý [nástroj pro převod | http://jaybee.frih.net/software/prevodnik-texy!---latex] čisté Texy! syntaxe do LaTeXu vytvořil Jay Bee: *"Tento převodník jsem vytvořil a používal jen proto, že jsem líný a přeci jen je mě bližší Texy syntaxe než LaTeX syntaxe. Pro psaní jednoduše formátovaných dokumentů je ideální. Napsal jsem svou bakalářku v Texy a pak jsem ji díky tomuhle převodníku nechal vygenerovat do PDF"*
-
 
 
 CZECH OPEN SOURCE 2007

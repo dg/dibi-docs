@@ -65,7 +65,7 @@ Vkládání externích dat
 
 24. 5. 2005 .[date]
 
-Přidána funkce pro vkládání externích dat. Používá se zápis např. `{{ getPrice(produkt) }}` (viz. [fórum | http://forum.texy.info/viewtopic.php?id=128]). Sponzorem vývoje této funkce je společnost [Internet Mall | www.MALL.cz], a.s.
+Přidána funkce pro vkládání externích dat. Používá se zápis např. `{{ getPrice(produkt) }}` (viz. [fórum | http://forum.texy.info/cs/viewtopic.php?id=128]). Sponzorem vývoje této funkce je společnost [Internet Mall | www.MALL.cz], a.s.
 
 Dále jsem začal označovat vydané verze datem ve formátu YYYY/MM/DD. Nechci kvůli každé drobnosti navyšovat číslo verze.
 
@@ -82,7 +82,7 @@ Sám jsem jej tak začal používat a docela mě potěšilo, že [nejsem jediný
 Mimochodem, hodil by se editor se zvýrazňováním Texy syntaxe. Něco takového jsem se pokusil vytvořit pro Far Manager, ale ještě to není ono. Pokud byste mohli v této oblasti nějak pomoc, bylo by to super!
 
 [chomat]: http://www.chomat.net/articles/inspo-2005
-[komentare]: http://forum.texy.info/viewtopic.php?id=64
+[komentare]: http://forum.texy.info/cs/viewtopic.php?id=64
 
 
 

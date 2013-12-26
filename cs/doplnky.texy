@@ -6,11 +6,11 @@ Texy pluginy pro CMS((Content Management System, redakční systém)) a framewor
 
 (vyžaduje PHP 5.1 nebo vyšší, pluginy pro starší verze najdete [zde | texy2-php4])
 
-- [b2evolution plugin | download:texy2-plugin-b2evo.zip] (pro 1.8 - 2.0) ([informace | http://forum.texy.info/viewforum.php?id=8])
-- [WordPress plugin | download:texy2-plugin-wordpress.zip]  (pro 1.2 - 2.5) ([informace | http://forum.texy.info/viewforum.php?id=10])
-- [BLOG:CMS plugin | download:texy2-plugin-blogcms.zip] ([informace | http://forum.texy.info/viewforum.php?id=4], [upozornění | http://forum.texy.info/viewtopic.php?id=65])
-- [Nucleus plugin | download:texy2-plugin-nucleus.zip] (pro 3.2) ([informace | http://forum.texy.info/viewforum.php?id=7], [upozornění | http://forum.texy.info/viewtopic.php?id=66])
-- [lucidCMS plugin | download:texy2-plugin-lucid.zip] ([informace | http://forum.texy.info/viewforum.php?id=17] )
+- [b2evolution plugin | download:texy2-plugin-b2evo.zip] (pro 1.8 - 2.0) ([informace | http://forum.texy.info/cs/viewforum.php?id=11])
+- [WordPress plugin | download:texy2-plugin-wordpress.zip]  (pro 1.2 - 2.5) ([informace | http://forum.texy.info/cs/viewforum.php?id=10])
+- [BLOG:CMS plugin | download:texy2-plugin-blogcms.zip] ([informace | http://forum.texy.info/cs/viewforum.php?id=7], [upozornění | http://forum.texy.info/cs/viewtopic.php?id=66])
+- [Nucleus plugin | download:texy2-plugin-nucleus.zip] (pro 3.2) ([informace | http://forum.texy.info/cs/viewforum.php?id=7], [upozornění | http://forum.texy.info/cs/viewtopic.php?id=66])
+- [lucidCMS plugin | download:texy2-plugin-lucid.zip] ([informace | http://forum.texy.info/cs/viewforum.php?id=11] )
 - [Drupal plugin | http://drupal.org/project/texy] (vytvořil Havran)
 - [Symfony plugin sfTexyPlugin | http://trac.symfony-project.com/trac/wiki/sfTexyPlugin] (vytvořil Miloslav Kmet)
 - [Joomla plugin | http://www.foceni.org/download/joomla/texy-plugin-2.html] (vytvořil Jiří Žán)

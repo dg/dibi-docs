@@ -28,7 +28,7 @@ Proměnné `$allowedTags`, `$allowedClasses` a `$allowedStyles` mohou nabývat h
   - `$allowedClasses` - seznam tříd a ID, přičemž ID začínají prefixem #
   - `$allowedStyles` - seznam CSS vlastností
 
-Pole `$alignClasses` definuje CSS třídy pro zarovnání textu a obrázků. Blíže popsáno [ve fóru | http://forum.texy.info/viewtopic.php?id=532].
+Pole `$alignClasses` definuje CSS třídy pro zarovnání textu a obrázků. Blíže popsáno [ve fóru | http://forum.texy.info/cs/viewtopic.php?id=532].
 
 Texy spojuje řádky následující za sebou do odstavců. Toto chování je možné vypnout nastavením vlastnosti `$texy->mergeLines = FALSE`.
 

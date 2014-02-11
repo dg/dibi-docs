@@ -6,21 +6,18 @@ Dibi, uvolněno pod [BSD a GPL | license]. Vyžaduje PHP ve verzi 5.2 nebo nově
 .[download]
 | Latest Release | Release date | Download
 |--------
-| Dibi 2.1.1 | 10/2013 | [zip | download:dibi-2.1.1.zip]
-| Dibi 1.2   | 9/2009 | [zip | download:dibi-1.2.zip]
+| Dibi 2.1.1 | 10/2013 | [zip | https://github.com/dg/dibi/releases/download/v2.1.1/dibi-2.1.1.zip]
 
 
 Přístup přes Git
 ----------------
 
-Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | http://github.com/dg/dibi/tree/master]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
+Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | http://github.com/dg/dibi]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
 
 /--code
 git clone git://github.com/dg/dibi.git
 \--
 
-
-You can take a look at the "[* feed-icon.gif *] RSS feed":http://dibiphp.com/feed for the changes log of GIt and this page.
 
 Icon for your website
 ------------

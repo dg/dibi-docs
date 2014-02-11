@@ -6,22 +6,19 @@ Dibi, released under the terms of the [Dibi License | license]. Requires PHP 5.2
 .[download]
 | Latest Release | Release date | Download
 |--------
-| Dibi 2.1.1 | 10/2013 | [zip | download:dibi-2.1.1.zip]
-| Dibi 1.2   | 9/2009 | [zip | download:dibi-1.2.zip]
+| Dibi 2.1.1 | 10/2013 | [zip | https://github.com/dg/dibi/releases/download/v2.1.1/dibi-2.1.1.zip]
 
 GIT Access
 -----------------
 
-You can obtain the latest development version from our GIT repository. The easiest way to browse through the repository is using the [web source code browser | http://github.com/nette/dibi/tree/master]. We recommend you install an SVN client on your machine for better access. TortoiseGIT  is a highly recommended client on Windows.
+You can obtain the latest development version from our GIT repository. The easiest way to browse through the repository is using the [web source code browser | http://github.com/dg/dibi]. We recommend you install an SVN client on your machine for better access. TortoiseGIT  is a highly recommended client on Windows.
 
 Use this command to anonymously check out the latest project source code:
 
 /--code
-git clone git://github.com/nette/dibi.git
+git clone git://github.com/dg/dibi.git
 \--
 
-
-You can take a look at the "[* feed-icon.gif *] RSS feed":http://nette.org/feed for the changes log of GIt and this page.
 
 Icon for your website
 ------------

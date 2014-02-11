@@ -1,7 +1,7 @@
 Texy! je sexy!
 ===========
 
-<a href="http://files.texy.info/latest.zip" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
+<a href="https://github.com/dg/texy/releases/tag/v2.4" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
 
 Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky. Používají ho tisíce spokojených uživatelů.
 
@@ -22,6 +22,18 @@ a pro odborníky:
 - plně podporuje CSS((Kaskádové styly)) a UTF-8
 
 --------
+
+Vydána verze Texy 2.4
+---------------------
+
+10. 2. 2014 .[date]
+
+- added new syntaxes for links: `[text | http://texy.info]` and `[text](http://texy.info)`
+- obsolete hover effects for images can be disabled via `$texy->allowed['image/hover'] = FALSE`
+- minimal required PHP version is now 5.2.0
+
+For the details about the changes you can have a look at the "Github diff":[https://github.com/dg/texy/compare/v2.3...v2.4].
+
 
 Vydána verze Texy 2.3
 ---------------------

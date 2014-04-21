@@ -1,32 +1,11 @@
 Texy PEAR channel
 ******************
 
-Texy is installable using the PEAR Installer. This installer provides a distribution system for PHP packages, and is shipped with every release of PHP.
-
-The Texy PEAR channel (`pear.texy.info`) that is used to distribute Texy needs to be registered with the local PEAR environment. This has to be done only once:
-
-/--
-pear channel-discover pear.texy.info
-\--
-
-You can list available packages: (you can receive updates via a [feed |http://pear.texy.info/feed.xml])
+Texy was installable using the PEAR Installer.
+Since version 2.5 it is installable only via [Composer|http://getcomposer.org]:
 
 /--
-pear remote-list -c texy
+composer require texy/texy
 \--
-
-Now the Texy can be installed from the PEAR channel:
-
-/--
-pear install texy/texy
-\--
-
-Installing a specific version/stability:
-
-/--
-pear install texy/texy-2.0.1
-pear install texy/package_name-beta
-\--
-
 
 You can also [download packages manually |www:download].

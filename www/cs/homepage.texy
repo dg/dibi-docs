@@ -1,7 +1,7 @@
 Texy! je sexy!
 ===========
 
-<a href="https://github.com/dg/texy/releases/tag/v2.4" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
+<a href="https://github.com/dg/texy/releases/tag/v2.5" id="download" class="right"><strong>Start Download</strong><br />Latest version</a>
 
 Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky. Používají ho tisíce spokojených uživatelů.
 
@@ -22,6 +22,21 @@ a pro odborníky:
 - plně podporuje CSS((Kaskádové styly)) a UTF-8
 
 --------
+
+Vydána verze Texy 2.5
+---------------------
+
+12. 5. 2014 .[date]
+
+- removed advertising notice
+- added warning that PCRE 8.34 is not supported
+- accepts hashbang in URL like `www.texy.info/path/#!/flag`
+- fixed parsing of `<h1>"neco":</h1>`
+- preserve spaces in `1 × 2`
+- correctly removes indentation in blocks
+
+For the details about the changes you can have a look at the "Github diff":https://github.com/dg/texy/compare/v2.4...v2.5.
+
 
 Vydána verze Texy 2.4
 ---------------------

@@ -161,6 +161,11 @@ Disable Texy
 \--
 
 
+You can also disable Texy for a part of inline text by using double apostrophe `''`:
+
+/--code texy
+   Example: ''**this is not strong**''
+\--
 
 
 

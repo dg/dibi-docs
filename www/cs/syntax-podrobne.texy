@@ -183,7 +183,11 @@ Klíčové slovo `html` nebo `text` ovlivňuje, jestli obsah bude chápán jako 
   \---
 \--
 
+Pro inline vypnutí Texy je možné použít dvojitý apostrof `''` a obalit s ním část textu, který nemá být Texy zpracováván.
 
+/--code texy
+   Příklad: ''**this is not strong**''
+\--
 
 
 

@@ -18,4 +18,4 @@ Konfigurace
 | $linksAllowed  | boolean | TRUE | je možné k frázi přidat odkaz?
 
 
-Pod pojmem fráze se rozumí jakákoliv řádková syntax jako `**tučné**`, `//kurzíva//`, `subskript_2`, `[odkaz | www.dgx.cz`].
+Pod pojmem fráze se rozumí jakákoliv řádková syntax jako `**tučné**`, `//kurzíva//`, `subskript_2`, `[odkaz | www.texy.info`].

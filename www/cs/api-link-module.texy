@@ -4,7 +4,7 @@ Třída TexyLinkModule
 Má na starosti definice, reference, odkazy. Modul vypneme zakázáním syntaxe:
 
 /--code php
-// vypnout zpracování definicí [ref]: www.dgx.cz
+// vypnout zpracování definicí [ref]: www.texy.info
 $texy->allowed['link/definition'] = FALSE;
 
 // vypnout zpracování referencí [ref]
@@ -28,7 +28,7 @@ Konfigurace
 | $forceNoFollow | boolean    | FALSE | doplňovat `rel="nofollow"`?
 | $shorten       | boolean    | TRUE | zkracovat URL?
 
-Texy automaticky doplňuje atribut nofollow odkazům, které mají pseudotřídu `nofollow`, např. `"odkaz .[nofollow]":www.dgx.cz`.
+Texy automaticky doplňuje atribut nofollow odkazům, které mají pseudotřídu `nofollow`, např. `"odkaz .[nofollow]":www.texy.info`.
 
 Příklad
 -------

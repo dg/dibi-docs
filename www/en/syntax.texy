@@ -299,20 +299,20 @@ References
 
 /--code texy
  [homepage]: http://texy.info/ Texy .(homepage)
- [la trine]: http://latrine.dgx.cz
+ [nette]: http://nette.org
 
  This is [homepage]
 
- Look at [this site | la trine]
+ Look at [this site | nette]
 \--
 
 [homepage]: http://texy.info/ Texy .(homepage)
-[la trine]: http://latrine.dgx.cz
+[la trine]: http://nette.org
 
 /-- texysource .[html]
  This is [homepage]
 
- Look at [this site | la trine]
+ Look at [this site | nette]
 \--
 
 
@@ -737,7 +737,7 @@ Quick-corrects
 
 /--code texy
 - very long words division (with respect for language rules). Example: antidisestablishmentarianism
-- clickable emails and URL www.dgx.cz, dave@dgx.cz (emails are obfuscated against spambots)
+- clickable emails and URL www.texy.info, dave@example.cz (emails are obfuscated against spambots)
 - "national" 'typographic' quotes
 - divider vs. dash: 10-15 vs. north-west
 - em-dash: one -- two
@@ -755,7 +755,7 @@ Quick-corrects
 
 /--div .[output]
 - very long words division (with respect for language rules). Example: antidisestablishmentarianism
-- clickable emails and URL www.dgx.cz, dave@dgx.cz (emails are obfuscated against spambots)
+- clickable emails and URL www.texy.info, dave@example.cz (emails are obfuscated against spambots)
 - "national" 'typographic' quotes
 - divider vs. dash: 10-15 vs. north-west
 - em-dash: one -- two
@@ -812,11 +812,11 @@ Klikatelnc URI
 Automatický ptevod URI do klikatelnc formy (včetn> emailů)
 
 /--code texy
-další informace na www.dgx.cz a takc ...
+další informace na www.texy.info a takc ...
 \--
 
 /--div .[output]
-další informace na www.dgx.cz a takc ...
+další informace na www.texy.info a takc ...
 \--
 
 

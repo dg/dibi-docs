@@ -306,11 +306,11 @@ Aby se tok textu "neznečišťoval" vkládáním URL, je možné všechny adresy
 
 /--code texy
  [homepage]: http://texy.info/ Texy .(homepage)
- [la trine]: http://www.dgx.cz/trine/
-
+ [nette]: http://nette.org
+ 
 This is [homepage]
 
-Look at "this site":[la trine]
+Look at "this site":[nette]
 \--
 
 
@@ -821,11 +821,11 @@ Klikatelné URI
 Automatický převod URI do klikatelné formy (včetně emailů)
 
 /--code texy
-další informace na www.dgx.cz a také ...
+další informace na www.texy.info a také ...
 \--
 
 /--div .[output]
-další informace na www.dgx.cz a také ...
+další informace na www.texy.info a také ...
 \--
 
 

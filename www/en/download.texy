@@ -11,7 +11,7 @@ Dibi, released under the terms of the [Dibi License | license]. Requires PHP 5.2
 GIT Access
 -----------------
 
-You can obtain the latest development version from our GIT repository. The easiest way to browse through the repository is using the [web source code browser | http://github.com/dg/dibi]. We recommend you install an SVN client on your machine for better access. TortoiseGIT  is a highly recommended client on Windows.
+You can obtain the latest development version from our GIT repository. The easiest way to browse through the repository is using the [web source code browser | https://github.com/dg/dibi]. We recommend you install an SVN client on your machine for better access. TortoiseGIT  is a highly recommended client on Windows.
 
 Use this command to anonymously check out the latest project source code:
 

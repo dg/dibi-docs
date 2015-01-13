@@ -1,31 +1,29 @@
 Download
 ********
 
-Dibi, uvolněno pod [BSD a GPL | license]. Vyžaduje PHP ve verzi 5.2 nebo novější.
+/--div .[emphasis]
+Nejnovější stabilní **Dibi 2.3.0** instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
 
-.[download]
-| Latest Release | Release date | Download
-|--------
-| Dibi 2.2.1 | 6/2014 | [zip | https://github.com/dg/dibi/releases/download/v2.2.1/dibi-2.2.1.zip]
+/--
+composer require dibi/dibi
+\--
 
-
-Přístup přes Git
-----------------
-
-Nejnovější vývojovou verzi můžete získat z Git repositáře. Nejjednodušším způsobem je procházet úložiště pomocí [webového prohlížeče | https://github.com/dg/dibi]. Zde si můžete také aktuální verzi stáhnout jako archív ZIP. Nebo můžete nainstalovat Git klienta a získat klon repositáře příkazem:
-
-/--code
-git clone git://github.com/dg/dibi.git
+Můžete si ji také stáhnout jako balíček "Dibi 2.3.0.zip":https://github.com/dg/dibi/releases/download/v2.3.0/dibi-2.3.0.zip,
+starší verze najdete v [archivu | https://github.com/dg/dibi/releases].
 \--
 
 
-Icon for your website
-------------
+Vývojová verze a Git
+====================
 
-<a href="http://dibiphp.com/" title="dibi - tiny ‘n’ smart database abstraction layer"
-    ><img src="http://dibiphp.com/images/dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+Nejnovější vývojovou verzi můžete získat z oficiálního repozitáře na https://github.com/dg/dibi
 
-/--code
-<a href="http://dibiphp.com/" title="dibi - tiny 'n' smart database abstraction layer"
-><img src="dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+/--
+git clone https://github.com/dg/dibi.git
 \--
+
+
+Požadavky
+=========
+
+Vyžaduje PHP 5.2.0 nebo vyšší. Uvolněno pod [BSD a GPL | license].

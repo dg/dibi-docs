@@ -1,32 +1,29 @@
 Download
 ********
 
-Dibi, released under the terms of the [Dibi License | license]. Requires PHP 5.2 or higher.
+/--div .[emphasis]
+Install the latest stable **Dibi 2.3.0** via [Composer |https://getcomposer.org]:
 
-.[download]
-| Latest Release | Release date | Download
-|--------
-| Dibi 2.2.1 | 6/2014 | [zip | https://github.com/dg/dibi/releases/download/v2.2.1/dibi-2.2.1.zip]
+/--
+composer require dibi/dibi
+\--
 
-GIT Access
------------------
-
-You can obtain the latest development version from our GIT repository. The easiest way to browse through the repository is using the [web source code browser | https://github.com/dg/dibi]. We recommend you install an SVN client on your machine for better access. TortoiseGIT  is a highly recommended client on Windows.
-
-Use this command to anonymously check out the latest project source code:
-
-/--code
-git clone git://github.com/dg/dibi.git
+You can also download package "Dibi 2.3.0.zip":https://github.com/dg/dibi/releases/download/v2.3.0/dibi-2.3.0.zip,
+older releases are available in [archive | https://github.com/dg/dibi/releases].
 \--
 
 
-Icon for your website
-------------
+Development version and Git
+===========================
 
-<a href="http://dibiphp.com/" title="dibi - tiny ‘n’ smart database abstraction layer"
-    ><img src="http://dibiphp.com/images/dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+You can obtain the latest development version from our repository at https://github.com/dg/dibi
 
-/--code
-<a href="http://dibiphp.com/" title="dibi - tiny 'n' smart database abstraction layer"
-><img src="dibi-powered.gif" width="80" height="15" alt="dibi powered" /></a>
+/--
+git clone https://github.com/dg/dibi.git
 \--
+
+
+Requirements
+=========
+
+Requires PHP 5.2.0 or newer. Released under [BSD a GPL | license].

@@ -2,26 +2,17 @@ Download
 ********
 
 /--div .[emphasis]
-Install the latest stable **Dibi 2.3.0** via [Composer |https://getcomposer.org]:
+Install the latest stable Dibi via [Composer |https://getcomposer.org]:
 
 /--
 composer require dibi/dibi
 \--
 
-You can also download package "Dibi 2.3.0.zip":https://github.com/dg/dibi/releases/download/v2.3.0/dibi-2.3.0.zip,
+You can also "download ZIP package":https://github.com/dg/dibi/releases/latest,
 older releases are available in [archive | https://github.com/dg/dibi/releases].
 \--
 
-
-Development version and Git
-===========================
-
 You can obtain the latest development version from our repository at https://github.com/dg/dibi
-
-/--
-git clone https://github.com/dg/dibi.git
-\--
-
 
 Requirements
 =========

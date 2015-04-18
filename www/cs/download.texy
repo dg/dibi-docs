@@ -2,25 +2,17 @@ Download
 ********
 
 /--div .[emphasis]
-Nejnovější stabilní **Dibi 2.3.0** instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
+Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
 
 /--
 composer require dibi/dibi
 \--
 
-Můžete si ji také stáhnout jako balíček "Dibi 2.3.0.zip":https://github.com/dg/dibi/releases/download/v2.3.0/dibi-2.3.0.zip,
+Můžete si ji také "stáhnout jako balíček":https://github.com/dg/dibi/releases/latest,
 starší verze najdete v [archivu | https://github.com/dg/dibi/releases].
 \--
 
-
-Vývojová verze a Git
-====================
-
 Nejnovější vývojovou verzi můžete získat z oficiálního repozitáře na https://github.com/dg/dibi
-
-/--
-git clone https://github.com/dg/dibi.git
-\--
 
 
 Požadavky

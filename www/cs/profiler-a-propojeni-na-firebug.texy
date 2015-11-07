@@ -4,11 +4,11 @@ Profiler a propojení na Firebug
 Dibi má v sobě zabudovaný profiler, kterým můžete sledovat všechny vykonané SQL příkazy a měřit délku jejich trvání. Aktivace profileru:
 
 /--php
-dibi::connect(array(
+dibi::connect([
         'driver'   => 'sqlite',
         'database' => 'sample.sdb',
         'profiler' => TRUE, // spustí profiler
-));
+]);
 \--
 
 Provoz lze buď logovat do souboru:

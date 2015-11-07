@@ -22,33 +22,33 @@ Cíle layeru dibi
 Připojení k databázi
 --------------
 
-Každé spojení je reprezentováno objektem DibiConnection. To komunikuje s databází přes ovladač (třída implementující IDibiDriver). Který ovladač použít zvolíme při vytváření objektu:
+Každé spojení je reprezentováno objektem Dibi\Connection. To komunikuje s databází přes ovladač (třída implementující Dibi\Driver). Který ovladač použít zvolíme při vytváření objektu:
 
 /--code php
-$options = array(
+$options = [
     'driver'   => 'mysql',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
     'database' => 'table',
-);
+];
 
-// v případě chyby vyhodí DibiException
-$connection = new DibiConnection($options);
+// v případě chyby vyhodí Dibi\Exception
+$connection = new Dibi\Connection($options);
 $connection->query('TRUNCATE `table`');
 \--code
 
 Ale na tento způsob můžete klidně zapomenout :-) Je tu totiž statický registr `dibi`. Ten má za úkol udržovat v globálně dostupném úložišti objekt spojení a nad ním volat potřebné funkce:
 
 /--code php
-dibi::connect(array(
+dibi::connect([
     'driver'   => 'mysql',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
     'database' => 'test',
     'charset'  => 'utf8',
-));
+]);
 \--
 
 Statická třída `dibi` má **jednu báječnou výhodu** - kdekoliv je po ruce. Nemusíte získávat instanci připojení, prostě napíšete `dibi::` a máte vystaráno.
@@ -64,10 +64,10 @@ Přiznám se, že způsob zápisu SQL příkazů jsem hledal šíleně dlouho. N
 /--code php
 dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
 
-$arr = array(
+$arr = [
     'pole' => 'hodnota',
     'bit'  => TRUE,
-);
+];
 dibi::query('INSERT INTO [table]', $arr);
 
 dibi::query('UPDATE `table` SET ', $arr, 'WHERE `id`=%i', $x);
@@ -154,10 +154,10 @@ Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V to
 Takže příklad:
 
 /--code php
-$arr = array(
+$arr = [
     'a' => 'hello',
     'b'  => TRUE,
-);
+];
 dibi::query('INSERT INTO [table]', $arr);
 // INSERT INTO `table` (`a`, `b`) VALUES ('hello', 1)
 
@@ -173,9 +173,9 @@ Složitější výrazy v polích
 Přímo v polích (v klíčích) je možné používat modifikátory:
 
 /--code php
-dibi::query('UPDATE `table` SET ', array(
+dibi::query('UPDATE `table` SET ', [
 	'number%sql' => 'RAND()', // %sql means SQL ;)
-));
+]);
 // UPDATE `table` SET 'number' = RAND()
 \--code
 
@@ -183,19 +183,19 @@ dibi::query('UPDATE `table` SET ', array(
 Také hodnoty mohou být složitější výrazy:
 
 /--code php
-dibi::query('UPDATE `table` SET ', array(
+dibi::query('UPDATE `table` SET ', [
 	'title' => array('SHA1(%s)', 'tajneheslo'),
-));
+]);
 // UPDATE `table` SET 'title' = SHA1('tajneheslo')
 \--code
 
 Klíče je možné zcela vynechat:
 
 /--code php
-dibi::query('SELECT * FROM `table` WHERE %and', array(
+dibi::query('SELECT * FROM `table` WHERE %and', [
 	array('number > %i', 10),
 	array('number < %i', 100),
-));
+]);
 // SELECT * FROM `table` WHERE (number > 10) AND (number < 100)
 \--code
 
@@ -207,9 +207,9 @@ Speciální typ pro datum a čas
 Parametrem může být také objekt `DateTime`.
 
 /--code php
-dibi::query('UPDATE `table` SET ', array(
+dibi::query('UPDATE `table` SET ', [
     'time' => new DateTime,
-));
+]);
 // UPDATE `table` SET ('2008-01-01 01:08:10')
 \--code
 
@@ -361,7 +361,7 @@ Datové typy
 Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a dibi je bude automaticky převádět.
 
 /--code php
-$result->setType('id', Dibi::FIELD_INTEGER);
+$result->setType('id', Dibi\Type::INTEGER);
 $record = $res->fetch();
 
 if (is_int($record['id']))
@@ -381,13 +381,13 @@ Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => TRU
 Vrácený záznam
 -------------
 
-Dibi vrací záznamy jako objekty DibiRow. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
+Dibi vrací záznamy jako objekty Dibi\Row. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
 
 
 Výjimky, logování chyb a profiler
 -----------------
 
-Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku DibiException nebo potomka DibiDriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
+Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku Dibi\Exception nebo potomka Dibi\DriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
 
 Užitečnou vlastností je logování provozu:
 

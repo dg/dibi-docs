@@ -19,20 +19,20 @@ Code samples
 
 /--code php
 // connect to database
-dibi::connect(array(
+dibi::connect([
     'driver'   => 'mysql',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
-));
+]);
 
 // select, insert, update
 dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
 
-$arr = array(
+$arr = [
     'name' => 'John',
     'is_admin'  => TRUE,
-);
+];
 dibi::query('INSERT INTO [table]', $arr);
 // INSERT INTO `table` (`name`, `is_admin`) VALUES ('John', 1)
 

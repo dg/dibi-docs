@@ -29,7 +29,7 @@ dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
 
 $arr = [
     'name' => 'John',
-    'is_admin'  => TRUE,
+    'is_admin'  => true,
 ];
 dibi::query('INSERT INTO [table]', $arr);
 // INSERT INTO `table` (`name`, `is_admin`) VALUES ('John', 1)

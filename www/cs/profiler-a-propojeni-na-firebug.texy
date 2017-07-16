@@ -7,7 +7,7 @@ Dibi má v sobě zabudovaný profiler, kterým můžete sledovat všechny vykona
 dibi::connect([
         'driver'   => 'sqlite',
         'database' => 'sample.sdb',
-        'profiler' => TRUE, // spustí profiler
+        'profiler' => true, // spustí profiler
 ]);
 \--
 

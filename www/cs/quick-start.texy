@@ -66,7 +66,7 @@ dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
 
 $arr = [
     'pole' => 'hodnota',
-    'bit'  => TRUE,
+    'bit'  => true,
 ];
 dibi::query('INSERT INTO [table]', $arr);
 
@@ -75,16 +75,16 @@ dibi::query('UPDATE `table` SET ', $arr, 'WHERE `id`=%i', $x);
 
 Jak vidíte, SQL příkaz se zapisuje jako série parametrů a před vložením proměnné uvedeme modifikátor (např. `%i`). Pokud ho neuvedeme, zjistí se typ automaticky (samozřejmě nelze zjistit typy jako je datum apod).
 
-Proměnná na naformátuje do výsledného SQL podle pravidel aktivní databáze. Tak třeba TRUE bude v MS SQL jako -1, jinde jako '1'. Stejně tak se zformátují řetězce, časové údaje, atd.
+Proměnná na naformátuje do výsledného SQL podle pravidel aktivní databáze. Tak třeba true bude v MS SQL jako -1, jinde jako '1'. Stejně tak se zformátují řetězce, časové údaje, atd.
 
 Modifikátory jsou následující:
 
 | %s | string |
-| %sN | string, ale '' se přeloží jako NULL |
+| %sN | string, ale '' se přeloží jako null |
 | %bin | binární data |
 | %b | boolean |
 | %i %u | integer |
-| %iN | integer, ale 0 se přeloží jako NULL |
+| %iN | integer, ale 0 se přeloží jako null |
 | %f | float |
 | %d | datum (očekává string nebo integer) |
 | %t | datum & čas (také string či integer) |
@@ -95,7 +95,7 @@ Modifikátory jsou následující:
 | %ex | speciální - expanduje pole |
 
 
-Pokud za modifikátorem následuje NULL, vloží se do databáze NULL. Pokud následuje pole, tak se modifikátor aplikuje na všechny jeho prvky. Ty se pak vloží do SQL oddělené čárkama.
+Pokud za modifikátorem následuje null, vloží se do databáze null. Pokud následuje pole, tak se modifikátor aplikuje na všechny jeho prvky. Ty se pak vloží do SQL oddělené čárkama.
 
 **Vždy používejte** modifikátor `%s` před proměnnou s řetězcem. Dibi by pak nemohlo rozlišit, co je SQL příkaz (tzv. embedded SQL) a co řetězec. V tomto příkladu je funkce `dibi::query` volána s dvěma argumenty, první je řetězec představující (embedded) SQL,  druhý je řetězec představující řetězec. Modifikátor `%s` to odliší:
 
@@ -156,7 +156,7 @@ Takže příklad:
 /--code php
 $arr = [
     'a' => 'hello',
-    'b'  => TRUE,
+    'b'  => true,
 ];
 dibi::query('INSERT INTO [table]', $arr);
 // INSERT INTO `table` (`a`, `b`) VALUES ('hello', 1)
@@ -375,7 +375,7 @@ $result->detectTypes();
 ...
 \--
 
-Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => TRUE` a typy se budou detekovat vždy.
+Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => true` a typy se budou detekovat vždy.
 
 
 Vrácený záznam

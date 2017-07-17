@@ -15,6 +15,6 @@ older releases are available in [archive | https://github.com/dg/dibi/releases].
 You can obtain the latest development version from our repository at https://github.com/dg/dibi
 
 Requirements
-=========
+============
 
 Requires PHP 5.4.4 or newer. Released under BSD a GPL.

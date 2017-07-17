@@ -1,8 +1,8 @@
 Quick Start
-**********
+***********
 
 Cíle layeru dibi
------------------
+----------------
 
 -	maximálně ulehčit práci programátorům. Jak?
   -	zjednodušit zápis SQL příkazů, co to jen půjde
@@ -20,7 +20,7 @@ Cíle layeru dibi
 
 
 Připojení k databázi
---------------
+--------------------
 
 Každé spojení je reprezentováno objektem Dibi\Connection. To komunikuje s databází přes ovladač (třída implementující Dibi\Driver). Který ovladač použít zvolíme při vytváření objektu:
 
@@ -57,7 +57,7 @@ Statická třída `dibi` má **jednu báječnou výhodu** - kdekoliv je po ruce.
 
 
 SQL příkazy - tak to je bomba!
--------------------------
+------------------------------
 
 Přiznám se, že způsob zápisu SQL příkazů jsem hledal šíleně dlouho. Nakonec jsem dospěl k technice, která je nesmírně prostá, intuitivní a doslova návyková:
 
@@ -135,7 +135,7 @@ dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
 
 
 Formátování polí
--------------------
+----------------
 
 Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pole, které se pak oddělené čárkami vloží do SQL. Ovšem můžeme využít také dvou speciálních modifikátorů `%a` nebo `%v`.
 
@@ -168,7 +168,7 @@ dibi::query('UPDATE `table` SET ', $arr);
 
 
 Složitější výrazy v polích
--------------------
+--------------------------
 
 Přímo v polích (v klíčích) je možné používat modifikátory:
 
@@ -202,7 +202,7 @@ dibi::query('SELECT * FROM `table` WHERE %and', [
 
 
 Speciální typ pro datum a čas
--------------------
+-----------------------------
 
 Parametrem může být také objekt `DateTime`.
 
@@ -216,7 +216,7 @@ dibi::query('UPDATE `table` SET ', [
 
 
 Postupné skládání dotazu
----------------------
+------------------------
 
 Dibi disponuje také podporou pro postupné skládání SQL dotazu:
 
@@ -263,7 +263,7 @@ FROM %if', $cond, '[one_table] %else [second_table]'
 Podmínky můžete zanořovat do libovolné hloubky!
 
 Prefixy & substituce
----------
+--------------------
 
 Názvy tabulek a sloupců mohou obsahovat proměnné části. Ty si nejprve nadefinujeme:
 
@@ -281,7 +281,7 @@ dibi::test("UPDATE [:blog:items] SET [text]='Hello World'");
 
 
 Testování query()
----------------
+-----------------
 
 Abyste si mohli trošku s dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
 
@@ -379,13 +379,13 @@ Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => tru
 
 
 Vrácený záznam
--------------
+--------------
 
 Dibi vrací záznamy jako objekty Dibi\Row. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
 
 
 Výjimky, logování chyb a profiler
------------------
+---------------------------------
 
 Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku Dibi\Exception nebo potomka Dibi\DriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
 

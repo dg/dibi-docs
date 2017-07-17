@@ -1,5 +1,5 @@
-Dibi is Database Abstraction Library for PHP 5.
--------------------
+Dibi is Database Abstraction Library
+------------------------------------
 
 Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access and generic PDO and ODBC.
 

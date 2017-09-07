@@ -1,5 +1,5 @@
 Dibi is Database Abstraction Library
-------------------------------------
+******
 
 Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access and generic PDO and ODBC.
 
@@ -10,6 +10,28 @@ Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL,
 - [La Trine: Téměř v cíli: dibi 0.9b | https://phpfashion.com/temer-v-cili-dibi-0-9b]
 - [Extrémě rychlý "load SQL file" | https://phpfashion.com/extreme-rychly-load-sql-file]
 - [Závěrem dibitýdne... | https://phpfashion.com/zaverem-dibitydne]
+
+
+
+Download & Installation
+=========
+
+Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
+
+/--
+composer require dibi/dibi
+\--
+
+Vyžaduje PHP 5.4.4 nebo vyšší. Uvolněno pod licencí BSD a GPL.
+
+Můžete si ji také "stáhnout jako balíček":https://github.com/dg/dibi/releases/latest,
+starší verze najdete v [archivu | https://github.com/dg/dibi/releases].
+
+
+
+
+
+
 
 
 Code samples

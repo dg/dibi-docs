@@ -1,32 +1,11 @@
-Quick Start
-***********
-
-Cíle layeru dibi
-----------------
-
--	maximálně ulehčit práci programátorům. Jak?
-  -	zjednodušit zápis SQL příkazů, co to jen půjde
-  -	snadný přístup k metodám, i bez globálních proměnných
-  -	funkce pro několik rutinních úkonů
--	eliminovat výskyt chyby. Jak?
-  -	přehledný zápis SQL příkazů
--	přenositelnost mezi databázovými systémy
-  -	automatická podpora konvencí (escapování/slashování, uvozování identifikátorů)
-  -	automatické formátování spec. typů, např. datum, řetězec
-  -	sjednocení základních fcí (připojení k db, vykonání příkazu, získání výsledku)
--	**a především KISS** (Keep It Simple, Stupid)
-  -	zachovat maximální jednoduchost
-  -	raději jeden geniální nápad, než 10.000 hloupých řádků kódu
-
-
 Připojení k databázi
---------------------
+====
 
-Každé spojení je reprezentováno objektem Dibi\Connection. To komunikuje s databází přes ovladač (třída implementující Dibi\Driver). Který ovladač použít zvolíme při vytváření objektu:
+Každé spojení je reprezentováno objektem [Dibi\Connection|api:]. To komunikuje s databází přes ovladač (třída implementující Dibi\Driver). Který ovladač použít zvolíme při vytváření objektu:
 
 /--code php
 $options = [
-    'driver'   => 'mysql',
+    'driver'   => 'mysqli',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
@@ -34,15 +13,15 @@ $options = [
 ];
 
 // v případě chyby vyhodí Dibi\Exception
-$connection = new Dibi\Connection($options);
-$connection->query('TRUNCATE `table`');
+$database = new Dibi\Connection($options);
+$res = $database->query('SELECT * FROM users');
 \--code
 
-Ale na tento způsob můžete klidně zapomenout :-) Je tu totiž statický registr `dibi`. Ten má za úkol udržovat v globálně dostupném úložišti objekt spojení a nad ním volat potřebné funkce:
+Alternativně můžete používat statický registr `dibi`, který udržuje v globálně dostupném úložišti objekt spojení a nad ním volá všechny funkce:
 
 /--code php
 dibi::connect([
-    'driver'   => 'mysql',
+    'driver'   => 'mysqli',
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '***',
@@ -51,15 +30,301 @@ dibi::connect([
 ]);
 \--
 
-Statická třída `dibi` má **jednu báječnou výhodu** - kdekoliv je po ruce. Nemusíte získávat instanci připojení, prostě napíšete `dibi::` a máte vystaráno.
-
-*Poznámka: připojování ve stylu DSN, kdy popis připojení je uložen v řetězci připomínajícím URI, se v praxi ukázalo jako nepraktické. Používám raději pole, přípustný je však i řetězec, a to ve standardizovaném formátu HTTP query.*
 
 
-SQL příkazy - tak to je bomba!
-------------------------------
+Dotazy
+======
 
-Přiznám se, že způsob zápisu SQL příkazů jsem hledal šíleně dlouho. Nakonec jsem dospěl k technice, která je nesmírně prostá, intuitivní a doslova návyková:
+Databázové dotazy pokládáme metodou `query()`, která vrací [ResultSet |api:Dibi\ResultSet].
+
+/--php
+$result = $database->query('SELECT * FROM users');
+
+foreach ($result as $row) {
+	echo $row->id;
+	echo $row->name;
+}
+
+echo $result->getRowCount(); // vrací počet řádků výsledku, pokud je znám
+\--
+
+Do dotazu lze velmi snadno přidávat i parametry, všimněte si otazníku:
+
+/--php
+$database->query('SELECT * FROM users WHERE name = ?', $name);
+
+$database->query('SELECT * FROM users WHERE name = ? AND active = ?', $name, $active);
+
+$database->query('SELECT * FROM users WHERE id IN (?)', $ids); // $ids je pole
+\--
+
+/--div .[warning]
+	POZOR, nikdy dotazy neskládejte jako řetězce, vznikla by zranitelnost [SQL injection |https://cs.wikipedia.org/wiki/SQL_injection]
+	/--
+	$db->query('SELECT * FROM users WHERE name = ' . $name); // ŠPATNĚ!!!
+	\--
+\--
+
+V případě selhání `query()` vyhodí buď `Dibi\Exception` nebo některého z potomků:
+
+- [ConstraintViolationException |api:Dibi\ConstraintViolationException] - porušení nějakého omezení pro tabulku
+- [ForeignKeyConstraintViolationException |api:Dibi\ForeignKeyConstraintViolationException] - neplatný cizí klíč
+- [NotNullConstraintViolationException |api:Dibi\NotNullConstraintViolationException] - porušení podmínky NOT NULL
+- [UniqueConstraintViolationException |api:Dibi\UniqueConstraintViolationException] - koliduje unikátní index
+
+Kromě `query()` jsou tu další užitečné funkce:
+
+/--php
+// vrátí asociativní pole id => name
+$pairs = $database->fetchPairs('SELECT id, name FROM users');
+
+// vrátí všechny záznamy jako pole
+$rows = $database->fetchAll('SELECT * FROM users');
+
+// vrátí jeden záznam
+$row = $database->fetch('SELECT * FROM users WHERE id = ?', $id);
+
+// vrátí přímo hodnotu buňky
+$name = $database->fetchField('SELECT name FROM users WHERE id = ?', $id);
+\--
+
+V případě selhání všechny tyto metody vyhodí `Dibi\DriverException`.
+
+
+Insert, Update & Delete
+=======================
+
+Parameterem, který vkládáme do SQL dotazu, může být i pole (v takovém případě je navíc možné zástupný znak `?` vynechat), což se hodí třeba pro sestavení příkazu `INSERT`:
+
+/--php
+$database->query('INSERT INTO users ?', [ // tady můžeme otazník vynechat
+	'name' => $name,
+	'year' => $year,
+]);
+// INSERT INTO users (`name`, `year`) VALUES ('Jim', 1978)
+
+$id = $database->getInsertId(); // vrátí auto-increment vloženého záznamu
+
+$id = $database->getInsertId($sequence); // nebo hodnotu sekvence
+\--
+
+Vícenásobný INSERT:
+
+/--php
+$database->query('INSERT INTO users', [
+	'name' => 'Jim',
+	'year' => 1978,
+], [
+	'name' => 'Jack',
+	'year' => 1987,
+]);
+// INSERT INTO users (`name`, `year`) VALUES ('Jim', 1978), ('Jack', 1987)
+\--
+
+Jako parametry můžeme předávat i objekty DateTime:
+
+/--php
+$database->query('INSERT INTO users', [
+	'name' => $name,
+	'created' => new DateTime, // nebo $database::literal('NOW()')
+]);
+\--
+
+Mazání:
+
+/--php
+// vrací počet ovlivněných řádků
+$affectedRows = $database->query('DELETE FROM users WHERE id = ?', $id);
+\--
+
+Úprava záznamů:
+
+/--php
+$affectedRows = $database->query('UPDATE users SET', [
+	'name' => $name,
+	'year' => $year,
+], 'WHERE id = ?', $id);
+// UPDATE users SET `name` = 'Jim', `year` = 1978 WHERE id = 123
+\--
+
+Pro UPDATE můžeme využít operátorů `+=` a `-=`:
+
+/--php
+$database->query('UPDATE users SET', [
+	'age+=' => 1, // všimněte si +=
+], 'WHERE id = ?', $id);
+// UPDATE users SET `age` = `age` + 1
+\--
+
+
+Pokročilé dotazy
+================
+
+Vložení, nebo úprava záznamu, pokud již existuje:
+
+/--php
+$database->query('INSERT INTO users', [
+	'id' => $id,
+	'name' => $name,
+	'year' => $year,
+], 'ON DUPLICATE KEY UPDATE', [
+	'name' => $name,
+	'year' => $year,
+]);
+// INSERT INTO users (`id`, `name`, `year`) VALUES (123, 'Jim', 1978)
+//   ON DUPLICATE KEY UPDATE `name` = 'Jim', `year` = 1978
+\--
+
+Všimněte si, že Nette Database pozná, v jakém kontextu SQL příkazu parametr s polem vkládáme a podle toho z něj sestaví SQL kód. Takže z prvního pole sestavil `(id, name, year) VALUES (123, 'Jim', 1978)`, zatímco druhé převedl do podoby `name = 'Jim', year = 1978`.
+
+Také řazení můžeme ovlivnit polem, v klíčích uvedeme sloupce a hodnotou bude boolean určující, zda řadit vzestupně:
+
+/--php
+$database->query('SELECT id FROM author ORDER BY', [
+	'id' => true, // vzestupně
+	'name' => false, // sestupně
+]);
+// SELECT id FROM author ORDER BY `id`, `name` DESC
+\--
+
+Pokud by u neobvyklé konstrukce detekce nezafungovala, můžete formu sestavení určit zástupným znakem `?` doplněným o hint. Podporovány jsou tyto hinty:
+
+| ?values | (key1, key2, ...) VALUES (value1, value2, ...)
+| ?set    | key1 = value1, key2 = value2, ...
+| ?and    | key1 = value1 OR key2 = value2 ...
+| ?or     | key1 = value1 AND key2 = value2 ...
+| ?order  | key1 ASC, key2 DESC
+
+V klauzuli WHERE se používá operátor `?and`, takže podmínky se spojují operátorem `AND`:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name' => $name,
+	'year' => $year,
+]);
+// SELECT * FROM users WHERE `name` = 'Jim' AND `year` = 1978
+\--
+
+Což můžeme snadno změnit na `OR` tím, že uvedeme zástupný znak `?or`:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE ?or', [
+	'name' => $name,
+	'year' => $year,
+]);
+// SELECT * FROM users WHERE `name` = 'Jim' OR `year` = 1978
+\--
+
+V podmínkách můžeme používat operátory:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name <>' => $name,
+	'year >' => $year,
+]);
+// SELECT * FROM users WHERE `name` <> 'Jim' AND `year` > 1978
+\--
+
+A také výčty:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name' => $names, // ['Jim', 'Jack'],
+	'role NOT IN' => ['admin', 'owner'], // výčet + operátor NOT IN
+]);
+// SELECT * FROM users WHERE
+//   `name` IN ('Jim', 'Jack') AND `role` NOT IN ('admin', 'owner')
+\--
+
+Do podmínky také můžeme vložit kus vlastního SQL kódu pomocí tzv. SQL literálu:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name' => $name,
+	'year >' => $database::literal('YEAR()'),
+]);
+// SELECT * FROM users WHERE (`name` = 'Jim') AND (`year` > YEAR())
+\--
+
+Nebo alternativě:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name' => $name,
+	$database::literal('year > YEAR()'),
+]);
+// SELECT * FROM users WHERE (`name` = 'Jim') AND (year > YEAR())
+\--
+
+SQL literál také může mít své parametry:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE', [
+	'name' => $name,
+	$database::literal('year > ? AND year < ?', $min, $max),
+]);
+// SELECT * FROM users WHERE `name` = 'Jim' AND (year > 1978 AND year < 2017)
+\--
+
+Nebo ještě zajímavější kombinace:
+
+/--php
+$result = $database->query('SELECT * FROM users WHERE ?', [
+	'name' => $name,
+	$database::literal('?or', [
+		'active' => true,
+		'role' => $role,
+	]),
+]);
+// SELECT * FROM users WHERE `name` = 'Jim' AND (`active` = 1 OR `role` = 'admin')
+\--
+
+
+Proměnný název
+==============
+
+Ještě existuje zástupný znak `?name`, který využijete v případě, že název tabulky nebo sloupce je proměnnou. (Pozor, nedovolte uživateli manipulovat s obsahem takové proměnné):
+
+/--php
+$table = 'blog.users';
+$column = 'name';
+$database->query('SELECT * FROM ?name WHERE ?name = ?', $table, $column, $value);
+// SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
+\--
+
+
+Transakce
+=========
+
+Pro práci s transakcemi slouží trojice metod:
+
+/--php
+$database->beginTransaction(); // zahájení transakce
+
+$database->commit(); // potvrzení
+
+$database->rollback(); // vrácení zpět
+\--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL příkazy
+====
 
 /--code php
 dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
@@ -77,7 +342,23 @@ Jak vidíte, SQL příkaz se zapisuje jako série parametrů a před vložením 
 
 Proměnná na naformátuje do výsledného SQL podle pravidel aktivní databáze. Tak třeba true bude v MS SQL jako -1, jinde jako '1'. Stejně tak se zformátují řetězce, časové údaje, atd.
 
-Modifikátory jsou následující:
+I SQL prochází zpracováním, aby vyhovovalo konvencím dané databáze. Identifikátory (jména tabulek a sloupců) uvozuji do hranatých závorek nebo zpětných uvozovek (je to jedno), dále řetězce značím jednoduchými či dvojitými uvozovkami, ale na výstup se dostane vždy to, co databáze žádá. Příklad
+
+/--code php
+dibi::query("UPDATE `table` SET [text]='I''m fine'");
+
+// MySQL: UPDATE `table` SET `text`='I\'m fine'
+// ODBC:  UPDATE [table] SET [text]='I''m fine'
+\--
+
+Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem dibi je opak.
+
+
+
+Modifikátory
+============
+
+Kromě zástupného symbolu `?` můžeme používat i šikovnější modifikátory:
 
 | %s | string |
 | %sN | string, ale '' se přeloží jako null |
@@ -97,7 +378,7 @@ Modifikátory jsou následující:
 
 Pokud za modifikátorem následuje null, vloží se do databáze null. Pokud následuje pole, tak se modifikátor aplikuje na všechny jeho prvky. Ty se pak vloží do SQL oddělené čárkama.
 
-**Vždy používejte** modifikátor `%s` před proměnnou s řetězcem. Dibi by pak nemohlo rozlišit, co je SQL příkaz (tzv. embedded SQL) a co řetězec. V tomto příkladu je funkce `dibi::query` volána s dvěma argumenty, první je řetězec představující (embedded) SQL,  druhý je řetězec představující řetězec. Modifikátor `%s` to odliší:
+**Vždy používejte** modifikátor `%s` před proměnnou s řetězcem. Dibi by pak nemohlo rozlišit, co je SQL příkaz a co řetězec. V tomto příkladu je funkce `dibi::query` volána s dvěma argumenty, první je řetězec představující SQL,  druhý je řetězec představující řetězec. Modifikátor `%s` to odliší:
 
 /--code php
 $text = "I'm fine";
@@ -107,19 +388,9 @@ dibi::query('UPDATE `table` SET `text`=%s', $text);
 \--
 
 
-Proč používám termín embedded SQL? Protože jak vidno, i toto SQL prochází zpracováním, aby vyhovovalo konvencím dané databáze. Identifikátory (jména tabulek a sloupců) uvozuji do hranatých závorek nebo zpětných uvozovek (je to jedno), dále řetězce značím jednoduchými či dvojitými uvozovkami, ale na výstup se dostane vždy to, co databáze žádá. Příklad
-
-/--code php
-dibi::query("UPDATE `table` SET [text]='I''m fine'");
-
-// MySQL: UPDATE `table` SET `text`='I\'m fine'
-// ODBC:  UPDATE [table] SET [text]='I''m fine'
-\--
-
-Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem dibi je opak.
 
 Operátor LIKE
--------------
+====
 
 Pro operátor LIKE jsou k dispozici tři speciální výrazy:
 
@@ -135,7 +406,7 @@ dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
 
 
 Formátování polí
-----------------
+====
 
 Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pole, které se pak oddělené čárkami vloží do SQL. Ovšem můžeme využít také dvou speciálních modifikátorů `%a` nebo `%v`.
 
@@ -168,7 +439,7 @@ dibi::query('UPDATE `table` SET ', $arr);
 
 
 Složitější výrazy v polích
---------------------------
+====
 
 Přímo v polích (v klíčích) je možné používat modifikátory:
 
@@ -201,8 +472,8 @@ dibi::query('SELECT * FROM `table` WHERE %and', [
 
 
 
-Speciální typ pro datum a čas
------------------------------
+Datum a čas
+====
 
 Parametrem může být také objekt `DateTime`.
 
@@ -216,7 +487,7 @@ dibi::query('UPDATE `table` SET ', [
 
 
 Postupné skládání dotazu
-------------------------
+====
 
 Dibi disponuje také podporou pro postupné skládání SQL dotazu:
 
@@ -234,7 +505,7 @@ Nebo lze použít expanzi pole přes speciální modifikátor `%ex`.
 
 
 Podmíněné SQL příkazy
----------------------
+====
 
 Podmíněné SQL příkazy jsou velmi silným nástrojem. Ovládají se pomocí tří klíčových slov `%if`, `%else` a `%end`. První z nich `%if` se musí, obdobně jako modifikátor, nacházet zcela na konci řetězce představujícího SQL:
 
@@ -263,7 +534,7 @@ FROM %if', $cond, '[one_table] %else [second_table]'
 Podmínky můžete zanořovat do libovolné hloubky!
 
 Prefixy & substituce
---------------------
+====
 
 Názvy tabulek a sloupců mohou obsahovat proměnné části. Ty si nejprve nadefinujeme:
 
@@ -281,7 +552,7 @@ dibi::test("UPDATE [:blog:items] SET [text]='Hello World'");
 
 
 Testování query()
------------------
+====
 
 Abyste si mohli trošku s dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
 
@@ -289,7 +560,7 @@ Možná by vás zajímalo, co celé to parsování a skládání dotazu stojí. 
 
 
 Získávání výsledků
-------------------
+====
 
 Nejjednodušší cesta vede přes klasickou iteraci
 
@@ -356,7 +627,7 @@ $result->seek($row);
 
 
 Datové typy
------------
+====
 
 Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a dibi je bude automaticky převádět.
 
@@ -379,13 +650,13 @@ Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => tru
 
 
 Vrácený záznam
---------------
+====
 
 Dibi vrací záznamy jako objekty Dibi\Row. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
 
 
 Výjimky, logování chyb a profiler
----------------------------------
+====
 
 Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku Dibi\Exception nebo potomka Dibi\DriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
 
@@ -406,4 +677,65 @@ echo dibi::$totalTime; // celkový čas v sec
 
 Dibi disponuje rozhraním pro připojení vlastního profileru nebo logovací knihovny.
 
-{{toc}}
+
+Profiler a propojení na Firebug
+====
+
+Dibi má v sobě zabudovaný profiler, kterým můžete sledovat všechny vykonané SQL příkazy a měřit délku jejich trvání. Aktivace profileru:
+
+/--php
+dibi::connect([
+        'driver'   => 'sqlite',
+        'database' => 'sample.sdb',
+        'profiler' => true, // spustí profiler
+]);
+\--
+
+Provoz lze buď logovat do souboru:
+
+/--php
+dibi::getProfiler()->setFile('log.sql');
+\--
+
+...nebo do Firebug konzole. Jak na to?
+
+1) je vyžadován je Firefox verze 2 nebo 3
+2) stáhněte si rozšíření [Firebug | http://www.getfirebug.com]
+3) stáhněte si rozšíření [FirePHP | http://www.firephp.org] (minimálně ve verzi 0.2)
+4) zapněte si FirePHP v FirePHP menu a aktivujte Firebug Net panel
+
+Logování do Firebugu se zapíná automaticky, je-li detekována jeho přítomnost.
+
+[* firebug-1.png *]
+
+
+
+Připojení do Nette
+=======================
+
+Nicméně šikovnější způsob nabízí bridge pro Nette. [aplikační konfigurace |configuring#databaze], kam stačí přidat sekci `database` a vytvoří se potřebné objekty a také databázový panel v [Tracy | tracy:] baru.
+
+/--neon
+	database:
+		dsn: 'mysql:host=127.0.0.1;dbname=test'
+		user: root
+		password: password
+\--
+
+Poté objekt spojení [získáme jako službu z DI kontejneru |di-usage], např.:
+
+/--php
+class Model
+{
+	private $database;
+
+	// pro práci s vrstvou Database Explorer si předáme Dibi\Context
+	public function __construct(Dibi\Connection $database)
+	{
+		$this->database = $database;
+	}
+}
+\--
+
+Více informací o [konfiguraci databáze|configuring#databaze].
+

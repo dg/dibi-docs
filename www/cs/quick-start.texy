@@ -370,7 +370,7 @@ Kromě zástupného symbolu `?` můžeme používat i šikovnější modifikáto
 | %d | datum (očekává string nebo integer) |
 | %t | datum & čas (také string či integer) |
 | %n | identifikátor (tedy název tabulky či sloupce) |
-| %sql | SQL - řetězec ponechá beze změny |
+| %SQL | SQL - řetězec ponechá beze změny |
 | %lmt | speciální - určuje limit |
 | %ofs | speciální - určuje offset |
 | %ex | speciální - expanduje pole |
@@ -445,7 +445,7 @@ Přímo v polích (v klíčích) je možné používat modifikátory:
 
 /--code php
 dibi::query('UPDATE `table` SET ', [
-	'number%sql' => 'RAND()', // %sql means SQL ;)
+	'number%SQL' => 'RAND()', // %SQL means SQL ;)
 ]);
 // UPDATE `table` SET 'number' = RAND()
 \--code
@@ -738,4 +738,3 @@ class Model
 \--
 
 Více informací o [konfiguraci databáze|configuring#databaze].
-

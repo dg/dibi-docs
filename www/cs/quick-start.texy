@@ -35,7 +35,7 @@ dibi::connect([
 Dotazy
 ======
 
-Databázové dotazy pokládáme metodou `query()`, která vrací [ResultSet |api:Dibi\ResultSet].
+Databázové dotazy pokládáme metodou `query()`, která vrací [Result |api:Dibi\Result].
 
 /--php
 $result = $database->query('SELECT * FROM users');
@@ -85,7 +85,7 @@ $rows = $database->fetchAll('SELECT * FROM users');
 $row = $database->fetch('SELECT * FROM users WHERE id = ?', $id);
 
 // vrátí přímo hodnotu buňky
-$name = $database->fetchField('SELECT name FROM users WHERE id = ?', $id);
+$name = $database->fetchSingle('SELECT name FROM users WHERE id = ?', $id);
 \--
 
 V případě selhání všechny tyto metody vyhodí `Dibi\DriverException`.
@@ -147,15 +147,6 @@ $affectedRows = $database->query('UPDATE users SET', [
 // UPDATE users SET `name` = 'Jim', `year` = 1978 WHERE id = 123
 \--
 
-Pro UPDATE můžeme využít operátorů `+=` a `-=`:
-
-/--php
-$database->query('UPDATE users SET', [
-	'age+=' => 1, // všimněte si +=
-], 'WHERE id = ?', $id);
-// UPDATE users SET `age` = `age` + 1
-\--
-
 
 Pokročilé dotazy
 ================
@@ -167,7 +158,7 @@ $database->query('INSERT INTO users', [
 	'id' => $id,
 	'name' => $name,
 	'year' => $year,
-], 'ON DUPLICATE KEY UPDATE', [
+], 'ON DUPLICATE KEY UPDATE %a', [
 	'name' => $name,
 	'year' => $year,
 ]);
@@ -175,120 +166,54 @@ $database->query('INSERT INTO users', [
 //   ON DUPLICATE KEY UPDATE `name` = 'Jim', `year` = 1978
 \--
 
-Všimněte si, že Nette Database pozná, v jakém kontextu SQL příkazu parametr s polem vkládáme a podle toho z něj sestaví SQL kód. Takže z prvního pole sestavil `(id, name, year) VALUES (123, 'Jim', 1978)`, zatímco druhé převedl do podoby `name = 'Jim', year = 1978`.
-
 Také řazení můžeme ovlivnit polem, v klíčích uvedeme sloupce a hodnotou bude boolean určující, zda řadit vzestupně:
 
 /--php
-$database->query('SELECT id FROM author ORDER BY', [
+$database->query('SELECT id FROM author ORDER BY %by', [
 	'id' => true, // vzestupně
 	'name' => false, // sestupně
 ]);
 // SELECT id FROM author ORDER BY `id`, `name` DESC
 \--
 
-Pokud by u neobvyklé konstrukce detekce nezafungovala, můžete formu sestavení určit zástupným znakem `?` doplněným o hint. Podporovány jsou tyto hinty:
+Dibi se snaží detekovat typ dotazu a upravit podle něj formátování polí. Pokud by u neobvyklé konstrukce detekce nezafungovala, můžete formu sestavení určit zástupným znakem `%` doplněným o hint. Podporovány jsou tyto hinty:
 
-| ?values | (key1, key2, ...) VALUES (value1, value2, ...)
-| ?set    | key1 = value1, key2 = value2, ...
-| ?and    | key1 = value1 OR key2 = value2 ...
-| ?or     | key1 = value1 AND key2 = value2 ...
-| ?order  | key1 ASC, key2 DESC
+| %v      | (key1, key2, ...) VALUES (value1, value2, ...)
+| %a      | key1 = value1, key2 = value2, ...
+| %and    | key1 = value1 AND key2 = value2 ...
+| %or     | key1 = value1 OR key2 = value2 ...
+| %by     | key1 ASC, key2 DESC
 
-V klauzuli WHERE se používá operátor `?and`, takže podmínky se spojují operátorem `AND`:
+V klauzuli WHERE se používá operátor `%and`, takže podmínky se spojují operátorem `AND`:
 
 /--php
-$result = $database->query('SELECT * FROM users WHERE', [
+$result = $database->query('SELECT * FROM users WHERE %and', [
 	'name' => $name,
 	'year' => $year,
 ]);
 // SELECT * FROM users WHERE `name` = 'Jim' AND `year` = 1978
 \--
 
-Což můžeme snadno změnit na `OR` tím, že uvedeme zástupný znak `?or`:
+Což můžeme snadno změnit na `OR` tím, že uvedeme zástupný znak `%or`:
 
 /--php
-$result = $database->query('SELECT * FROM users WHERE ?or', [
+$result = $database->query('SELECT * FROM users WHERE %or', [
 	'name' => $name,
 	'year' => $year,
 ]);
 // SELECT * FROM users WHERE `name` = 'Jim' OR `year` = 1978
 \--
 
-V podmínkách můžeme používat operátory:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE', [
-	'name <>' => $name,
-	'year >' => $year,
-]);
-// SELECT * FROM users WHERE `name` <> 'Jim' AND `year` > 1978
-\--
-
-A také výčty:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE', [
-	'name' => $names, // ['Jim', 'Jack'],
-	'role NOT IN' => ['admin', 'owner'], // výčet + operátor NOT IN
-]);
-// SELECT * FROM users WHERE
-//   `name` IN ('Jim', 'Jack') AND `role` NOT IN ('admin', 'owner')
-\--
-
-Do podmínky také můžeme vložit kus vlastního SQL kódu pomocí tzv. SQL literálu:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE', [
-	'name' => $name,
-	'year >' => $database::literal('YEAR()'),
-]);
-// SELECT * FROM users WHERE (`name` = 'Jim') AND (`year` > YEAR())
-\--
-
-Nebo alternativě:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE', [
-	'name' => $name,
-	$database::literal('year > YEAR()'),
-]);
-// SELECT * FROM users WHERE (`name` = 'Jim') AND (year > YEAR())
-\--
-
-SQL literál také může mít své parametry:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE', [
-	'name' => $name,
-	$database::literal('year > ? AND year < ?', $min, $max),
-]);
-// SELECT * FROM users WHERE `name` = 'Jim' AND (year > 1978 AND year < 2017)
-\--
-
-Nebo ještě zajímavější kombinace:
-
-/--php
-$result = $database->query('SELECT * FROM users WHERE ?', [
-	'name' => $name,
-	$database::literal('?or', [
-		'active' => true,
-		'role' => $role,
-	]),
-]);
-// SELECT * FROM users WHERE `name` = 'Jim' AND (`active` = 1 OR `role` = 'admin')
-\--
-
 
 Proměnný název
 ==============
 
-Ještě existuje zástupný znak `?name`, který využijete v případě, že název tabulky nebo sloupce je proměnnou. (Pozor, nedovolte uživateli manipulovat s obsahem takové proměnné):
+Ještě existuje zástupný znak `%n`, který využijete v případě, že název tabulky nebo sloupce je proměnnou. (Pozor, nedovolte uživateli manipulovat s obsahem takové proměnné):
 
 /--php
 $table = 'blog.users';
 $column = 'name';
-$database->query('SELECT * FROM ?name WHERE ?name = ?', $table, $column, $value);
+$database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $value);
 // SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
 \--
 
@@ -351,7 +276,7 @@ dibi::query("UPDATE `table` SET [text]='I''m fine'");
 // ODBC:  UPDATE [table] SET [text]='I''m fine'
 \--
 
-Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem dibi je opak.
+Ještě doplním, že uvozovka se uvnitř řetězce v embedded SQL zapisuje zdvojením. Lomítko má totiž v PHP řetězci zvláštní význam, muselo by se tedy použít dvojité, což leda komplikuje život a cílem Dibi je opak.
 
 
 
@@ -420,7 +345,7 @@ Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pol
 | %n | identifikátory | `[key], [key2] AS alias, ...` |
 | jiný  | - | `val, val2, ...` |
 
-Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V tom případě dibi použije tuto dedukci: jde-li o příkaz INSERT či REPLACE, zvol %v, jinak %a (platí pro asociativní pole).
+Také si můžeme dovolit luxus žádný modifikátor před polem neuvést. V tom případě Dibi použije tuto dedukci: jde-li o příkaz INSERT či REPLACE, zvol %v, jinak %a (platí pro asociativní pole).
 
 Takže příklad:
 
@@ -554,7 +479,7 @@ dibi::test("UPDATE [:blog:items] SET [text]='Hello World'");
 Testování query()
 ====
 
-Abyste si mohli trošku s dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
+Abyste si mohli trošku s Dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
 
 Možná by vás zajímalo, co celé to parsování a skládání dotazu stojí. Napsal jsem tyto funkce co nejoptimálněji a situace je taková, že zaberou jen zlomek času, který si ukousne samotné vykonání SQL příkazu. Můžete si ověřit.
 
@@ -629,7 +554,7 @@ $result->seek($row);
 Datové typy
 ====
 
-Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a dibi je bude automaticky převádět.
+Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a Dibi je bude automaticky převádět.
 
 /--code php
 $result->setType('id', Dibi\Type::INTEGER);
@@ -713,28 +638,30 @@ Logování do Firebugu se zapíná automaticky, je-li detekována jeho přítomn
 Připojení do Nette
 =======================
 
-Nicméně šikovnější způsob nabízí bridge pro Nette. [aplikační konfigurace |configuring#databaze], kam stačí přidat sekci `database` a vytvoří se potřebné objekty a také databázový panel v [Tracy | tracy:] baru.
+Nicméně šikovnější způsob nabízí bridge pro Nette. V konfiguračním souboru zaregistrujeme DI rozšíření a přidáme sekci `dibi` - tím se vytvoří potřebné objekty a také databázový panel v [Tracy | https://tracy.nette.org/cs/] baru.
 
 /--neon
-	database:
-		dsn: 'mysql:host=127.0.0.1;dbname=test'
-		user: root
-		password: password
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
+dibi:
+	host: localhost
+	username: root
+	password: ***
+	database: foo
+	lazy: true
 \--
 
-Poté objekt spojení [získáme jako službu z DI kontejneru |di-usage], např.:
+Poté objekt spojení [získáme jako službu z DI kontejneru | https://doc.nette.org/cs/di-usage], např.:
 
 /--php
 class Model
 {
 	private $database;
 
-	// pro práci s vrstvou Database Explorer si předáme Dibi\Context
 	public function __construct(Dibi\Connection $database)
 	{
 		$this->database = $database;
 	}
 }
 \--
-
-Více informací o [konfiguraci databáze|configuring#databaze].

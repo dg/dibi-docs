@@ -1,5 +1,5 @@
 Připojení k databázi
-====
+====================
 
 Každé spojení je reprezentováno objektem [Dibi\Connection|api:]. To komunikuje s databází přes ovladač (třída implementující Dibi\Driver). Který ovladač použít zvolíme při vytváření objektu:
 
@@ -249,7 +249,7 @@ $database->rollback(); // vrácení zpět
 
 
 SQL příkazy
-====
+===========
 
 /--code php
 dibi::query('SELECT * FROM [table] WHERE [id] = %i', $id);
@@ -315,7 +315,7 @@ dibi::query('UPDATE `table` SET `text`=%s', $text);
 
 
 Operátor LIKE
-====
+=============
 
 Pro operátor LIKE jsou k dispozici tři speciální výrazy:
 
@@ -331,7 +331,7 @@ dibi::query("SELECT * FROM table WHERE name LIKE %like~", $query);
 
 
 Formátování polí
-====
+================
 
 Jak jsem už psal, modifikátor je možné aplikovat také na všechny prvky pole, které se pak oddělené čárkami vloží do SQL. Ovšem můžeme využít také dvou speciálních modifikátorů `%a` nebo `%v`.
 
@@ -364,7 +364,7 @@ dibi::query('UPDATE `table` SET ', $arr);
 
 
 Složitější výrazy v polích
-====
+==========================
 
 Přímo v polích (v klíčích) je možné používat modifikátory:
 
@@ -398,7 +398,7 @@ dibi::query('SELECT * FROM `table` WHERE %and', [
 
 
 Datum a čas
-====
+===========
 
 Parametrem může být také objekt `DateTime`.
 
@@ -412,7 +412,7 @@ dibi::query('UPDATE `table` SET ', [
 
 
 Postupné skládání dotazu
-====
+========================
 
 Dibi disponuje také podporou pro postupné skládání SQL dotazu:
 
@@ -430,7 +430,7 @@ Nebo lze použít expanzi pole přes speciální modifikátor `%ex`.
 
 
 Podmíněné SQL příkazy
-====
+=====================
 
 Podmíněné SQL příkazy jsou velmi silným nástrojem. Ovládají se pomocí tří klíčových slov `%if`, `%else` a `%end`. První z nich `%if` se musí, obdobně jako modifikátor, nacházet zcela na konci řetězce představujícího SQL:
 
@@ -459,7 +459,7 @@ FROM %if', $cond, '[one_table] %else [second_table]'
 Podmínky můžete zanořovat do libovolné hloubky!
 
 Prefixy & substituce
-====
+====================
 
 Názvy tabulek a sloupců mohou obsahovat proměnné části. Ty si nejprve nadefinujeme:
 
@@ -477,7 +477,7 @@ dibi::test("UPDATE [:blog:items] SET [text]='Hello World'");
 
 
 Testování query()
-====
+=================
 
 Abyste si mohli trošku s Dibi hrát, je tu připravena funkce `dibi::test()`, které předáte parametry stejně jako `dibi::query()`, ovšem místo provedení SQL příkazu se tento barevně vypíše na obrazovku.
 
@@ -485,7 +485,7 @@ Možná by vás zajímalo, co celé to parsování a skládání dotazu stojí. 
 
 
 Získávání výsledků
-====
+==================
 
 Nejjednodušší cesta vede přes klasickou iteraci
 
@@ -552,7 +552,7 @@ $result->seek($row);
 
 
 Datové typy
-====
+===========
 
 Stále to není všechno, jedeme dále. Při získávání záznamů můžeme specifikovat datový typ jednotlivých sloupců a Dibi je bude automaticky převádět.
 
@@ -575,13 +575,13 @@ Případně nastavit v metodě `connect()` parameter `'resultDetectTypes' => tru
 
 
 Vrácený záznam
-====
+==============
 
 Dibi vrací záznamy jako objekty Dibi\Row. Ty mají tu vlastnost, že k hodnotám atributů lze přistupovat dvěma způsoby - buď jako k hodnotám objektů anebo jako k asociativnímu poli.
 
 
 Výjimky, logování chyb a profiler
-====
+=================================
 
 Jakákoliv chyba vzniklá během operace s databázovým serverem vyhodí výjimku Dibi\Exception nebo potomka Dibi\DriverException. Pokud dojde k chybě během vykonávání SQL příkazu, je i tento předán jako výjimce.
 
@@ -604,7 +604,7 @@ Dibi disponuje rozhraním pro připojení vlastního profileru nebo logovací kn
 
 
 Profiler a propojení na Firebug
-====
+===============================
 
 Dibi má v sobě zabudovaný profiler, kterým můžete sledovat všechny vykonané SQL příkazy a měřit délku jejich trvání. Aktivace profileru:
 
@@ -636,7 +636,7 @@ Logování do Firebugu se zapíná automaticky, je-li detekována jeho přítomn
 
 
 Připojení do Nette
-=======================
+==================
 
 Nicméně šikovnější způsob nabízí bridge pro Nette. V konfiguračním souboru zaregistrujeme DI rozšíření a přidáme sekci `dibi` - tím se vytvoří potřebné objekty a také databázový panel v [Tracy | https://tracy.nette.org/cs/] baru.
 

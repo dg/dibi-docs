@@ -1,5 +1,5 @@
 Dibi is Database Abstraction Library
-******
+************************************
 
 Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access and generic PDO and ODBC.
 
@@ -14,7 +14,7 @@ Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL,
 
 
 Download & Installation
-=========
+=======================
 
 Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
 

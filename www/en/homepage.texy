@@ -1,24 +1,24 @@
-Dibi je Database Abstraction Library
+Dibi is Database Abstraction Library
 ************************************
 
-Dibi podporuje mnoho významných databází: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access a obecné PDO a ODBC.
+Dibi supports a lot of significant databases: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access and generic PDO and ODBC.
 
 
-Instalace
----------
+Installation
+------------
 
-Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
+To install the latest stable Dibi version use the [Composer |https://getcomposer.org] command:
 
 /--
 composer require dibi/dibi
 \--
 
 
-Příklady
---------
+Code samples
+------------
 
 /--php
-// připojení k databázi
+// connect to database
 $database = new Dibi\Connection([
     'driver'   => 'mysqli',
     'host'     => 'localhost',
@@ -35,10 +35,10 @@ foreach ($result as $row) {
 	echo $row->name;
 }
 
-$value = $result->fetchSingle(); // vrací první buňku
-$all = $result->fetchAll(); // pole všech řádků
-$assoc = $result->fetchAssoc('id'); // pole všech řádků, klíčem je id
-$pairs = $result->fetchPairs('id', 'name'); // vrací asociativní pole id => name
+$value = $result->fetchSingle(); // returns the first cell
+$all = $result->fetchAll(); // array of all rows
+$assoc = $result->fetchAssoc('id'); // array of all rows, key is id
+$pairs = $result->fetchPairs('id', 'name'); // returns the associative pairs id => name
 
 // INSERT & UPDATE
 $arr = [
@@ -53,4 +53,4 @@ $database->query('UPDATE users SET', $arr, 'WHERE id=?', $id);
 // UPDATE users SET `name`='John', `is_admin`=1 WHERE id = 123
 \--
 
-Více v [dokumentaci | documentation].
+Read [documentation].

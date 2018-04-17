@@ -557,7 +557,7 @@ $database->substitute('blog', 'wp_');
 a poté použijeme v SQL. Všimněte si, že v SQL jsou uvozeny dvojtečkama:
 
 /--php
-$database->test("UPDATE [:blog:items] SET [text]='Hello World'");
+$database->query("UPDATE [:blog:items] SET [text]='Hello World'");
 // UPDATE `wp_items` SET `text`='Hello World'
 \--
 
@@ -575,36 +575,20 @@ is_int($row->id) // true
 \--
 
 
-Profiler a propojení na Firebug
-===============================
+Logování
+========
 
-Dibi má v sobě zabudovaný profiler, kterým můžete sledovat všechny vykonané SQL příkazy a měřit délku jejich trvání. Aktivace profileru:
+Dibi má v sobě zabudovaný logger, kterým můžete sledovat všechny vykonané SQL příkazy a měřit délku jejich trvání. Aktivace:
 
 /--php
 $database->connect([
 	'driver'   => 'sqlite',
 	'database' => 'sample.sdb',
-	'profiler' => true, // spustí profiler
+	'profiler' => [
+		'file' => 'file.log',
+	],
 ]);
 \--
-
-Provoz lze buď logovat do souboru:
-
-/--php
-$database->getProfiler()->setFile('log.sql');
-\--
-
-…nebo do FireLoggeru. Jak na to?
-
-Firefox: (nefunguje ve verzi Quantum)
-- nainstalujte si rozšíření [Firebug | http://getfirebug.com/] a [FireLogger | https://addons.mozilla.org/cs/firefox/addon/firelogger/]
-- zapněte Firebug (klávesou F12), povolte panely Síť (Net) a Logger (nechte otevřený)
-
-Chrome:
-- nainstalujte si rozšíření [FireLogger for Chrome | https://chrome.google.com/webstore/detail/firelogger-for-chrome/hmagilfopmdjkeomnjpchokglfdfjfeh]
-- zapněte Chrome DevTools (klávesou Ctrl-Shift-I) a otevřete Konzoli
-
-Logování do FireLoggeru se zapíná automaticky, je-li detekována jeho přítomnost.
 
 Šikovnější profiler je panel pro Tracy, který se aktivuje při propojení s Nette.
 

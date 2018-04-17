@@ -557,7 +557,7 @@ $database->substitute('blog', 'wp_');
 and then use it in SQL. Note that in SQL they are quoted by the colon:
 
 /--php
-$database->test("UPDATE [:blog:items] SET [text]='Hello World'");
+$database->query("UPDATE [:blog:items] SET [text]='Hello World'");
 // UPDATE `wp_items` SET `text`='Hello World'
 \--
 
@@ -575,36 +575,20 @@ is_int($row->id) // true
 \--
 
 
-Profiler and Firebug connection
-===============================
+Logger
+======
 
-Dibi has a built-in profiler that lets you track all SQL statements executed and measure the length of their duration. Activating the profiler:
+Dibi has a built-in logger that lets you track all SQL statements executed and measure the length of their duration. Activating the logger:
 
 /--php
 $database->connect([
 	'driver'   => 'sqlite',
 	'database' => 'sample.sdb',
-	'profiler' => true, // enable profiler
+	'profiler' => [
+		'file' => 'file.log',
+	],
 ]);
 \--
-
-Operation can either be logged into a file:
-
-/--php
-$database->getProfiler()->setFile('log.sql');
-\--
-
-…or into FireLoggeru. How to do it?
-
-Firefox: (does not work in Quantum)
-- install extension [Firebug | http://getfirebug.com/] and [FireLogger | https://addons.mozilla.org/cs/firefox/addon/firelogger/]
-- turn on Firebug (using F12 key), enable tabs Net and Logger (stay on Logger)
-
-Chrome:
-- install extension [FireLogger for Chrome | https://chrome.google.com/webstore/detail/firelogger-for-chrome/hmagilfopmdjkeomnjpchokglfdfjfeh]
-- turn on Chrome DevTools (using Ctrl-Shift-I key) and open Console
-
-Logging into FireLogger is turned on automatically when its presence is detected.
 
 A more versatile profiler is a Tracy panel that is activated when connected to Nette.
 

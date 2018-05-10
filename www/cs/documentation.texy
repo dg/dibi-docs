@@ -60,7 +60,7 @@ $all = $result->fetchAssoc('id');
 // asociativní pole id => name
 $pairs = $result->fetchPairs('id', 'name');
 
-// počet řádků výsledku, pokud je znám
+// počet řádků výsledku, pokud je znám, nebo počet ovlivněných řádků
 $count = $result->getRowCount();
 \--
 
@@ -69,13 +69,13 @@ Metoda fetchAssoc() umí vracet i [složitější asociativní pole |#Výsledek 
 Do dotazu lze velmi snadno přidávat i parametry, všimněte si otazníku:
 
 /--php
-$database->query('SELECT * FROM users WHERE name = ? AND active = ?', $name, $active);
+$result = $database->query('SELECT * FROM users WHERE name = ? AND active = ?', $name, $active);
 
 // nebo
-$database->query('SELECT * FROM users WHERE name = ?', $name, 'AND active = ?', $active););
+$result = $database->query('SELECT * FROM users WHERE name = ?', $name, 'AND active = ?', $active););
 
 $ids = [10, 20, 30];
-$database->query('SELECT * FROM users WHERE id IN (?)', $ids);
+$result = $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
 \--
 
 /--div .[warning]
@@ -88,7 +88,7 @@ $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
 Místo otazníku lze používat i tzv. [#modifikátory].
 
 /--php
-$database->query('SELECT * FROM users WHERE name = %s', $name);
+$result = $database->query('SELECT * FROM users WHERE name = %s', $name);
 \--
 
 V případě selhání `query()` vyhodí buď `Dibi\Exception`, nebo některého z potomků:
@@ -138,7 +138,7 @@ Kromě zástupného symbolu `?` můžeme používat i modifikátory:
 Příklad:
 
 /--php
-$database->query('SELECT * FROM users WHERE name = %s', $name);
+$result = $database->query('SELECT * FROM users WHERE name = %s', $name);
 \--
 
 Pokud $name je null, vloží se do SQL příkazu NULL.
@@ -147,7 +147,7 @@ Pokud proměnná je pole, tak se modifikátor aplikuje na všechny jeho prvky a 
 
 /--php
 $ids = [10, '20', 30];
-$database->query('SELECT * FROM users WHERE id IN (%i)', $ids);
+$result = $database->query('SELECT * FROM users WHERE id IN (%i)', $ids);
 // SELECT * FROM users WHERE id IN (10, 20, 30)
 \--
 
@@ -156,7 +156,7 @@ Modifikátor `%n` využijete v případě, že název tabulky nebo sloupce je pr
 /--php
 $table = 'blog.users';
 $column = 'name';
-$database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $value);
+$result = $database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $value);
 // SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
 \--
 
@@ -169,7 +169,7 @@ Pro operátor LIKE jsou k dispozici tři speciální modifikátory:
 Hledej jména začínající na určitý řetězec:
 
 /--php
-$database->query('SELECT * FROM table WHERE name LIKE %like~', $query);
+$result = $database->query('SELECT * FROM table WHERE name LIKE %like~', $query);
 \--
 
 
@@ -217,7 +217,7 @@ Viz také [#Složitější dotazy].
 Modifikátor `%by` slouží k řazení, v klíčích uvedeme sloupce a hodnotou bude boolean určující, zda řadit vzestupně:
 
 /--php
-$database->query('SELECT id FROM author ORDER BY %by', [
+$result = $database->query('SELECT id FROM author ORDER BY %by', [
 	'id' => true, // vzestupně
 	'name' => false, // sestupně
 ]);
@@ -258,18 +258,23 @@ $database->query('INSERT INTO users', [
 Mazání:
 
 /--php
-// vrací počet ovlivněných řádků
-$affectedRows = $database->query('DELETE FROM users WHERE id = ?', $id);
+$database->query('DELETE FROM users WHERE id = ?', $id);
+
+// vrací počet smazaných řádků
+$affectedRows = $database->getAffectedRows();
 \--
 
 Úprava záznamů:
 
 /--php
-$affectedRows = $database->query('UPDATE users SET', [
+$database->query('UPDATE users SET', [
 	'name' => $name,
 	'year' => $year,
 ], 'WHERE id = ?', $id);
 // UPDATE users SET `name` = 'Jim', `year` = 1978 WHERE id = 123
+
+// vrací počet změněných řádků
+$affectedRows = $database->getAffectedRows();
 \--
 
 Vložení záznamu, nebo úprava, pokud již existuje:
@@ -325,7 +330,7 @@ Složitější dotazy
 Parametrem může být také objekt `DateTime`.
 
 /--php
-$database->query('SELECT * FROM users WHERE created < ?', new DateTime);
+$result = $database->query('SELECT * FROM users WHERE created < ?', new DateTime);
 
 $database->query('INSERT INTO users', [
 	'created' => new DateTime,
@@ -362,7 +367,7 @@ $database->query('UPDATE table SET', [
 V podmínkách (tj. u modifikátorů `%and` a `%or`) není nutné uvádět klíče:
 
 /--php
-$database->query('SELECT * FROM `table` WHERE %and', [
+$result = $database->query('SELECT * FROM `table` WHERE %and', [
 	'number > 10',
 	'number < 100',
 ]);
@@ -372,7 +377,7 @@ $database->query('SELECT * FROM `table` WHERE %and', [
 V položkách lze používat i modifikátory nebo zástupné znaky:
 
 /--php
-$database->query('SELECT * FROM `table` WHERE %and', [
+$result = $database->query('SELECT * FROM `table` WHERE %and', [
 	['number > ?', 10],  // nebo new Dibi\Expression('number > ?', 10)
 	['number < ?', 100],
 	['%or', [
@@ -386,7 +391,7 @@ $database->query('SELECT * FROM `table` WHERE %and', [
 Modifikátor `%ex` vloží do SQL všechny prvky pole:
 
 /--php
-$database->query('SELECT * FROM `table` WHERE %ex', [
+$result = $database->query('SELECT * FROM `table` WHERE %ex', [
 	new Dibi\Expression('left = ?', 1),
 	'AND',
 	'top IS NULL',
@@ -403,7 +408,7 @@ Podmíněné SQL příkazy se ovládají pomocí tří modifikátorů `%if`, `%e
 /--php
 $user = ???
 
-$database->query('
+$result = $database->query('
 	SELECT *
 	FROM table
 	%if', isset($user), 'WHERE user=%s', $user, '%end
@@ -414,7 +419,7 @@ $database->query('
 Podmínku lze doplnit o část `%else`:
 
 /--php
-$database->query('
+$result = $database->query('
 	SELECT *
 	FROM %if', $cond, 'one_table %else second_table
 ');

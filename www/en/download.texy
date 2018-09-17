@@ -1,20 +1,12 @@
 Download
 ********
 
-/--div .[emphasis]
 Install the latest stable Dibi via [Composer |https://getcomposer.org]:
 
 /--
 composer require dibi/dibi
 \--
 
-You can also "download ZIP package":https://github.com/dg/dibi/releases/latest,
-older releases are available in [archive | https://github.com/dg/dibi/releases].
-\--
+Release announcements are on [GitHub | https://github.com/dg/dibi/releases].
 
-You can obtain the latest development version from our repository at https://github.com/dg/dibi
-
-Requirements
-============
-
-Requires PHP 5.4.4 or newer. Released under BSD a GPL.
+Requires PHP 7.1 or newer. Released under BSD a GPL.

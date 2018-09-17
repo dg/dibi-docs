@@ -1,21 +1,12 @@
 Download
 ********
 
-/--div .[emphasis]
 Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
 
 /--
 composer require dibi/dibi
 \--
 
-Můžete si ji také "stáhnout jako balíček":https://github.com/dg/dibi/releases/latest,
-starší verze najdete v [archivu | https://github.com/dg/dibi/releases].
-\--
+Přehled verzí najdete na stánce [Releases | https://github.com/dg/dibi/releases].
 
-Nejnovější vývojovou verzi můžete získat z oficiálního repozitáře na https://github.com/dg/dibi
-
-
-Požadavky
-=========
-
-Vyžaduje PHP 5.4.4 nebo vyšší. Uvolněno pod licencí BSD a GPL.
+Vyžaduje PHP 7.1 nebo vyšší. Uvolněno pod licencí BSD a GPL.

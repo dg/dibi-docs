@@ -88,12 +88,12 @@ $ids = [10, 20, 30];
 $result = $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
 ```
 
-/--div .[warning]
-	**POZOR, nikdy dotazy neskládejte jako řetězce, vznikla by zranitelnost [SQL injection |https://cs.wikipedia.org/wiki/SQL_injection]**
-	/--
-	$database->query('SELECT * FROM users WHERE id = ' . $id); // ŠPATNĚ!!!
-	\--
+<div class=warning>
+**POZOR, nikdy dotazy neskládejte jako řetězce, vznikla by zranitelnost [SQL injection |https://cs.wikipedia.org/wiki/SQL_injection]**
+/--
+$database->query('SELECT * FROM users WHERE id = ' . $id); // ŠPATNĚ!!!
 \--
+</div>
 
 Místo otazníku lze používat i tzv. [#modifikátory].
 

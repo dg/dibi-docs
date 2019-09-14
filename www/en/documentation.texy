@@ -89,12 +89,12 @@ $ids = [10, 20, 30];
 $result = $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
 ```
 
-/--div .[warning]
-	**WARNING, never concencate parameters to SQL, the vulnerability would arise [SQL injection |https://en.wikipedia.org/wiki/SQL_injection]**
-	/--
-	$database->query('SELECT * FROM users WHERE id = ' . $id); // BAD!!!
-	\--
+<div class=warning>
+**WARNING, never concencate parameters to SQL, the vulnerability would arise [SQL injection |https://en.wikipedia.org/wiki/SQL_injection]**
+/--
+$database->query('SELECT * FROM users WHERE id = ' . $id); // BAD!!!
 \--
+</div>
 
 Instead of a question mark, so-called [#modifiers] can be used.
 

@@ -7,7 +7,7 @@ Connecting to database
 
 The database connection is represented by the object [Dibi\Connection|api:]:
 
-/--php
+```php
 $database = new Dibi\Connection([
     'driver'   => 'mysqli',
     'host'     => 'localhost',
@@ -17,11 +17,11 @@ $database = new Dibi\Connection([
 ]);
 
 $result = $database->query('SELECT * FROM users');
-\--
+```
 
 Alternatively, you can use the `dibi` static register, which maintains a connection object in a globally available storage and calls all the functions above it:
 
-/--php
+```php
 dibi::connect([
     'driver'   => 'mysqli',
     'host'     => 'localhost',
@@ -32,7 +32,7 @@ dibi::connect([
 ]);
 
 $result = dibi::query('SELECT * FROM users');
-\--
+```
 
 In the event of a connection error, it throws `Dibi\Exception`.
 
@@ -43,7 +43,7 @@ Queries
 
 We query the database queries by the method `query()` which returns [Dibi\Result |api:Dibi\Result]. Rows are objects [Dibi\Row |api:Dibi\Row].
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users');
 
 foreach ($result as $row) {
@@ -62,13 +62,13 @@ $pairs = $result->fetchPairs('id', 'name');
 
 // the number of rows of the result, if known, or number of affected rows
 $count = $result->getRowCount();
-\--
+```
 
 Method fetchAssoc() can return [a more complex associative array |#Result as associative array].
 
 You can easily add parameters to the query, note the question mark:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users WHERE name = ? AND active = ?', $name, $active);
 
 // or
@@ -76,7 +76,7 @@ $result = $database->query('SELECT * FROM users WHERE name = ?', $name, 'AND act
 
 $ids = [10, 20, 30];
 $result = $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
-\--
+```
 
 /--div .[warning]
 	**WARNING, never concencate parameters to SQL, the vulnerability would arise [SQL injection |https://en.wikipedia.org/wiki/SQL_injection]**
@@ -87,9 +87,9 @@ $result = $database->query('SELECT * FROM users WHERE id IN (?)', $ids);
 
 Instead of a question mark, so-called [#modifiers] can be used.
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users WHERE name = %s', $name);
-\--
+```
 
 In case of failure `query()` throws `Dibi\Exception`, or one of the descendants:
 
@@ -100,7 +100,7 @@ In case of failure `query()` throws `Dibi\Exception`, or one of the descendants:
 
 You can use also shortcuts:
 
-/--php
+```php
 // returns associative pairs id => name, shortcut for query(...)->fetchPairs()
 $pairs = $database->fetchPairs('SELECT id, name FROM users');
 
@@ -112,7 +112,7 @@ $row = $database->fetch('SELECT * FROM users WHERE id = ?', $id);
 
 // returns field, shortcut for query(...)->fetchSingle()
 $name = $database->fetchSingle('SELECT name FROM users WHERE id = ?', $id);
-\--
+```
 
 
 Modifiers
@@ -137,28 +137,28 @@ In addition to the `?` wild char, we can also use modifiers:
 
 Example:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users WHERE name = %s', $name);
-\--
+```
 
 If $name is null, the NULL is inserted into the SQL statement.
 
 If the variable is an array, the modifier is applied to all of its elements and they are inserted into SQL separated by commas:
 
-/--php
+```php
 $ids = [10, '20', 30];
 $result = $database->query('SELECT * FROM users WHERE id IN (%i)', $ids);
 // SELECT * FROM users WHERE id IN (10, 20, 30)
-\--
+```
 
 The modifier '%n' is used if the table or column name is a variable. (Beware, do not allow the user to manipulate the content of such a variable):
 
-/--php
+```php
 $table = 'blog.users';
 $column = 'name';
 $result = $database->query('SELECT * FROM %n WHERE %n = ?', $table, $column, $value);
 // SELECT * FROM `blog`.`users` WHERE `name` = 'Jim'
-\--
+```
 
 Three special modifiers are available for LIKE:
 
@@ -168,9 +168,9 @@ Three special modifiers are available for LIKE:
 
 Search for names beginning with a string:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM table WHERE name LIKE %like~', $query);
-\--
+```
 
 
 Modifiers for arrays
@@ -189,7 +189,7 @@ The parameter entered in the SQL query can also be an array. These modifiers det
 
 Example:
 
-/--php
+```php
 $arr = [
     'a' => 'hello',
     'b'  => true,
@@ -200,29 +200,29 @@ $database->query('INSERT INTO table %v', $arr);
 
 $database->query('UPDATE `table` SET %a', $arr);
 // UPDATE `table` SET `a`='hello', `b`=1
-\--
+```
 
 In the WHERE clause modifiers `%and` nebo `%or` can be used:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users WHERE %and', [
 	'name' => $name,
 	'year' => $year,
 ]);
 // SELECT * FROM users WHERE `name` = 'Jim' AND `year` = 1978
-\--
+```
 
 See also [#complex queries].
 
 The modifier `%by` is used to sort, the keys show the columns, and the boolean value will determine whether to sort in ascending order:
 
-/--php
+```php
 $result = $database->query('SELECT id FROM author ORDER BY %by', [
 	'id' => true, // ascending
 	'name' => false, // descending
 ]);
 // SELECT id FROM author ORDER BY `id`, `name` DESC
-\--
+```
 
 
 Insert, Update & Delete
@@ -230,7 +230,7 @@ Insert, Update & Delete
 
 We insert the data into an SQL query as an associative array. Modifiers and wildcards `?` are not required in these cases.
 
-/--php
+```php
 $database->query('INSERT INTO users', [
 	'name' => $name,
 	'year' => $year,
@@ -240,11 +240,11 @@ $database->query('INSERT INTO users', [
 $id = $database->getInsertId(); // returns the auto-increment of the inserted record
 
 $id = $database->getInsertId($sequence); // or sequence value
-\--
+```
 
 Multiple INSERT:
 
-/--php
+```php
 $database->query('INSERT INTO users', [
 	'name' => 'Jim',
 	'year' => 1978,
@@ -253,20 +253,20 @@ $database->query('INSERT INTO users', [
 	'year' => 1987,
 ]);
 // INSERT INTO users (`name`, `year`) VALUES ('Jim', 1978), ('Jack', 1987)
-\--
+```
 
 Deleting:
 
-/--php
+```php
 $database->query('DELETE FROM users WHERE id = ?', $id);
 
 // returns the number of deleted rows
 $affectedRows = $database->getAffectedRows();
-\--
+```
 
 Update:
 
-/--php
+```php
 $database->query('UPDATE users SET', [
 	'name' => $name,
 	'year' => $year,
@@ -275,11 +275,11 @@ $database->query('UPDATE users SET', [
 
 // returns the number of updated rows
 $affectedRows = $database->getAffectedRows();
-\--
+```
 
 Insert an entry or update if it already exists:
 
-/--php
+```php
 $database->query('INSERT INTO users', [
 	'id' => $id,
 	'name' => $name,
@@ -290,7 +290,7 @@ $database->query('INSERT INTO users', [
 ]);
 // INSERT INTO users (`id`, `name`, `year`) VALUES (123, 'Jim', 1978)
 //   ON DUPLICATE KEY UPDATE `name` = 'Jim', `year` = 1978
-\--
+```
 
 
 Transaction
@@ -298,13 +298,13 @@ Transaction
 
 There are three methods for dealing with transactions:
 
-/--php
+```php
 $database->beginTransaction();
 
 $database->commit();
 
 $database->rollback();
-\--
+```
 
 
 Testing
@@ -316,12 +316,12 @@ The query results can be echoed as a table using `$result->dump()`.
 
 These variables are also available:
 
-/--php
+```php
 dibi::$sql; // the latest SQL query
 dibi::$elapsedTime; // its duration in sec
 dibi::$numOfQueries;
 dibi::$totalTime;
-\--
+```
 
 
 Complex queries
@@ -329,54 +329,54 @@ Complex queries
 
 The parameter may also be an object `DateTime`.
 
-/--php
+```php
 $result = $database->query('SELECT * FROM users WHERE created < ?', new DateTime);
 
 $database->query('INSERT INTO users', [
 	'created' => new DateTime,
 ]);
-\--
+```
 
 Or SQL literal:
 
-/--php
+```php
 $database->query('UPDATE table SET', [
 	'date' => $database->literal('NOW()'),
 ]);
 // UPDATE table SET `date` = NOW()
-\--
+```
 
 Or an expression in which you can use `?` or modifiers:
 
-/--php
+```php
 $database->query('UPDATE `table` SET', [
 	'title' => new Dibi\Expression('SHA1(?)', 'secret'),
 ]);
 // UPDATE `table` SET `title` = SHA1('secret')
-\--
+```
 
 When updating, modifiers can be placed directly in the keys:
 
-/--php
+```php
 $database->query('UPDATE table SET', [
 	'date%SQL' => 'NOW()', // %SQL means SQL ;)
 ]);
 // UPDATE table SET `date` = NOW()
-\--
+```
 
 In conditions (ie, for `%and` and `%or` modifiers), it is not necessary to specify the keys:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM `table` WHERE %and', [
 	'number > 10',
 	'number < 100',
 ]);
 // SELECT * FROM `table` WHERE (number > 10) AND (number < 100)
-\--
+```
 
 Modifiers or wildcards can also be used in expressions:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM `table` WHERE %and', [
 	['number > ?', 10],  // or new Dibi\Expression('number > ?', 10)
 	['number < ?', 100],
@@ -386,18 +386,18 @@ $result = $database->query('SELECT * FROM `table` WHERE %and', [
 	]],
 ]);
 // SELECT * FROM `table` WHERE (number > 10) AND (number < 100) AND (`left` = 1 OR `top` = 2)
-\--
+```
 
 The `%ex` modifier inserts all items of the array into SQL:
 
-/--php
+```php
 $result = $database->query('SELECT * FROM `table` WHERE %ex', [
 	new Dibi\Expression('left = ?', 1),
 	'AND',
 	'top IS NULL',
 ]);
 // SELECT * FROM `table` WHERE left = 1 AND top IS NULL
-\--
+```
 
 
 Conditions in the SQL
@@ -405,7 +405,7 @@ Conditions in the SQL
 
 Conditional SQL commands are controlled by three modifiers `%if`, `%else`, and `%end`. The `%if` must be at the end of the string representing SQL and is followed by the variable:
 
-/--php
+```php
 $user = ???
 
 $result = $database->query('
@@ -414,16 +414,16 @@ $result = $database->query('
 	%if', isset($user), 'WHERE user=%s', $user, '%end
 	ORDER BY name
 ');
-\--
+```
 
 The condition can be supplemented by the section `%else`:
 
-/--php
+```php
 $result = $database->query('
 	SELECT *
 	FROM %if', $cond, 'one_table %else second_table
 ');
-\--
+```
 
 Conditions can nest together.
 
@@ -433,11 +433,11 @@ Identifiers and strings in SQL
 
 SQL itself goes through processing to meet the conventions of the database. The identifiers (names of tables and columns) can be entered into square brackets or backticks, strings are quoted with single or double quotation marks, but the server always sends what the database asks for. Example:
 
-/--php
+```php
 $database->query("UPDATE `table` SET [status]='I''m fine'");
 // MySQL: UPDATE `table` SET `status`='I\'m fine'
 // ODBC:  UPDATE [table] SET [status]='I''m fine'
-\--
+```
 
 The quotation marks are duplicated inside the string in SQL.
 
@@ -448,26 +448,26 @@ Result as associative array
 
 Example: returns results as an associative field, where the key will be the value of the `id` field:
 
-/--php
+```php
 $assoc = $result->fetchAssoc('id');
-\--
+```
 
 The greatest power of `fetchAssoc()` is reflected in a SQL query joining several tables with different types of joins. The database will make a flat table, fetchAssoc returns the shape.
 
 Example: Let's take a customer and order table (N:M binding) and query:
 
-/--php
+```php
 $result = $database->query('
   SELECT customer_id, customers.name, order_id, orders.number, ...
   FROM customers
   INNER JOIN orders USING (customer_id)
   WHERE ...
 ');
-\--
+```
 
 And we'd like to get a nested associative array by Customer ID and then Order ID:
 
-/--php
+```php
 $all = $result->fetchAssoc('customer_id|order_id');
 
 // we will iterate like this:
@@ -476,30 +476,30 @@ foreach ($all as $customerId => $orders) {
        ...
    }
 }
-\--
+```
 
 An associative descriptor has a similar syntax as when you type the array by assigning it to PHP. Thus `'customer_id|order_id'` represents the assignment series `$all[$customerId][$orderId] = $row;` sequentially for all rows.
 
 Sometimes it would be useful to associate by the customer's name instead of his ID:
 
-/--php
+```php
 $all = $result->fetchAssoc('name|order_id');
 
 // the elements then proceeds like this:
 $order = $all['Arnold Rimmer'][$orderId];
-\--
+```
 
 But what if there are more customers with the same name? The table should be in the form of:
 
-/--php
+```php
 $row = $all['Arnold Rimmer'][0][$orderId];
 $row = $all['Arnold Rimmer'][1][$orderId];
 ...
-\--
+```
 
 So we can distinguish between multiple possible Rimmers using an array. The associative descriptor has a format similar to the assignment, with the sequence array representing `[]`:
 
-/--php
+```php
 $all = $result->fetchAssoc('name[]order_id');
 
 // we get all the Arnolds in the results
@@ -508,11 +508,11 @@ foreach ($all['Arnold Rimmer'] as $arnoldOrders) {
        ...
    }
 }
-\--
+```
 
 Returning to the example with the `customer_id|order_id` descriptor, we will try to list the orders of each customer:
 
-/--php
+```php
 $all = $result->fetchAssoc('customer_id|order_id');
 
 foreach ($all as $customerId => $orders) {
@@ -523,19 +523,19 @@ foreach ($all as $customerId => $orders) {
        // customer name is in $order->name
    }
 }
-\--
+```
 
 It would be a nice to echo customer name too. But we would have to look for it in the `$orders` array. So let's adjust the results to such a shape:
 
-/--php
+```php
 $all[$customerId]->name = 'John Doe';
 $all[$customerId]->order_id[$orderId] = $row;
 $all[$customerId]->order_id[$orderId2] = $row2;
-\---
+```
 
 So, between `$clientId` and `$orderId`, we will also insert an intermediate item. This time not the numbered indexes as we used to distinguish between individual Rimmers, but a database row. The solution is very similar, just remember that the row symbolizes the arrow:
 
-/--php
+```php
 $all = $result->fetchAssoc('customer_id->order_id');
 
 foreach ($all as $customerId => $row) {
@@ -545,7 +545,7 @@ foreach ($all as $customerId => $row) {
        echo "ID number: $order->number";
    }
 }
-\--
+```
 
 
 
@@ -554,17 +554,17 @@ Prefixes & substitutions
 
 Table and column names can contain variable parts. You will first define:
 
-/--php
+```php
 // create new substitution :blog:  ==>  wp_
 $database->substitute('blog', 'wp_');
-\--
+```
 
 and then use it in SQL. Note that in SQL they are quoted by the colon:
 
-/--php
+```php
 $database->query("UPDATE [:blog:items] SET [text]='Hello World'");
 // UPDATE `wp_items` SET `text`='Hello World'
-\--
+```
 
 
 Field data types
@@ -572,12 +572,12 @@ Field data types
 
 Dibi automatically detects the types of query columns and converts fields them to native PHP types. We can also specify the type manually. You can find the possible types in the [Dibi\Type |api:Dibi\Type] class.
 
-/--php
+```php
 $result->setType('id', Dibi\Type::INTEGER); // id will be integer
 $row = $result->fetch();
 
 is_int($row->id) // true
-\--
+```
 
 
 Logger
@@ -585,7 +585,7 @@ Logger
 
 Dibi has a built-in logger that lets you track all SQL statements executed and measure the length of their duration. Activating the logger:
 
-/--php
+```php
 $database->connect([
 	'driver'   => 'sqlite',
 	'database' => 'sample.sdb',
@@ -593,7 +593,7 @@ $database->connect([
 		'file' => 'file.log',
 	],
 ]);
-\--
+```
 
 A more versatile profiler is a Tracy panel that is activated when connected to Nette.
 
@@ -604,7 +604,7 @@ Connect to [Nette |https://nette.org]
 
 In the configuration file, we will register the DI extensions and add the `dibi` section to create the required objects and also the database panel in the [Tracy |https://tracy.nette.org] debugger bar.
 
-/--neon
+```neon
 extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
 
@@ -614,11 +614,11 @@ dibi:
 	password: ***
 	database: foo
 	lazy: true
-\--
+```
 
 Then the object of connection can be [obtained as a service from the container DI |https://doc.nette.org/di-usage], eg:
 
-/--php
+```php
 class Model
 {
 	private $database;
@@ -628,4 +628,4 @@ class Model
 		$this->database = $database;
 	}
 }
-\--
+```

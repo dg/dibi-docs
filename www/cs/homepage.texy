@@ -9,15 +9,15 @@ Instalace
 
 Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
 
-/--
+```
 composer require dibi/dibi
-\--
+```
 
 
 Příklady
 --------
 
-/--php
+```php
 // připojení k databázi
 $database = new Dibi\Connection([
     'driver'   => 'mysqli',
@@ -51,6 +51,6 @@ $database->query('INSERT INTO users', $arr);
 
 $database->query('UPDATE users SET', $arr, 'WHERE id=?', $id);
 // UPDATE users SET `name`='John', `is_admin`=1 WHERE id = 123
-\--
+```
 
 Více v [dokumentaci | documentation].

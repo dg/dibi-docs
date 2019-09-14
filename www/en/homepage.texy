@@ -9,15 +9,15 @@ Installation
 
 To install the latest stable Dibi version use the [Composer |https://getcomposer.org] command:
 
-/--
+```
 composer require dibi/dibi
-\--
+```
 
 
 Code samples
 ------------
 
-/--php
+```php
 // connect to database
 $database = new Dibi\Connection([
     'driver'   => 'mysqli',
@@ -51,6 +51,6 @@ $database->query('INSERT INTO users', $arr);
 
 $database->query('UPDATE users SET', $arr, 'WHERE id=?', $id);
 // UPDATE users SET `name`='John', `is_admin`=1 WHERE id = 123
-\--
+```
 
 Read [documentation].

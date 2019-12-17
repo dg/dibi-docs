@@ -4,16 +4,6 @@ Dibi je Database Abstraction Library
 Dibi podporuje mnoho významných databází: MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Access a obecné PDO a ODBC.
 
 
-Instalace
----------
-
-Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
-
-```
-composer require dibi/dibi
-```
-
-
 Příklady
 --------
 

@@ -2,6 +2,17 @@ Documentation
 *************
 
 
+To install the latest stable Dibi version use the [Composer |https://getcomposer.org] command:
+
+```
+composer require dibi/dibi
+```
+
+Release announcements are on [GitHub | https://github.com/dg/dibi/releases].
+
+Requires PHP 7.1 or newer.
+
+
 Connecting to database
 ======================
 

@@ -1,6 +1,16 @@
 Dokumentace
 ***********
 
+Nejnovější stabilní verzi Dibi instalujte pomocí [Composeru |https://getcomposer.org] příkazem:
+
+```
+composer require dibi/dibi
+```
+
+Přehled verzí najdete na stánce [Releases | https://github.com/dg/dibi/releases].
+
+Vyžaduje PHP 7.1 nebo vyšší. 
+
 
 Připojení k databázi
 ====================

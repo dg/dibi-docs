@@ -640,6 +640,7 @@ class Model
 }
 ```
 
+*Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/web-content/tree/dibiphp.com (větev `dibi`).*
 
 /--comment
 chybí:

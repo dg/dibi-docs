@@ -54,6 +54,8 @@ Queries
 
 We query the database queries by the method `query()` which returns [Dibi\Result |api:Dibi\Result]. Rows are objects [Dibi\Row |api:Dibi\Row].
 
+You can try all the examples [online at the playground |https://repl.it/@DavidGrudl/dibi-playground].
+
 ```php
 $result = $database->query('SELECT * FROM users');
 
@@ -141,6 +143,7 @@ In addition to the `?` wild char, we can also use modifiers:
 | %d | date (accepts DateTime, string or UNIX timestamp)
 | %dt | datetime (accepts DateTime, string or UNIX timestamp)
 | %n | identifier, ie the name of the table or column
+| %N | identifier, treats period as a common character, ie alias or a database name (`%n AS %N` or `DROP DATABASE %N`)
 | %SQL | SQL - directly inserts into SQL (the alternative is Dibi\Literal)
 | %ex | SQL expression or array of expressions
 | %lmt | special - adds LIMIT to the query
@@ -176,6 +179,7 @@ Three special modifiers are available for LIKE:
 | %like~ | the expression starts with a string
 | %~like | the expression ends with a string
 | %~like~ | the expression contains a string
+| `%like` | the expression matches a string
 
 Search for names beginning with a string:
 
@@ -361,7 +365,7 @@ Or an expression in which you can use `?` or modifiers:
 
 ```php
 $database->query('UPDATE `table` SET', [
-	'title' => new Dibi\Expression('SHA1(?)', 'secret'),
+	'title' => $database::expression('SHA1(?)', 'secret'),
 ]);
 // UPDATE `table` SET `title` = SHA1('secret')
 ```
@@ -389,7 +393,7 @@ Modifiers or wildcards can also be used in expressions:
 
 ```php
 $result = $database->query('SELECT * FROM `table` WHERE %and', [
-	['number > ?', 10],  // or new Dibi\Expression('number > ?', 10)
+	['number > ?', 10],  // or $database::expression('number > ?', 10)
 	['number < ?', 100],
 	['%or', [
 		'left' => 1,
@@ -403,7 +407,7 @@ The `%ex` modifier inserts all items of the array into SQL:
 
 ```php
 $result = $database->query('SELECT * FROM `table` WHERE %ex', [
-	new Dibi\Expression('left = ?', 1),
+	$database::expression('left = ?', 1),
 	'AND',
 	'top IS NULL',
 ]);

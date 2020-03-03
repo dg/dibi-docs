@@ -9,7 +9,7 @@ composer require dibi/dibi
 
 Přehled verzí najdete na stánce [Releases | https://github.com/dg/dibi/releases].
 
-Vyžaduje PHP 7.1 nebo vyšší. 
+Vyžaduje PHP 7.1 nebo vyšší.
 
 
 Připojení k databázi
@@ -52,6 +52,8 @@ Dotazy
 ======
 
 Databázové dotazy pokládáme metodou `query()`, která vrací [Dibi\Result |api:Dibi\Result]. Řádky jako objekty [Dibi\Row |api:Dibi\Row].
+
+Všechny příklady si můžete zkoušet [online na hřišti |https://repl.it/@DavidGrudl/dibi-playground].
 
 ```php
 $result = $database->query('SELECT * FROM users');
@@ -140,6 +142,7 @@ Kromě zástupného symbolu `?` můžeme používat i modifikátory:
 | %d | datum (očekává DateTime, string nebo UNIX timestamp)
 | %dt | datum & čas (očekává DateTime, string nebo UNIX timestamp)
 | %n | identifikátor, tedy název tabulky či sloupce
+| %N | identifikátor, považuje tečku za běžný znak
 | %SQL | SQL - přímo vloží do SQL (alternativou je Dibi\Literal)
 | %ex | expanduje pole
 | %lmt | speciální - doplní do dotazu LIMIT
@@ -175,6 +178,7 @@ Pro operátor LIKE jsou k dispozici tři speciální modifikátory:
 | %like~ | výraz začíná řetězcem
 | %~like | výraz končí řetězcem
 | %~like~ | výraz obsahuje řetězec
+| `%like` | výraz je řetězec
 
 Hledej jména začínající na určitý řetězec:
 
@@ -360,7 +364,7 @@ Nebo výraz, ve kterém lze používat zástupné znaky `?` nebo modifikátory:
 
 ```php
 $database->query('UPDATE `table` SET', [
-	'title' => new Dibi\Expression('SHA1(?)', 'tajne'),
+	'title' => $database::expression('SHA1(?)', 'tajne'),
 ]);
 // UPDATE `table` SET `title` = SHA1('tajne')
 ```
@@ -388,7 +392,7 @@ V položkách lze používat i modifikátory nebo zástupné znaky:
 
 ```php
 $result = $database->query('SELECT * FROM `table` WHERE %and', [
-	['number > ?', 10],  // nebo new Dibi\Expression('number > ?', 10)
+	['number > ?', 10],  // nebo $database::expression('number > ?', 10)
 	['number < ?', 100],
 	['%or', [
 		'left' => 1,
@@ -402,7 +406,7 @@ Modifikátor `%ex` vloží do SQL všechny prvky pole:
 
 ```php
 $result = $database->query('SELECT * FROM `table` WHERE %ex', [
-	new Dibi\Expression('left = ?', 1),
+	$database::expression('left = ?', 1),
 	'AND',
 	'top IS NULL',
 ]);

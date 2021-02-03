@@ -44,3 +44,5 @@ $database->query('UPDATE users SET', $arr, 'WHERE id=?', $id);
 ```
 
 Read [documentation].
+
+{{maintitle: Dibi – Smart Database Abstraction Library for PHP}}

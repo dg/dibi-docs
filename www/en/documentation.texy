@@ -13,7 +13,7 @@ Release announcements are on [GitHub | https://github.com/dg/dibi/releases].
 Requires PHP 7.1 or newer.
 
 
-Connecting to database
+Connecting to Database
 ======================
 
 The database connection is represented by the object [Dibi\Connection|api:]:
@@ -46,7 +46,6 @@ $result = dibi::query('SELECT * FROM users');
 ```
 
 In the event of a connection error, it throws `Dibi\Exception`.
-
 
 
 Queries
@@ -188,7 +187,7 @@ $result = $database->query('SELECT * FROM table WHERE name LIKE %like~', $query)
 ```
 
 
-Modifiers for arrays
+Modifiers for Arrays
 ====================
 
 The parameter entered in the SQL query can also be an array. These modifiers determine how to compile the SQL statement:
@@ -343,7 +342,7 @@ dibi::$totalTime;
 ```
 
 
-Complex queries
+Complex Queries
 ===============
 
 The parameter may also be an object `DateTime`.
@@ -420,7 +419,7 @@ $result = $database->query('SELECT * FROM `table` WHERE %ex', [
 
 
 Conditions in the SQL
-======================
+=====================
 
 Conditional SQL commands are controlled by three modifiers `%if`, `%else`, and `%end`. The `%if` must be at the end of the string representing SQL and is followed by the variable:
 
@@ -447,7 +446,7 @@ $result = $database->query('
 Conditions can nest together.
 
 
-Identifiers and strings in SQL
+Identifiers and Strings in SQL
 ==============================
 
 SQL itself goes through processing to meet the conventions of the database. The identifiers (names of tables and columns) can be entered into square brackets or backticks, strings are quoted with single or double quotation marks, but the server always sends what the database asks for. Example:
@@ -461,8 +460,7 @@ $database->query("UPDATE `table` SET [status]='I''m fine'");
 The quotation marks are duplicated inside the string in SQL.
 
 
-
-Result as associative array
+Result As Associative Array
 ===========================
 
 Example: returns results as an associative field, where the key will be the value of the `id` field:
@@ -567,8 +565,7 @@ foreach ($all as $customerId => $row) {
 ```
 
 
-
-Prefixes & substitutions
+Prefixes & Substitutions
 ========================
 
 Table and column names can contain variable parts. You will first define:
@@ -586,7 +583,7 @@ $database->query("UPDATE [:blog:items] SET [text]='Hello World'");
 ```
 
 
-Field data types
+Field Data Types
 ================
 
 Dibi automatically detects the types of query columns and converts fields them to native PHP types. We can also specify the type manually. You can find the possible types in the [Dibi\Type |api:Dibi\Type] class.
@@ -617,8 +614,7 @@ $database->connect([
 A more versatile profiler is a Tracy panel that is activated when connected to Nette.
 
 
-
-Connect to [Nette |https://nette.org]
+Connect To [Nette |https://nette.org]
 =====================================
 
 In the configuration file, we will register the DI extensions and add the `dibi` section to create the required objects and also the database panel in the [Tracy |https://tracy.nette.org] debugger bar.

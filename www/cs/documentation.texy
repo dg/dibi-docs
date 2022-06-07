@@ -47,7 +47,6 @@ $result = dibi::query('SELECT * FROM users');
 V případě chyby připojení se vyhodí `Dibi\Exception`.
 
 
-
 Dotazy
 ======
 
@@ -460,7 +459,6 @@ $database->query("UPDATE `table` SET [status]='I''m fine'");
 Uvozovka se uvnitř řetězce v SQL zapisuje zdvojením.
 
 
-
 Výsledek jako asociativní pole
 ==============================
 
@@ -566,7 +564,6 @@ foreach ($all as $customerId => $row) {
 ```
 
 
-
 Prefixy & substituce
 ====================
 
@@ -614,7 +611,6 @@ $database->connect([
 ```
 
 Šikovnější profiler je panel pro Tracy, který se aktivuje při propojení s Nette.
-
 
 
 Připojení do [Nette |https://nette.org]

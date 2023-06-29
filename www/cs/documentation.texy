@@ -648,6 +648,13 @@ class Model
 }
 ```
 
+
+Komunitní rozšíření
+===================
+
+Nad Dibi staví nejrůznější knihovny, ORM a rozšíření. Celý jejich seznam najdete na "Packagistu":https://packagist.org/packages/dibi/dibi/dependents?order_by=downloads&requires=require.
+
+
 *Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/web-content/tree/dibi (větev `dibi`).*
 
 /--comment

@@ -656,4 +656,4 @@ Community Extensions
 Various libraries, ORMs and extensions are being built on top of Dibi. You can find a full list of them on "Packagist":https://packagist.org/packages/dibi/dibi/dependents?order_by=downloads&requires=require.
 
 
-*Found a mistake? Please send pull request to "documentation":https://github.com/dg/web-content/tree/dibi (branch `dibi`).*
+*Found a mistake? Please send pull request to "documentation":https://github.com/dg/dibi-docs.*

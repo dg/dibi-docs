@@ -10,7 +10,7 @@ composer require dibi/dibi
 
 Release announcements are on [GitHub | https://github.com/dg/dibi/releases].
 
-Requires PHP 7.2 or newer.
+Requires PHP 8.0 or newer.
 
 
 Connecting to Database

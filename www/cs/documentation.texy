@@ -9,7 +9,7 @@ composer require dibi/dibi
 
 Přehled verzí najdete na stánce [Releases | https://github.com/dg/dibi/releases].
 
-Vyžaduje PHP 7.2 nebo vyšší.
+Vyžaduje PHP 8.0 nebo vyšší.
 
 
 Připojení k databázi
@@ -655,7 +655,7 @@ Komunitní rozšíření
 Nad Dibi staví nejrůznější knihovny, ORM a rozšíření. Celý jejich seznam najdete na "Packagistu":https://packagist.org/packages/dibi/dibi/dependents?order_by=downloads&requires=require.
 
 
-*Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/web-content/tree/dibi (větev `dibi`).*
+*Našli jste chybu? Pošlete prosím pull request do "dokumentace":https://github.com/dg/dibi-docs.*
 
 /--comment
 chybí:

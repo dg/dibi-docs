@@ -509,6 +509,12 @@ $all = $result->fetchAssoc('name|order_id');
 $order = $all['Arnold Rimmer'][$orderId];
 ```
 
+A když bychom chtěli data vypsat třeba rovnou do html selectboxu a potřebovali bychom vrátit jen sloupec a ne celý řádek, stačí použít znak rovná se:
+
+```php
+$all = $result->fetchAssoc('name|order_id=number');
+```
+
 Co když ale existuje více zákazníků se stejným jménem? Tabulka by měla mít spíš tvar:
 
 ```php
@@ -566,7 +572,6 @@ foreach ($all as $customerId => $row) {
    }
 }
 ```
-
 
 Prefixy & substituce
 ====================

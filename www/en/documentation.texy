@@ -510,6 +510,12 @@ $all = $result->fetchAssoc('name|order_id');
 $order = $all['Arnold Rimmer'][$orderId];
 ```
 
+And if we would like to dump the data directly into the html selectbox and we need to return only a column and not the whole row, we can just use the equals sign:
+
+```php
+$all = $result->fetchAssoc('name|order_id=number');
+```
+
 But what if there are more customers with the same name? The table should be in the form of:
 
 ```php
